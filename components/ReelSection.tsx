@@ -6,7 +6,7 @@ import { useLanguage } from '@/lib/LanguageContext';
 const VIDEOS = [
   { id: 'uiubbiDvPnc', tag: 'Promo', title: 'Restaurant post in 30 seconds', year: '2026', vertical: true },
   { id: 'HhmkBLttloI', tag: 'Campaign', title: 'Vaš restoran zaslužuje bolji marketing', year: '2026', vertical: true },
-  { id: 'K5HdEyfORjM?start=774', tag: 'Product Film', title: 'BalkanBites — Mentorship Presentation', year: '2026', vertical: false },
+  { id: 'K5HdEyfORjM?start=774', tag: 'Product Film', title: 'BalkanBites: Mentorship Presentation', year: '2026', vertical: false },
 ];
 
 export default function ReelSection() {

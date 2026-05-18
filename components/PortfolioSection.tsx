@@ -4,12 +4,12 @@ import ScrollReveal from './ScrollReveal';
 import { useLanguage } from '@/lib/LanguageContext';
 
 const PORTFOLIO_ITEMS = [
-  { category: 'RESTAURANT BRANDING', title: 'Stara Vura — Visual Identity' },
-  { category: 'MENU DESIGN', title: 'Konoba Adriatic — Seasonal Menu' },
-  { category: 'SOCIAL MEDIA', title: 'La Piazza — Instagram Campaign' },
-  { category: 'VIDEO PRODUCTION', title: 'Restoran Mala Barka — Launch Reel' },
-  { category: 'BRAND STRATEGY', title: 'Kafić Stari Grad — Rebranding' },
-  { category: 'PRINT & PACKAGING', title: 'Bakery Zrno — Packaging Design' },
+  { category: 'RESTAURANT BRANDING', title: 'Stara Vura: Visual Identity' },
+  { category: 'MENU DESIGN', title: 'Konoba Adriatic: Seasonal Menu' },
+  { category: 'SOCIAL MEDIA', title: 'La Piazza: Instagram Campaign' },
+  { category: 'VIDEO PRODUCTION', title: 'Restoran Mala Barka: Launch Reel' },
+  { category: 'BRAND STRATEGY', title: 'Kafić Stari Grad: Rebranding' },
+  { category: 'PRINT & PACKAGING', title: 'Bakery Zrno: Packaging Design' },
 ];
 
 function PortfolioCard({

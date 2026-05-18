@@ -3,14 +3,14 @@ import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
 
 export const metadata: Metadata = {
-  title: "Mellasia — Creative Agency",
+  title: "Mellasia Creative Agency",
   description:
-    "AI-powered restaurant marketing, cinematic storytelling, and digital experiences — from Zagreb to the world.",
+    "AI-powered restaurant marketing, cinematic storytelling, and digital experiences. From Zagreb to the world.",
   keywords: "creative agency, AI marketing, restaurant marketing, brand identity, video production, Zagreb",
   openGraph: {
-    title: "Mellasia — Creative Agency",
+    title: "Mellasia Creative Agency",
     description:
-      "AI-powered restaurant marketing, cinematic storytelling, and digital experiences — from Zagreb to the world.",
+      "AI-powered restaurant marketing, cinematic storytelling, and digital experiences. From Zagreb to the world.",
     url: "https://mellasia.com",
     siteName: "Mellasia",
     type: "website",

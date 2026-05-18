@@ -15,16 +15,16 @@ export const translations = {
       titleLine1: 'Crafting brands',
       titleLine2: 'that linger.',
       subtitle:
-        'AI-powered restaurant marketing, cinematic storytelling, and digital experiences — from Zagreb to the world.',
+        'AI-powered restaurant marketing, cinematic storytelling, and digital experiences. From Zagreb to the world.',
       cta1: 'Explore our work',
       cta2: 'Start a project',
       scroll: 'Scroll',
     },
     product: {
-      label: '01 — Product',
-      title: 'Meet BalkanBites — your AI marketing team.',
+      label: '01 - Product',
+      title: 'Meet BalkanBites, your AI marketing team.',
       description:
-        'Upload a dish photo, AI writes the caption and generates a post for Instagram — in under a minute. No copywriter, no photographer, no monthly agency bill.',
+        'Upload a dish photo. AI writes the caption and generates a post for Instagram in under a minute. No copywriter, no photographer, no monthly agency bill.',
       feature1Title: 'Caption',
       feature1Desc: 'Upload a photo, AI writes the perfect caption',
       feature2Title: 'Remove BG',
@@ -38,17 +38,17 @@ export const translations = {
       stat3: 'Starting price',
     },
     portfolio: {
-      label: '02 — Portfolio',
+      label: '02 - Portfolio',
       title: 'Selected',
       titleItalic: 'work.',
     },
     reel: {
-      label: '03 — Reel',
+      label: '03 - Reel',
       title: 'Stories,',
       titleItalic: 'in motion.',
     },
     services: {
-      label: '04 — Services',
+      label: '04 - Services',
       title: 'What we',
       titleItalic: 'do best.',
       service1Name: 'AI Social Media Marketing',
@@ -56,7 +56,7 @@ export const translations = {
         'Automated Instagram, Facebook & TikTok content creation for restaurants. AI-generated captions, images, and posts that feel handcrafted.',
       service2Name: 'Brand Identity',
       service2Desc:
-        "Logo systems, visual language, and brand voice — building the soul of your restaurant's digital presence.",
+        "Logo systems, visual language, and brand voice. Building the soul of your restaurant's digital presence.",
       service3Name: 'Video Production',
       service3Desc: 'Cinematic short-form content, launch reels, and brand films. From concept to final cut.',
       service4Name: 'Menu & Print Design',
@@ -67,7 +67,7 @@ export const translations = {
         'Positioning, content calendars, and growth strategies tailored to the hospitality industry.',
     },
     contact: {
-      label: '05 — Contact',
+      label: '05 - Contact',
       titleLine1: "Let's make something",
       titleItalic: 'unforgettable.',
       subtitle: 'Tell us about your project. We reply within one working day.',
@@ -98,16 +98,16 @@ export const translations = {
       titleLine1: 'Brendovi koji',
       titleLine2: 'ostavljaju trag.',
       subtitle:
-        'AI marketing za restorane, filmsko pripovijedanje i digitalna iskustva — iz Zagreba u svijet.',
+        'AI marketing za restorane, filmsko pripovijedanje i digitalna iskustva. Iz Zagreba u svijet.',
       cta1: 'Pogledaj radove',
       cta2: 'Pokreni projekt',
       scroll: 'LISTAJ',
     },
     product: {
-      label: '01 — Proizvod',
-      title: 'Upoznaj BalkanBites — tvoj AI marketing tim.',
+      label: '01 - Proizvod',
+      title: 'Upoznaj BalkanBites, tvoj AI marketing tim.',
       description:
-        'Učitaj fotku jela, AI napiše natpis i pripremi objavu za Instagram — za manje od minute. Bez copywritera, bez fotografa, bez mjesečnog računa agencije.',
+        'Učitaj fotku jela. AI napiše natpis i pripremi objavu za Instagram za manje od minute. Bez copywritera, bez fotografa, bez mjesečnog računa agencije.',
       feature1Title: 'Natpis',
       feature1Desc: 'Učitaj fotku, AI napiše savršeni natpis',
       feature2Title: 'Ukloni pozadinu',
@@ -121,17 +121,17 @@ export const translations = {
       stat3: 'Početna cijena',
     },
     portfolio: {
-      label: '02 — Portfolio',
+      label: '02 - Portfolio',
       title: 'Odabrani',
       titleItalic: 'radovi.',
     },
     reel: {
-      label: '03 — Video',
+      label: '03 - Video',
       title: 'Priče',
       titleItalic: 'u pokretu.',
     },
     services: {
-      label: '04 — Usluge',
+      label: '04 - Usluge',
       title: 'Ono u čemu',
       titleItalic: 'smo najbolji.',
       service1Name: 'AI Marketing na društvenim mrežama',
@@ -139,7 +139,7 @@ export const translations = {
         'Automatizirani sadržaj za Instagram, Facebook i TikTok za restorane. AI natpisi, slike i objave koji izgledaju ručno napravljeno.',
       service2Name: 'Vizualni identitet',
       service2Desc:
-        'Logo sustavi, vizualni jezik i glas branda — gradnja duše digitalnog identiteta vašeg restorana.',
+        'Logo sustavi, vizualni jezik i glas branda. Gradnja duše digitalnog identiteta vašeg restorana.',
       service3Name: 'Video produkcija',
       service3Desc: 'Kinematografski kratki sadržaj, launch reelovi i brand filmovi. Od koncepta do finalnog reza.',
       service4Name: 'Dizajn jelovnika',
@@ -149,7 +149,7 @@ export const translations = {
         'Pozicioniranje, content kalendari i strategije rasta prilagođene ugostiteljskoj industriji.',
     },
     contact: {
-      label: '05 — Kontakt',
+      label: '05 - Kontakt',
       titleLine1: 'Napravimo nešto',
       titleItalic: 'nezaboravno.',
       subtitle: 'Recite nam o svom projektu. Odgovaramo unutar jednog radnog dana.',
