@@ -2,14 +2,15 @@
 
 import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
+import { useLanguage } from '@/lib/LanguageContext';
 
 const ParticleWave = dynamic(() => import('./ParticleWave'), { ssr: false });
 
 export default function HeroSection() {
   const elementsRef = useRef<(HTMLElement | null)[]>([]);
+  const { t } = useLanguage();
 
   useEffect(() => {
-    // Staggered entrance animation
     elementsRef.current.forEach((el, i) => {
       if (!el) return;
       el.style.opacity = '0';
@@ -81,7 +82,7 @@ export default function HeroSection() {
             fontFamily: "'DM Sans', sans-serif",
           }}
         >
-          Creative Agency · Est. 2026
+          {t.hero.badge}
         </span>
 
         {/* Heading */}
@@ -96,8 +97,8 @@ export default function HeroSection() {
             letterSpacing: '-0.5px',
           }}
         >
-          <span style={{ color: '#ffffff', display: 'block' }}>Crafting brands</span>
-          <span style={{ color: '#D4A574', fontStyle: 'italic', display: 'block' }}>that linger.</span>
+          <span style={{ color: '#ffffff', display: 'block' }}>{t.hero.titleLine1}</span>
+          <span style={{ color: '#D4A574', fontStyle: 'italic', display: 'block' }}>{t.hero.titleLine2}</span>
         </h1>
 
         {/* Subtitle */}
@@ -113,7 +114,7 @@ export default function HeroSection() {
             fontFamily: "'DM Sans', sans-serif",
           }}
         >
-          AI-powered restaurant marketing, cinematic storytelling, and digital experiences — from Zagreb to the world.
+          {t.hero.subtitle}
         </p>
 
         {/* CTA Buttons */}
@@ -155,7 +156,7 @@ export default function HeroSection() {
               e.currentTarget.style.background = '#D4A574';
             }}
           >
-            Explore our work
+            {t.hero.cta1}
           </a>
           <a
             href="#contact"
@@ -185,7 +186,7 @@ export default function HeroSection() {
               e.currentTarget.style.color = 'rgba(255,255,255,0.85)';
             }}
           >
-            Start a project
+            {t.hero.cta2}
           </a>
         </div>
       </div>
@@ -211,7 +212,7 @@ export default function HeroSection() {
           color: 'rgba(212,165,116,0.8)',
           textTransform: 'uppercase',
           fontFamily: "'DM Sans', sans-serif",
-        }}>Scroll</span>
+        }}>{t.hero.scroll}</span>
         <div style={{
           width: '1px',
           height: '48px',

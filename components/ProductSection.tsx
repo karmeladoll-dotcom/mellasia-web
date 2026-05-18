@@ -1,15 +1,18 @@
 'use client';
 
 import ScrollReveal from './ScrollReveal';
-
-const FEATURES = [
-  { icon: '📸', title: 'Caption', desc: 'Upload a photo, AI writes the perfect caption', hero: false },
-  { icon: '✂️', title: 'Remove BG', desc: 'Remove background from any food photo instantly', hero: false },
-  { icon: '🎨', title: 'AI Image', desc: 'Generate or enhance food photography with AI', hero: false },
-  { icon: '✨', title: 'Smart Post', desc: 'Complete post: AI creates both the image and caption, ready for Instagram', hero: true },
-];
+import { useLanguage } from '@/lib/LanguageContext';
 
 export default function ProductSection() {
+  const { t } = useLanguage();
+
+  const FEATURES = [
+    { icon: '📸', title: t.product.feature1Title, desc: t.product.feature1Desc, hero: false },
+    { icon: '✂️', title: t.product.feature2Title, desc: t.product.feature2Desc, hero: false },
+    { icon: '🎨', title: t.product.feature3Title, desc: t.product.feature3Desc, hero: false },
+    { icon: '✨', title: t.product.feature4Title, desc: t.product.feature4Desc, hero: true },
+  ];
+
   return (
     <section
       id="product"
@@ -30,7 +33,7 @@ export default function ProductSection() {
             marginBottom: '22px',
             fontFamily: "'DM Sans', sans-serif",
           }}>
-            01 — Product
+            {t.product.label}
           </p>
         </ScrollReveal>
 
@@ -45,9 +48,7 @@ export default function ProductSection() {
             marginBottom: '20px',
             maxWidth: '700px',
           }}>
-            Meet{' '}
-            <span style={{ color: '#D4A574', fontStyle: 'italic' }}>BalkanBites</span>
-            {' '}— your AI marketing team.
+            {t.product.title}
           </h2>
         </ScrollReveal>
 
@@ -62,8 +63,7 @@ export default function ProductSection() {
             fontFamily: "'DM Sans', sans-serif",
             fontWeight: 300,
           }}>
-            Upload a dish photo, AI writes the caption and generates a post for Instagram — in under a minute.
-            No copywriter, no photographer, no monthly agency bill.
+            {t.product.description}
           </p>
         </ScrollReveal>
 
@@ -147,9 +147,9 @@ export default function ProductSection() {
               gap: '24px',
               justifyContent: 'space-between',
             }}>
-              <StatItem label="Platforms" value="Instagram · Facebook · TikTok" />
-              <StatItem label="Generation time" value="< 30 sec" />
-              <StatItem label="Starting price" value="€1" />
+              <StatItem label={t.product.stat1} value="Instagram · Facebook · TikTok" />
+              <StatItem label={t.product.stat2} value="< 30 sec" />
+              <StatItem label={t.product.stat3} value="€1" />
             </div>
           </div>
         </ScrollReveal>

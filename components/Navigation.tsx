@@ -1,18 +1,21 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
-const NAV_LINKS = [
-  { label: 'Product', href: '#product' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Reel', href: '#reel' },
-  { label: 'Services', href: '#services' },
-  { label: 'Contact', href: '#contact' },
-];
+import { useLanguage } from '@/lib/LanguageContext';
+import type { Language } from '@/lib/translations';
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
+
+  const NAV_LINKS = [
+    { label: t.nav.product, href: '#product' },
+    { label: t.nav.portfolio, href: '#portfolio' },
+    { label: t.nav.reel, href: '#reel' },
+    { label: t.nav.services, href: '#services' },
+    { label: t.nav.contact, href: '#contact' },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -25,6 +28,8 @@ export default function Navigation() {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
+
+  const toggleLang = () => setLanguage(language === 'hr' ? 'en' : ('hr' as Language));
 
   return (
     <nav
@@ -91,6 +96,40 @@ export default function Navigation() {
           </a>
         ))}
 
+        {/* Language toggle */}
+        <button
+          onClick={toggleLang}
+          aria-label="Toggle language"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '2px',
+            background: 'transparent',
+            border: '1px solid rgba(212,165,116,0.3)',
+            borderRadius: '100px',
+            padding: '5px 12px',
+            cursor: 'pointer',
+            fontSize: '11px',
+            fontWeight: 500,
+            letterSpacing: '1px',
+            fontFamily: "'DM Sans', sans-serif",
+            transition: 'all 0.25s',
+            color: 'rgba(255,255,255,0.55)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = 'rgba(212,165,116,0.6)';
+            e.currentTarget.style.color = '#D4A574';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'rgba(212,165,116,0.3)';
+            e.currentTarget.style.color = 'rgba(255,255,255,0.55)';
+          }}
+        >
+          <span style={{ color: language === 'hr' ? '#D4A574' : 'rgba(255,255,255,0.4)' }}>HR</span>
+          <span style={{ color: 'rgba(255,255,255,0.2)', margin: '0 3px' }}>|</span>
+          <span style={{ color: language === 'en' ? '#D4A574' : 'rgba(255,255,255,0.4)' }}>EN</span>
+        </button>
+
         {/* CTA */}
         <a
           href="#contact"
@@ -115,7 +154,7 @@ export default function Navigation() {
             e.currentTarget.style.borderColor = 'rgba(212,165,116,0.45)';
           }}
         >
-          Let&apos;s talk
+          {t.nav.cta}
         </a>
       </div>
 
@@ -190,6 +229,32 @@ export default function Navigation() {
               {link.label}
             </a>
           ))}
+
+          {/* Mobile language toggle */}
+          <button
+            onClick={toggleLang}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '2px',
+              background: 'transparent',
+              border: '1px solid rgba(212,165,116,0.3)',
+              borderRadius: '100px',
+              padding: '7px 16px',
+              cursor: 'pointer',
+              fontSize: '12px',
+              fontWeight: 500,
+              letterSpacing: '1px',
+              fontFamily: "'DM Sans', sans-serif",
+              width: 'fit-content',
+              color: 'rgba(255,255,255,0.55)',
+            }}
+          >
+            <span style={{ color: language === 'hr' ? '#D4A574' : 'rgba(255,255,255,0.4)' }}>HR</span>
+            <span style={{ color: 'rgba(255,255,255,0.2)', margin: '0 4px' }}>|</span>
+            <span style={{ color: language === 'en' ? '#D4A574' : 'rgba(255,255,255,0.4)' }}>EN</span>
+          </button>
+
           <a
             href="#contact"
             onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
@@ -205,7 +270,7 @@ export default function Navigation() {
               marginTop: '4px',
             }}
           >
-            Let&apos;s talk
+            {t.nav.cta}
           </a>
         </div>
       )}

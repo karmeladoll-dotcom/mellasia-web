@@ -1,6 +1,7 @@
 'use client';
 
 import ScrollReveal from './ScrollReveal';
+import { useLanguage } from '@/lib/LanguageContext';
 
 const SOCIALS = [
   {
@@ -33,6 +34,8 @@ const SOCIALS = [
 ];
 
 export default function ContactSection() {
+  const { t } = useLanguage();
+
   return (
     <section
       id="contact"
@@ -60,7 +63,7 @@ export default function ContactSection() {
             marginBottom: '22px',
             fontFamily: "'DM Sans', sans-serif",
           }}>
-            05 — Contact
+            {t.contact.label}
           </p>
         </ScrollReveal>
 
@@ -74,8 +77,8 @@ export default function ContactSection() {
             color: '#ffffff',
             marginBottom: '22px',
           }}>
-            Let&apos;s make something{' '}
-            <span style={{ color: '#D4A574', fontStyle: 'italic', display: 'block' }}>unforgettable.</span>
+            {t.contact.titleLine1}{' '}
+            <span style={{ color: '#D4A574', fontStyle: 'italic', display: 'block' }}>{t.contact.titleItalic}</span>
           </h2>
         </ScrollReveal>
 
@@ -90,7 +93,7 @@ export default function ContactSection() {
             fontWeight: 300,
             maxWidth: '440px',
           }}>
-            Tell us about your project. We reply within one working day.
+            {t.contact.subtitle}
           </p>
         </ScrollReveal>
 
@@ -131,11 +134,7 @@ export default function ContactSection() {
 
         {/* Social links */}
         <ScrollReveal delay={0.4}>
-          <div style={{
-            display: 'flex',
-            gap: '24px',
-            alignItems: 'center',
-          }}>
+          <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
             {SOCIALS.map((s) => (
               <a
                 key={s.label}

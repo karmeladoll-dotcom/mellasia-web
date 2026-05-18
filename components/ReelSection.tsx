@@ -1,32 +1,17 @@
 'use client';
 
 import ScrollReveal from './ScrollReveal';
+import { useLanguage } from '@/lib/LanguageContext';
 
 const VIDEOS = [
-  {
-    id: 'uiubbiDvPnc',
-    tag: 'Promo',
-    title: 'Restaurant post in 30 seconds',
-    year: '2026',
-    vertical: true,
-  },
-  {
-    id: 'HhmkBLttloI',
-    tag: 'Campaign',
-    title: 'Vaš restoran zaslužuje bolji marketing',
-    year: '2026',
-    vertical: true,
-  },
-  {
-    id: 'K5HdEyfORjM?start=774',
-    tag: 'Product Film',
-    title: 'BalkanBites — Mentorship Presentation',
-    year: '2026',
-    vertical: false,
-  },
+  { id: 'uiubbiDvPnc', tag: 'Promo', title: 'Restaurant post in 30 seconds', year: '2026', vertical: true },
+  { id: 'HhmkBLttloI', tag: 'Campaign', title: 'Vaš restoran zaslužuje bolji marketing', year: '2026', vertical: true },
+  { id: 'K5HdEyfORjM?start=774', tag: 'Product Film', title: 'BalkanBites — Mentorship Presentation', year: '2026', vertical: false },
 ];
 
 export default function ReelSection() {
+  const { t } = useLanguage();
+
   return (
     <section
       id="reel"
@@ -47,7 +32,7 @@ export default function ReelSection() {
             marginBottom: '22px',
             fontFamily: "'DM Sans', sans-serif",
           }}>
-            03 — Reel
+            {t.reel.label}
           </p>
         </ScrollReveal>
 
@@ -61,8 +46,8 @@ export default function ReelSection() {
             color: '#ffffff',
             marginBottom: '56px',
           }}>
-            Stories,{' '}
-            <span style={{ color: '#D4A574', fontStyle: 'italic' }}>in motion.</span>
+            {t.reel.title}{' '}
+            <span style={{ color: '#D4A574', fontStyle: 'italic' }}>{t.reel.titleItalic}</span>
           </h2>
         </ScrollReveal>
 
@@ -127,12 +112,8 @@ function VideoCard({
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            border: 'none',
+            position: 'absolute', top: 0, left: 0,
+            width: '100%', height: '100%', border: 'none',
           }}
         />
       </div>

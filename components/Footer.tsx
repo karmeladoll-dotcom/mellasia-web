@@ -1,21 +1,25 @@
 'use client';
 
-const NAV_LINKS = [
-  { label: 'Product', href: '#product' },
-  { label: 'Reel', href: '#reel' },
-  { label: 'Services', href: '#services' },
-  { label: 'Contact', href: '#contact' },
-];
-
-const SERVICE_LINKS = [
-  'AI Social Media',
-  'Brand Identity',
-  'Video Production',
-  'Menu & Print Design',
-  'Digital Strategy',
-];
+import { useLanguage } from '@/lib/LanguageContext';
 
 export default function Footer() {
+  const { t } = useLanguage();
+
+  const NAV_LINKS = [
+    { label: t.nav.product, href: '#product' },
+    { label: t.nav.reel, href: '#reel' },
+    { label: t.nav.services, href: '#services' },
+    { label: t.nav.contact, href: '#contact' },
+  ];
+
+  const SERVICE_LINKS = [
+    t.footer.service1,
+    t.footer.service2,
+    t.footer.service3,
+    t.footer.service4,
+    t.footer.service5,
+  ];
+
   const handleClick = (href: string) => {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -94,7 +98,7 @@ export default function Footer() {
             textTransform: 'uppercase',
             marginBottom: '20px',
             fontFamily: "'DM Sans', sans-serif",
-          }}>Navigation</p>
+          }}>{t.footer.navHeading}</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {NAV_LINKS.map((link) => (
               <a
@@ -128,7 +132,7 @@ export default function Footer() {
             textTransform: 'uppercase',
             marginBottom: '20px',
             fontFamily: "'DM Sans', sans-serif",
-          }}>Services</p>
+          }}>{t.footer.servicesHeading}</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {SERVICE_LINKS.map((s) => (
               <a
@@ -170,14 +174,14 @@ export default function Footer() {
           fontSize: '12px',
           fontFamily: "'DM Sans', sans-serif",
         }}>
-          © 2026 Mellasia Studio. All rights reserved.
+          {t.footer.copyright}
         </span>
         <span style={{
           color: 'rgba(255,255,255,0.22)',
           fontSize: '12px',
           fontFamily: "'DM Sans', sans-serif",
         }}>
-          Crafted with care in Zagreb.
+          {t.footer.tagline}
         </span>
       </div>
     </footer>

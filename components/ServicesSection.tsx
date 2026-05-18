@@ -2,34 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import ScrollReveal from './ScrollReveal';
-
-const SERVICES = [
-  {
-    num: '01',
-    name: 'AI Social Media Marketing',
-    desc: 'Automated Instagram, Facebook & TikTok content creation for restaurants. AI-generated captions, images, and posts that feel handcrafted.',
-  },
-  {
-    num: '02',
-    name: 'Brand Identity',
-    desc: 'Logo systems, visual language, and brand voice — building the soul of your restaurant\'s digital presence.',
-  },
-  {
-    num: '03',
-    name: 'Video Production',
-    desc: 'Cinematic short-form content, launch reels, and brand films. From concept to final cut.',
-  },
-  {
-    num: '04',
-    name: 'Menu & Print Design',
-    desc: 'Beautiful menus, flyers, and promotional materials that match your restaurant\'s atmosphere.',
-  },
-  {
-    num: '05',
-    name: 'Digital Strategy',
-    desc: 'Positioning, content calendars, and growth strategies tailored to the hospitality industry.',
-  },
-];
+import { useLanguage } from '@/lib/LanguageContext';
 
 function AccordionItem({
   num,
@@ -121,10 +94,7 @@ function AccordionItem({
       <div
         ref={contentRef}
         className="accordion-content"
-        style={{
-          maxHeight: '0',
-          opacity: '0',
-        }}
+        style={{ maxHeight: '0', opacity: '0' }}
       >
         <p style={{
           color: 'rgba(255,255,255,0.5)',
@@ -141,6 +111,16 @@ function AccordionItem({
 }
 
 export default function ServicesSection() {
+  const { t } = useLanguage();
+
+  const SERVICES = [
+    { num: '01', name: t.services.service1Name, desc: t.services.service1Desc },
+    { num: '02', name: t.services.service2Name, desc: t.services.service2Desc },
+    { num: '03', name: t.services.service3Name, desc: t.services.service3Desc },
+    { num: '04', name: t.services.service4Name, desc: t.services.service4Desc },
+    { num: '05', name: t.services.service5Name, desc: t.services.service5Desc },
+  ];
+
   return (
     <section
       id="services"
@@ -161,7 +141,7 @@ export default function ServicesSection() {
             marginBottom: '22px',
             fontFamily: "'DM Sans', sans-serif",
           }}>
-            04 — Services
+            {t.services.label}
           </p>
         </ScrollReveal>
 
@@ -175,8 +155,8 @@ export default function ServicesSection() {
             color: '#ffffff',
             marginBottom: '60px',
           }}>
-            What we{' '}
-            <span style={{ color: '#D4A574', fontStyle: 'italic' }}>do best.</span>
+            {t.services.title}{' '}
+            <span style={{ color: '#D4A574', fontStyle: 'italic' }}>{t.services.titleItalic}</span>
           </h2>
         </ScrollReveal>
 
@@ -184,11 +164,7 @@ export default function ServicesSection() {
         <ScrollReveal delay={0.15}>
           <div style={{ maxWidth: '800px' }}>
             {SERVICES.map((s, i) => (
-              <AccordionItem
-                key={s.num}
-                {...s}
-                isFirst={i === 0}
-              />
+              <AccordionItem key={s.num} {...s} isFirst={i === 0} />
             ))}
           </div>
         </ScrollReveal>
