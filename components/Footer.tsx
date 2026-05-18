@@ -24,7 +24,7 @@ export default function Footer() {
   return (
     <footer style={{
       background: '#0A0A0A',
-      borderTop: '1px solid rgba(212,165,116,0.1)',
+      borderTop: 'none',
       position: 'relative',
       overflow: 'hidden',
       isolation: 'isolate',
@@ -36,9 +36,9 @@ export default function Footer() {
         left: '50%',
         transform: 'translateX(-50%)',
         fontFamily: "'Cormorant Garamond', serif",
-        fontSize: 'clamp(50px,12vw,200px)',
+        fontSize: 'clamp(60px,15vw,200px)',
         fontWeight: 300,
-        color: 'rgba(255,255,255,0.03)',
+        color: 'rgba(255,255,255,0.05)',
         whiteSpace: 'nowrap',
         pointerEvents: 'none',
         userSelect: 'none',

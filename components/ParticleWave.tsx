@@ -72,9 +72,9 @@ export default function ParticleWave() {
 
     // Wave line configs
     const waveLines = [
-      { baseY: H * 0.3, amplitude: 40, frequency: 0.004, speed: 0.4, opacity: 0.07 },
-      { baseY: H * 0.5, amplitude: 55, frequency: 0.003, speed: 0.25, opacity: 0.10 },
-      { baseY: H * 0.72, amplitude: 35, frequency: 0.005, speed: 0.55, opacity: 0.06 },
+      { baseY: H * 0.3, amplitude: 40, frequency: 0.004, speed: 0.4, opacity: 0.10 },
+      { baseY: H * 0.5, amplitude: 55, frequency: 0.003, speed: 0.25, opacity: 0.20 },
+      { baseY: H * 0.72, amplitude: 35, frequency: 0.005, speed: 0.55, opacity: 0.15 },
     ];
 
     let time = 0;
@@ -100,7 +100,7 @@ export default function ParticleWave() {
       waveLines.forEach((wl) => {
         ctx.beginPath();
         ctx.strokeStyle = `rgba(${GOLD_R},${GOLD_G},${GOLD_B},${wl.opacity})`;
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 2.5;
         for (let x = 0; x <= W; x += 2) {
           const y = wl.baseY + Math.sin(x * wl.frequency + time * wl.speed) * wl.amplitude;
           if (x === 0) ctx.moveTo(x, y);
