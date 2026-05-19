@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import ScrollReveal from './ScrollReveal';
 import { useLanguage } from '@/lib/LanguageContext';
 
@@ -52,20 +53,21 @@ function PortfolioCard({
         {/* Image */}
         <div
           style={{
+            position: 'relative',
             aspectRatio: '4/3',
             overflow: 'hidden',
             borderRadius: '12px 12px 0 0',
           }}
         >
-          <img
+          <Image
             className="card-img"
             src={image}
             alt={title}
+            fill
+            sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            quality={92}
             style={{
-              width: '100%',
-              height: '100%',
               objectFit: 'cover',
-              display: 'block',
               transition: 'transform 0.45s cubic-bezier(0.16,1,0.3,1)',
             }}
           />
