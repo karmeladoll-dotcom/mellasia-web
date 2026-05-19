@@ -1,5 +1,92 @@
 export type Language = 'en' | 'hr';
 
+export type TranslationShape = {
+  nav: {
+    about: string;
+    product: string;
+    portfolio: string;
+    reel: string;
+    services: string;
+    contact: string;
+    cta: string;
+  };
+  about: {
+    label: string;
+    title: string;
+    titleItalic: string;
+    paragraph1: string;
+    paragraph2: string;
+    photoPlaceholder: string;
+  };
+  hero: {
+    badge: string;
+    titleLine1: string;
+    titleLine2: string;
+    subtitle: string;
+    cta1: string;
+    cta2: string;
+    scroll: string;
+  };
+  product: {
+    label: string;
+    title: string;
+    description: string;
+    feature1Title: string;
+    feature1Desc: string;
+    feature2Title: string;
+    feature2Desc: string;
+    feature3Title: string;
+    feature3Desc: string;
+    feature4Title: string;
+    feature4Desc: string;
+    stat1: string;
+    stat2: string;
+    stat3: string;
+  };
+  portfolio: {
+    label: string;
+    title: string;
+    titleItalic: string;
+  };
+  reel: {
+    label: string;
+    title: string;
+    titleItalic: string;
+  };
+  services: {
+    label: string;
+    title: string;
+    titleItalic: string;
+    service1Name: string;
+    service1Desc: string;
+    service2Name: string;
+    service2Desc: string;
+    service3Name: string;
+    service3Desc: string;
+    service4Name: string;
+    service4Desc: string;
+    service5Name: string;
+    service5Desc: string;
+  };
+  contact: {
+    label: string;
+    titleLine1: string;
+    titleItalic: string;
+    subtitle: string;
+  };
+  footer: {
+    copyright: string;
+    tagline: string;
+    navHeading: string;
+    servicesHeading: string;
+    service1: string;
+    service2: string;
+    service3: string;
+    service4: string;
+    service5: string;
+  };
+};
+
 export const translations = {
   en: {
     nav: {
@@ -188,6 +275,6 @@ export const translations = {
       service5: 'Digitalna strategija',
     },
   },
-} as const;
+} satisfies Record<Language, TranslationShape>;
 
-export type Translations = typeof translations.en;
+export type Translations = TranslationShape;
