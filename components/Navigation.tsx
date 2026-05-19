@@ -11,6 +11,7 @@ export default function Navigation() {
 
   const NAV_LINKS = [
     { label: t.nav.product, href: '#product' },
+    { label: t.nav.about, href: '#about' },
     { label: t.nav.portfolio, href: '#portfolio' },
     { label: t.nav.reel, href: '#reel' },
     { label: t.nav.services, href: '#services' },

@@ -3,12 +3,23 @@ export type Language = 'en' | 'hr';
 export const translations = {
   en: {
     nav: {
+      about: 'About',
       product: 'Product',
       portfolio: 'Portfolio',
       reel: 'Reel',
       services: 'Services',
       contact: 'Contact',
       cta: "Let's talk",
+    },
+    about: {
+      label: '00 — About',
+      title: 'The studio behind',
+      titleItalic: 'the screen.',
+      paragraph1:
+        'Mellasia is a one-woman creative studio based in Zagreb, founded in 2026. We blend AI technology with human creativity to help restaurants tell their story online. From social media content to brand identity, we build digital experiences that feel personal, not automated.',
+      paragraph2:
+        'Behind Mellasia is Karmela, a self-taught developer and marketer who built BalkanBites from scratch as a solo founder. No team, no funding, just late nights and a stubborn belief that small restaurants deserve big-brand marketing.',
+      photoPlaceholder: 'Founder photo',
     },
     hero: {
       badge: 'Creative Agency · Est. 2026',
@@ -86,12 +97,23 @@ export const translations = {
   },
   hr: {
     nav: {
+      about: 'O nama',
       product: 'Proizvod',
       portfolio: 'Portfolio',
       reel: 'Video',
       services: 'Usluge',
       contact: 'Kontakt',
       cta: 'Javite se',
+    },
+    about: {
+      label: '00 — O nama',
+      title: 'Studio iza',
+      titleItalic: 'ekrana.',
+      paragraph1:
+        'Mellasia je kreativni studio iz Zagreba, osnovan 2026. Spajamo AI tehnologiju s ljudskom kreativnošću kako bismo pomogli restoranima ispričati svoju priču online. Od sadržaja za društvene mreže do vizualnog identiteta, gradimo digitalna iskustva koja djeluju osobno, ne automatizirano.',
+      paragraph2:
+        'Iza Mellasie stoji Karmela, samouka developerica i marketingašica koja je sama izgradila BalkanBites od nule. Bez tima, bez financiranja, samo kasne noći i tvrdoglavo uvjerenje da mali restorani zaslužuju marketing kao veliki brendovi.',
+      photoPlaceholder: 'Fotografija osnivačice',
     },
     hero: {
       badge: 'Kreativna agencija · Osn. 2026.',
