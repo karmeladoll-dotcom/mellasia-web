@@ -33,7 +33,7 @@ export default function AboutSection() {
         </ScrollReveal>
 
         {/* Title */}
-        <ScrollReveal delay={100}>
+        <ScrollReveal delay={0.1}>
           <h2
             style={{
               fontFamily: "'Cormorant Garamond', serif",
@@ -52,7 +52,7 @@ export default function AboutSection() {
         {/* Two-column layout */}
         <div className="about-grid">
           {/* Left: text */}
-          <ScrollReveal delay={150}>
+          <ScrollReveal delay={0.15}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
               <p
                 style={{
@@ -80,7 +80,7 @@ export default function AboutSection() {
           </ScrollReveal>
 
           {/* Right: founder photo placeholder */}
-          <ScrollReveal delay={220}>
+          <ScrollReveal delay={0.22}>
             <div
               style={{
                 border: '1px solid rgba(212,165,116,0.2)',
