@@ -34,6 +34,79 @@ const SOCIALS = [
   },
 ];
 
+type CornerPosition = 'tl' | 'tr' | 'bl' | 'br';
+
+const CORNER_ANCHOR: Record<CornerPosition, string> = {
+  tl: 'left-[-8px] top-[-8px]',
+  tr: 'right-[-8px] top-[-8px]',
+  bl: 'left-[-8px] bottom-[-8px]',
+  br: 'right-[-8px] bottom-[-8px]',
+};
+
+const CORNER_LINES: Record<
+  CornerPosition,
+  { hx: number; hy: number; vx: number; vy: number }
+> = {
+  tl: { hx: -28, hy: 0, vx: 0, vy: -28 },
+  tr: { hx: 28, hy: 0, vx: 0, vy: -28 },
+  bl: { hx: -28, hy: 0, vx: 0, vy: 28 },
+  br: { hx: 28, hy: 0, vx: 0, vy: 28 },
+};
+
+const CORNER_ORIGIN: Record<CornerPosition, string> = {
+  tl: 'origin-top-left',
+  tr: 'origin-top-right',
+  bl: 'origin-bottom-left',
+  br: 'origin-bottom-right',
+};
+
+function CornerOrnament({ corner }: { corner: CornerPosition }) {
+  const { hx, hy, vx, vy } = CORNER_LINES[corner];
+
+  return (
+    <div
+      className={`letterhead-corner pointer-events-none absolute ${CORNER_ANCHOR[corner]} ${CORNER_ORIGIN[corner]} max-md:scale-[0.82]`}
+      aria-hidden="true"
+    >
+      <svg
+        width="1"
+        height="1"
+        viewBox="-32 -32 64 64"
+        className="overflow-visible"
+        aria-hidden="true"
+      >
+        <line
+          x1="0"
+          y1="0"
+          x2={hx}
+          y2={hy}
+          stroke="#D4A574"
+          strokeOpacity="0.6"
+          strokeWidth="1"
+        />
+        <line
+          x1="0"
+          y1="0"
+          x2={vx}
+          y2={vy}
+          stroke="#D4A574"
+          strokeOpacity="0.6"
+          strokeWidth="1"
+        />
+        <rect
+          x="-2"
+          y="-2"
+          width="4"
+          height="4"
+          transform="rotate(45)"
+          fill="#D4A574"
+          fillOpacity="0.6"
+        />
+      </svg>
+    </div>
+  );
+}
+
 function LetterheadCard() {
   const { t } = useLanguage();
 
@@ -90,17 +163,44 @@ function LetterheadCard() {
         />
       </div>
 
-      {/* Card — Layer 5 edge bleed via box-shadow */}
-      <div
-        className="relative z-10 rounded-xl text-center"
-        style={{
-          border: '1px solid rgba(212,165,116,0.25)',
-          background: 'rgba(212,165,116,0.03)',
-          padding: '36px 32px',
-          boxShadow:
-            '0 0 30px rgba(212,165,116,0.06), 0 0 60px rgba(212,165,116,0.03)',
-        }}
-      >
+      {/* Card frame with gold decorative accents */}
+      <div className="relative z-10 w-full overflow-visible">
+        {/* Top accent line — letterhead ruling (desktop only) */}
+        <div
+          className="pointer-events-none absolute left-1/2 z-20 hidden w-[60%] -translate-x-1/2 items-center md:flex"
+          style={{ top: '-20px' }}
+          aria-hidden="true"
+        >
+          <div
+            className="h-1.5 w-1.5 shrink-0 rotate-45"
+            style={{ background: 'rgba(212,165,116,0.3)' }}
+          />
+          <div
+            className="mx-0 h-px flex-1"
+            style={{ background: 'rgba(212,165,116,0.3)' }}
+          />
+          <div
+            className="h-1.5 w-1.5 shrink-0 rotate-45"
+            style={{ background: 'rgba(212,165,116,0.3)' }}
+          />
+        </div>
+
+        <div className="relative overflow-visible px-1 max-md:px-0">
+          <CornerOrnament corner="tl" />
+          <CornerOrnament corner="tr" />
+          <CornerOrnament corner="bl" />
+          <CornerOrnament corner="br" />
+
+          <div
+            className="relative rounded-xl text-center"
+            style={{
+              border: '1px solid rgba(212,165,116,0.25)',
+              background: 'rgba(212,165,116,0.03)',
+              padding: '36px 32px',
+              boxShadow:
+                '0 0 30px rgba(212,165,116,0.06), 0 0 60px rgba(212,165,116,0.03), inset 0 0 0 3px #0A0A0A, inset 0 0 0 4px rgba(212,165,116,0.15)',
+            }}
+          >
         <p
           className="text-xl font-light tracking-[6px] text-[#D4A574]"
           style={{ fontFamily: "'Cormorant Garamond', serif" }}
@@ -108,7 +208,11 @@ function LetterheadCard() {
           MELLASIA
         </p>
 
-        <div className="mx-auto my-5 h-px w-10 bg-[#D4A574]" />
+        <div className="mx-auto my-5 flex w-[60px] items-center">
+          <div className="h-[3px] w-[3px] shrink-0 rounded-full bg-[#D4A574] opacity-40" />
+          <div className="mx-0 h-px flex-1 bg-[#D4A574] opacity-40" />
+          <div className="h-[3px] w-[3px] shrink-0 rounded-full bg-[#D4A574] opacity-40" />
+        </div>
 
         <p
           className="text-[10px] tracking-[2.5px] text-[#555]"
@@ -143,16 +247,28 @@ function LetterheadCard() {
           {t.contact.letterheadDatestamp}
         </p>
 
-        <div
-          className="mx-auto mt-8 flex h-14 w-14 items-center justify-center rounded-full text-xl text-[#D4A574]"
-          style={{
-            border: '1.5px solid rgba(212,165,116,0.5)',
-            background: 'rgba(212,165,116,0.06)',
-            fontFamily: "'Cormorant Garamond', serif",
-          }}
-          aria-hidden="true"
-        >
-          M
+        <div className="relative mx-auto mt-8 h-14 w-14">
+          <div
+            className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+            style={{
+              width: '80px',
+              height: '80px',
+              background: 'radial-gradient(circle, rgba(212,165,116,0.1) 0%, transparent 70%)',
+              filter: 'blur(15px)',
+            }}
+            aria-hidden="true"
+          />
+          <div
+            className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full text-xl text-[#D4A574]"
+            style={{
+              border: '1.5px solid rgba(212,165,116,0.5)',
+              background: 'rgba(212,165,116,0.06)',
+              fontFamily: "'Cormorant Garamond', serif",
+            }}
+            aria-hidden="true"
+          >
+            M
+          </div>
         </div>
 
         <p
@@ -167,6 +283,8 @@ function LetterheadCard() {
         >
           {t.contact.letterheadCity}
         </p>
+          </div>
+        </div>
       </div>
     </div>
   );
