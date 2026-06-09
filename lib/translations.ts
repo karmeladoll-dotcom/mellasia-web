@@ -73,6 +73,29 @@ export type TranslationShape = {
     titleLine1: string;
     titleItalic: string;
     subtitle: string;
+    formLineLabel_name: string;
+    formLineLabel_email: string;
+    formLineLabel_service: string;
+    formLineLabel_message: string;
+    placeholder_service: string;
+    services: {
+      aiMarketing: string;
+      visualIdentity: string;
+      videoProduction: string;
+      menuDesign: string;
+      digitalStrategy: string;
+      other: string;
+    };
+    submit: string;
+    submitting: string;
+    success_headline: string;
+    success_subtext: string;
+    success_again: string;
+    fallback_text: string;
+    error_validation: string;
+    error_email: string;
+    error_message_length: string;
+    error_send: string;
   };
   footer: {
     copyright: string;
@@ -169,6 +192,30 @@ export const translations = {
       titleLine1: "Let's make something",
       titleItalic: 'unforgettable.',
       subtitle: 'Tell us about your project. We reply within one working day.',
+      formLineLabel_name: 'NAME',
+      formLineLabel_email: 'EMAIL',
+      formLineLabel_service: 'SERVICE',
+      formLineLabel_message: 'MESSAGE',
+      placeholder_service: 'Choose a service',
+      services: {
+        aiMarketing: 'AI marketing on social media',
+        visualIdentity: 'Visual identity',
+        videoProduction: 'Video production',
+        menuDesign: 'Menu design',
+        digitalStrategy: 'Digital strategy',
+        other: 'Other',
+      },
+      submit: 'Send message',
+      submitting: 'Sending...',
+      success_headline: 'Message sent.',
+      success_subtext: 'We respond within one business day.',
+      success_again: 'Send another message',
+      fallback_text: 'Or write us directly at',
+      error_validation: 'All fields are required and properly formatted.',
+      error_email: 'Email is not properly formatted.',
+      error_message_length: 'Message must be at least 20 characters.',
+      error_send:
+        'Message not sent. Try again or write us directly at hello@mellasia.com.',
     },
     footer: {
       copyright: '© 2026 Mellasia Studio. All rights reserved.',
@@ -262,6 +309,30 @@ export const translations = {
       titleLine1: 'Napravimo nešto',
       titleItalic: 'nezaboravno.',
       subtitle: 'Recite nam o svom projektu. Odgovaramo unutar jednog radnog dana.',
+      formLineLabel_name: 'IME',
+      formLineLabel_email: 'EMAIL',
+      formLineLabel_service: 'USLUGA',
+      formLineLabel_message: 'PORUKA',
+      placeholder_service: 'Odaberi uslugu',
+      services: {
+        aiMarketing: 'AI marketing na društvenim mrežama',
+        visualIdentity: 'Vizualni identitet',
+        videoProduction: 'Video produkcija',
+        menuDesign: 'Dizajn jelovnika',
+        digitalStrategy: 'Digitalna strategija',
+        other: 'Drugo',
+      },
+      submit: 'Pošalji poruku',
+      submitting: 'Šalje se...',
+      success_headline: 'Poruka poslana.',
+      success_subtext: 'Javljamo se unutar jednog radnog dana.',
+      success_again: 'Pošalji još jednu poruku',
+      fallback_text: 'Ili nam piši direktno na',
+      error_validation: 'Sva polja su obavezna i ispravnog formata.',
+      error_email: 'Email nije ispravnog formata.',
+      error_message_length: 'Poruka mora imati najmanje 20 znakova.',
+      error_send:
+        'Poruka nije poslana. Pokušaj ponovno ili nam piši direktno na hello@mellasia.com.',
     },
     footer: {
       copyright: '© 2026 Mellasia Studio. Sva prava pridržana.',

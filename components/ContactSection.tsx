@@ -1,6 +1,7 @@
 'use client';
 
 import ScrollReveal from './ScrollReveal';
+import ContactForm from './ContactForm';
 import { useLanguage } from '@/lib/LanguageContext';
 
 const SOCIALS = [
@@ -88,7 +89,6 @@ export default function ContactSection() {
             color: 'rgba(255,255,255,0.42)',
             fontSize: 'clamp(14px,1.6vw,17px)',
             lineHeight: 1.75,
-            marginBottom: '48px',
             fontFamily: "'DM Sans', sans-serif",
             fontWeight: 300,
             maxWidth: '440px',
@@ -97,44 +97,55 @@ export default function ContactSection() {
           </p>
         </ScrollReveal>
 
-        {/* CTA Button */}
+        {/* Contact form */}
         <ScrollReveal delay={0.3}>
-          <a
-            href="mailto:hello@mellasia.com"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              background: '#D4A574',
-              color: '#0A0A0A',
-              fontSize: '15px',
-              fontWeight: 500,
-              letterSpacing: '0.5px',
-              padding: '16px 36px',
-              borderRadius: '100px',
-              textDecoration: 'none',
-              transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
-              marginBottom: '48px',
-              fontFamily: "'DM Sans', sans-serif",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-3px)';
-              e.currentTarget.style.boxShadow = '0 16px 50px rgba(212,165,116,0.4)';
-              e.currentTarget.style.background = '#E8C9A0';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'none';
-              e.currentTarget.style.background = '#D4A574';
-            }}
-          >
-            hello@mellasia.com ↗
-          </a>
+          <div id="kontakt-forma" className="mt-12 md:mt-16 w-full">
+            <ContactForm />
+          </div>
+        </ScrollReveal>
+
+        {/* Fallback email */}
+        <ScrollReveal delay={0.35}>
+          <div className="mt-16 w-full">
+            <div className="w-20 h-px bg-[var(--brand-gold)]/30 mx-auto" />
+            <p className="text-center text-sm text-white/60 mt-6">{t.contact.fallback_text}</p>
+            <a
+              href="mailto:hello@mellasia.com"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                background: '#D4A574',
+                color: '#0A0A0A',
+                fontSize: '15px',
+                fontWeight: 500,
+                letterSpacing: '0.5px',
+                padding: '16px 36px',
+                borderRadius: '100px',
+                textDecoration: 'none',
+                transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
+                marginTop: '16px',
+                fontFamily: "'DM Sans', sans-serif",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-3px)';
+                e.currentTarget.style.boxShadow = '0 16px 50px rgba(212,165,116,0.4)';
+                e.currentTarget.style.background = '#E8C9A0';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+                e.currentTarget.style.background = '#D4A574';
+              }}
+            >
+              hello@mellasia.com ↗
+            </a>
+          </div>
         </ScrollReveal>
 
         {/* Social links */}
         <ScrollReveal delay={0.4}>
-          <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginTop: '48px' }}>
             {SOCIALS.map((s) => (
               <a
                 key={s.label}

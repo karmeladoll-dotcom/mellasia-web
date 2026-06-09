@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  --brand-gold: #D4A574;
   --gold: #D4A574;
   --gold-light: #E8C9A0;
   --gold-dim: rgba(212, 165, 116, 0.3);

@@ -28,6 +28,15 @@ export default function HeroSection() {
     elementsRef.current[i] = el;
   };
 
+  const scrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const el = document.querySelector('#kontakt-forma');
+    if (!el) return;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const top = el.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+  };
+
   return (
     <section
       id="hero"
@@ -159,11 +168,8 @@ export default function HeroSection() {
             {t.hero.cta1}
           </a>
           <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-            }}
+            href="#kontakt-forma"
+            onClick={scrollToForm}
             style={{
               display: 'inline-block',
               background: 'transparent',
