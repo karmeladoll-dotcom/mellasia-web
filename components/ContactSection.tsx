@@ -39,26 +39,66 @@ function LetterheadCard() {
 
   return (
     <div className="relative w-full">
-      {/* Gold aurora glow */}
-      <div
-        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-        style={{
-          width: '320px',
-          height: '320px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(212,165,116,0.12) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-        }}
-        aria-hidden="true"
-      />
+      <style>{`
+        @keyframes auroraBreath {
+          0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+          50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+        }
+        .letterhead-aurora-breath {
+          animation: auroraBreath 6s ease-in-out infinite;
+          will-change: transform;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .letterhead-aurora-breath {
+            animation: none;
+          }
+        }
+      `}</style>
 
-      {/* Card */}
+      {/* Layered celestial glow — behind card */}
+      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
+        {/* Layer 1 — outer halo */}
+        <div
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+          style={{
+            width: '420px',
+            height: '420px',
+            background: 'radial-gradient(circle, rgba(212,165,116,0.08) 0%, transparent 70%)',
+            filter: 'blur(80px)',
+          }}
+        />
+        {/* Layer 2 — inner core (breathing) */}
+        <div
+          className="letterhead-aurora-breath absolute left-1/2 top-1/2 rounded-full"
+          style={{
+            width: '220px',
+            height: '220px',
+            transform: 'translate(-50%, -50%)',
+            background: 'radial-gradient(circle, rgba(212,165,116,0.18) 0%, transparent 70%)',
+            filter: 'blur(50px)',
+          }}
+        />
+        {/* Layer 3 — bright nucleus */}
+        <div
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+          style={{
+            width: '100px',
+            height: '100px',
+            background: 'radial-gradient(circle, rgba(212,165,116,0.25) 0%, transparent 70%)',
+            filter: 'blur(30px)',
+          }}
+        />
+      </div>
+
+      {/* Card — Layer 5 edge bleed via box-shadow */}
       <div
-        className="relative rounded-xl text-center"
+        className="relative z-10 rounded-xl text-center"
         style={{
           border: '1px solid rgba(212,165,116,0.25)',
           background: 'rgba(212,165,116,0.03)',
           padding: '36px 32px',
+          boxShadow:
+            '0 0 30px rgba(212,165,116,0.06), 0 0 60px rgba(212,165,116,0.03)',
         }}
       >
         <p

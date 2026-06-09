@@ -1,6 +1,6 @@
 'use client';
 
-import { useId, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -42,6 +42,206 @@ function WaxSealIcon() {
         M
       </text>
     </svg>
+  );
+}
+
+function ServiceDropdown({
+  id,
+  value,
+  options,
+  placeholder,
+  invalid,
+  errorDescribedBy,
+  onChange,
+}: {
+  id: string;
+  value: string;
+  options: string[];
+  placeholder: string;
+  invalid: boolean;
+  errorDescribedBy?: string;
+  onChange: (value: string) => void;
+}) {
+  const listboxId = `${id}-listbox`;
+  const [isOpen, setIsOpen] = useState(false);
+  const [focusedIndex, setFocusedIndex] = useState(-1);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const listboxRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const selectedIndex = options.indexOf(value);
+
+  const closeDropdown = () => {
+    setIsOpen(false);
+    setFocusedIndex(-1);
+  };
+
+  const selectOption = (option: string) => {
+    onChange(option);
+    closeDropdown();
+    buttonRef.current?.focus();
+  };
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    setFocusedIndex(selectedIndex >= 0 ? selectedIndex : 0);
+    listboxRef.current?.focus();
+
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        closeDropdown();
+      }
+    };
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeDropdown();
+        buttonRef.current?.focus();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isOpen, selectedIndex]);
+
+  const handleButtonKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === 'Escape' && isOpen) {
+      e.preventDefault();
+      closeDropdown();
+      return;
+    }
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setIsOpen(true);
+      return;
+    }
+
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setIsOpen(true);
+      setFocusedIndex(options.length - 1);
+    }
+  };
+
+  const handleListboxKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeDropdown();
+      buttonRef.current?.focus();
+      return;
+    }
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setFocusedIndex((prev) => (prev + 1) % options.length);
+      return;
+    }
+
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setFocusedIndex((prev) => (prev - 1 + options.length) % options.length);
+      return;
+    }
+
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (focusedIndex >= 0 && focusedIndex < options.length) {
+        selectOption(options[focusedIndex]);
+      }
+    }
+  };
+
+  return (
+    <div ref={containerRef} className="relative">
+      <input type="hidden" name="service" value={value} />
+
+      <button
+        ref={buttonRef}
+        id={id}
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-controls={listboxId}
+        aria-invalid={invalid}
+        aria-describedby={errorDescribedBy}
+        onClick={() => setIsOpen((open) => !open)}
+        onKeyDown={handleButtonKeyDown}
+        className={`group flex w-full items-center justify-between border-0 border-b bg-transparent py-4 text-left text-base transition-colors duration-200 ease-in-out focus:border-[#D4A574] focus:outline-none ${
+          isOpen ? 'border-[#D4A574]' : 'border-[#333] hover:border-[#D4A574]'
+        }`}
+        style={{ fontFamily: "'DM Sans', sans-serif" }}
+      >
+        <span className={value ? 'text-white' : 'text-[#555]'}>
+          {value || placeholder}
+        </span>
+        <svg
+          className={`shrink-0 text-[#555] transition-transform duration-200 ease-out ${
+            isOpen ? 'rotate-180' : ''
+          }`}
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+
+      <div
+        ref={listboxRef}
+        id={listboxId}
+        role="listbox"
+        aria-labelledby={id}
+        tabIndex={-1}
+        onKeyDown={handleListboxKeyDown}
+        className={`absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-lg border border-[rgba(212,165,116,0.25)] bg-[#141414] transition-all duration-200 ease-out ${
+          isOpen
+            ? 'pointer-events-auto translate-y-0 opacity-100'
+            : 'pointer-events-none -translate-y-1 opacity-0'
+        }`}
+      >
+        {options.map((option, index) => {
+          const isSelected = value === option;
+          const isFocused = focusedIndex === index;
+
+          return (
+            <div
+              key={option}
+              id={`${id}-option-${index}`}
+              role="option"
+              aria-selected={isSelected}
+              tabIndex={-1}
+              onMouseEnter={() => setFocusedIndex(index)}
+              onClick={() => selectOption(option)}
+              className={`flex cursor-pointer items-center justify-between px-4 py-3 text-[13px] transition-colors duration-150 ${
+                isSelected || isFocused
+                  ? 'bg-[rgba(212,165,116,0.1)] text-[#D4A574]'
+                  : 'text-[#ccc] hover:bg-[rgba(212,165,116,0.1)] hover:text-[#D4A574]'
+              }`}
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              <span>{option}</span>
+              {isSelected && (
+                <span className="ml-3 flex h-1.5 w-1.5 shrink-0 rounded-full bg-[#D4A574]" aria-hidden="true" />
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
@@ -89,7 +289,7 @@ export default function ContactForm() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -97,6 +297,17 @@ export default function ContactForm() {
       setInvalidFields((prev) => {
         const next = new Set(prev);
         next.delete(name);
+        return next;
+      });
+    }
+  };
+
+  const handleServiceChange = (service: string) => {
+    setFormData((prev) => ({ ...prev, service }));
+    if (invalidFields.has('service')) {
+      setInvalidFields((prev) => {
+        const next = new Set(prev);
+        next.delete('service');
         return next;
       });
     }
@@ -235,42 +446,15 @@ export default function ContactForm() {
             >
               {t.contact.formLineLabel_service}
             </label>
-            <div className="relative">
-              <select
-                id="contact-service"
-                name="service"
-                value={formData.service}
-                onChange={handleChange}
-                required
-                aria-invalid={invalidFields.has('service')}
-                aria-describedby={errorMessage ? errorId : undefined}
-                className={`${UNDERLINE_INPUT_CLASS} appearance-none pr-8`}
-                style={{ fontFamily: "'DM Sans', sans-serif" }}
-              >
-                <option value="" disabled>
-                  {t.contact.placeholder_service}
-                </option>
-                {serviceOptions.map((option) => (
-                  <option key={option} value={option} className="bg-[#111] text-white">
-                    {option}
-                  </option>
-                ))}
-              </select>
-              <svg
-                className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 text-[#D4A574]"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
-            </div>
+            <ServiceDropdown
+              id="contact-service"
+              value={formData.service}
+              options={serviceOptions}
+              placeholder={t.contact.placeholder_service}
+              invalid={invalidFields.has('service')}
+              errorDescribedBy={errorMessage ? errorId : undefined}
+              onChange={handleServiceChange}
+            />
           </div>
 
           <div>
