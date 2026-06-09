@@ -7,10 +7,13 @@ import ReelSection from '@/components/ReelSection';
 import ServicesSection from '@/components/ServicesSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import GoldParticles from '@/components/GoldParticles';
 
 export default function Home() {
   return (
-    <main>
+    <>
+      <GoldParticles />
+      <main>
       <Navigation />
       <HeroSection />
       <AboutSection />
@@ -20,6 +23,7 @@ export default function Home() {
       <ServicesSection />
       <ContactSection />
       <Footer />
-    </main>
+      </main>
+    </>
   );
 }

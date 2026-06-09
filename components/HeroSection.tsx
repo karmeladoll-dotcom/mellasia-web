@@ -1,10 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import dynamic from 'next/dynamic';
 import { useLanguage } from '@/lib/LanguageContext';
-
-const ParticleWave = dynamic(() => import('./ParticleWave'), { ssr: false });
 
 export default function HeroSection() {
   const elementsRef = useRef<(HTMLElement | null)[]>([]);
@@ -50,8 +47,6 @@ export default function HeroSection() {
         background: '#0A0A0A',
       }}
     >
-      <ParticleWave />
-
       {/* Vignette overlay */}
       <div style={{
         position: 'absolute',
