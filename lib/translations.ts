@@ -88,6 +88,11 @@ export type TranslationShape = {
     };
     submit: string;
     submitting: string;
+    letterheadRe: string;
+    letterheadSubject: string;
+    letterheadQuote: string;
+    letterheadDatestamp: string;
+    letterheadCity: string;
     success_headline: string;
     success_subtext: string;
     success_again: string;
@@ -188,10 +193,10 @@ export const translations = {
         'Positioning, content calendars, and growth strategies tailored to the hospitality industry.',
     },
     contact: {
-      label: '05 - Contact',
+      label: '05 — LETTER TO THE STUDIO',
       titleLine1: "Let's make something",
       titleItalic: 'unforgettable.',
-      subtitle: 'Tell us about your project. We reply within one working day.',
+      subtitle: 'Write us a letter. We reply within one working day.',
       formLineLabel_name: 'NAME',
       formLineLabel_email: 'EMAIL',
       formLineLabel_service: 'SERVICE',
@@ -205,8 +210,13 @@ export const translations = {
         digitalStrategy: 'Digital strategy',
         other: 'Other',
       },
-      submit: 'Send message',
+      submit: 'SEAL & SEND',
       submitting: 'Sending...',
+      letterheadRe: 'RE:',
+      letterheadSubject: 'Your project',
+      letterheadQuote: 'Every great project begins with a single letter.',
+      letterheadDatestamp: 'ZAGREB · MMXXVI',
+      letterheadCity: 'Zagreb, Croatia',
       success_headline: 'Message sent.',
       success_subtext: 'We respond within one business day.',
       success_again: 'Send another message',
@@ -305,10 +315,10 @@ export const translations = {
         'Pozicioniranje, content kalendari i strategije rasta prilagođene ugostiteljskoj industriji.',
     },
     contact: {
-      label: '05 - Kontakt',
+      label: '05 — PISMO STUDIJU',
       titleLine1: 'Napravimo nešto',
       titleItalic: 'nezaboravno.',
-      subtitle: 'Recite nam o svom projektu. Odgovaramo unutar jednog radnog dana.',
+      subtitle: 'Napišite nam pismo. Odgovaramo unutar jednog radnog dana.',
       formLineLabel_name: 'IME',
       formLineLabel_email: 'EMAIL',
       formLineLabel_service: 'USLUGA',
@@ -322,8 +332,13 @@ export const translations = {
         digitalStrategy: 'Digitalna strategija',
         other: 'Drugo',
       },
-      submit: 'Pošalji poruku',
+      submit: 'ZAPEČATI I POŠALJI',
       submitting: 'Šalje se...',
+      letterheadRe: 'RE:',
+      letterheadSubject: 'Vaš projekt',
+      letterheadQuote: 'Svaki veliki projekt započinje jednim pismom.',
+      letterheadDatestamp: 'ZAGREB · MMXXVI',
+      letterheadCity: 'Zagreb, Hrvatska',
       success_headline: 'Poruka poslana.',
       success_subtext: 'Javljamo se unutar jednog radnog dana.',
       success_again: 'Pošalji još jednu poruku',

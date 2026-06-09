@@ -15,8 +15,35 @@ type FormData = {
   _honeypot: string;
 };
 
-const INPUT_CLASS =
-  'w-full bg-transparent border-2 border-[var(--brand-gold)]/60 rounded-xl px-6 py-5 text-base text-white placeholder:text-white/40 transition-all duration-200 ease-in-out focus:outline-none focus:border-[var(--brand-gold)] focus:shadow-[inset_0_0_0_1px_rgba(212,165,116,0.2)]';
+const FIELD_LABEL_CLASS =
+  'mb-2 block text-[10px] uppercase tracking-[2px] text-[#D4A574]';
+const FIELD_LABEL_STYLE = { fontFamily: "'DM Sans', sans-serif" };
+
+const UNDERLINE_INPUT_CLASS =
+  'w-full border-0 border-b border-[#333] bg-transparent px-0 py-4 text-base text-white placeholder:text-[#555] transition-colors duration-200 ease-in-out focus:border-[#D4A574] focus:outline-none';
+
+const TEXTAREA_CLASS =
+  'w-full resize-y rounded-lg border border-[#282828] bg-transparent px-6 py-5 text-base text-white placeholder:text-[#555] transition-colors duration-200 ease-in-out focus:border-[#D4A574] focus:outline-none min-h-[140px]';
+
+function WaxSealIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="1" />
+      <text
+        x="12"
+        y="15"
+        textAnchor="middle"
+        fontSize="7"
+        fill="currentColor"
+        fontWeight="500"
+        fontFamily="serif"
+      >
+        M
+      </text>
+    </svg>
+  );
+}
 
 export default function ContactForm() {
   const { t, language } = useLanguage();
@@ -117,15 +144,21 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="py-16 text-center">
-        <h3 className="font-serif italic text-[var(--brand-gold)] text-3xl mb-4">
+      <div className="py-16 text-left">
+        <h3
+          className="mb-4 text-3xl italic text-[#D4A574]"
+          style={{ fontFamily: "'Cormorant Garamond', serif" }}
+        >
           {t.contact.success_headline}
         </h3>
-        <p className="text-white/60 mb-8">{t.contact.success_subtext}</p>
+        <p className="mb-8 text-white/60" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+          {t.contact.success_subtext}
+        </p>
         <button
           type="button"
           onClick={() => setStatus('idle')}
-          className="text-sm text-[var(--brand-gold)]/80 hover:text-[var(--brand-gold)] underline underline-offset-4"
+          className="text-sm text-[#D4A574]/80 underline underline-offset-4 transition-colors hover:text-[#D4A574]"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           {t.contact.success_again}
         </button>
@@ -134,9 +167,7 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="max-w-[calc(100%-48px)] md:max-w-[560px] mx-auto">
-      <div className="w-10 h-px bg-[var(--brand-gold)]/60 mx-auto mb-12" />
-
+    <div className="w-full">
       <form onSubmit={handleSubmit} noValidate className="relative">
         <input
           type="text"
@@ -146,117 +177,144 @@ export default function ContactForm() {
           tabIndex={-1}
           autoComplete="off"
           aria-hidden="true"
-          className="absolute opacity-0 pointer-events-none h-0 w-0 overflow-hidden"
+          className="pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0"
         />
 
         <div className="flex flex-col gap-8">
-        <div>
-          <label htmlFor="contact-name" className="block text-xs uppercase tracking-[0.2em] text-[var(--brand-gold)] mb-2">
-            {t.contact.formLineLabel_name}
-          </label>
-          <input
-            id="contact-name"
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            maxLength={100}
-            aria-invalid={invalidFields.has('name')}
-            aria-describedby={errorMessage ? errorId : undefined}
-            className={INPUT_CLASS}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="contact-email" className="block text-xs uppercase tracking-[0.2em] text-[var(--brand-gold)] mb-2">
-            {t.contact.formLineLabel_email}
-          </label>
-          <input
-            id="contact-email"
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            maxLength={200}
-            aria-invalid={invalidFields.has('email')}
-            aria-describedby={errorMessage ? errorId : undefined}
-            className={INPUT_CLASS}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="contact-service" className="block text-xs uppercase tracking-[0.2em] text-[var(--brand-gold)] mb-2">
-            {t.contact.formLineLabel_service}
-          </label>
-          <div className="relative">
-            <select
-              id="contact-service"
-              name="service"
-              value={formData.service}
+          <div>
+            <label
+              htmlFor="contact-name"
+              className={FIELD_LABEL_CLASS}
+              style={FIELD_LABEL_STYLE}
+            >
+              {t.contact.formLineLabel_name}
+            </label>
+            <input
+              id="contact-name"
+              type="text"
+              name="name"
+              value={formData.name}
               onChange={handleChange}
               required
-              aria-invalid={invalidFields.has('service')}
+              maxLength={100}
+              aria-invalid={invalidFields.has('name')}
               aria-describedby={errorMessage ? errorId : undefined}
-              className={`${INPUT_CLASS} appearance-none pr-12`}
-            >
-              <option value="" disabled>
-                {t.contact.placeholder_service}
-              </option>
-              {serviceOptions.map((option) => (
-                <option key={option} value={option} className="bg-[#111] text-white">
-                  {option}
-                </option>
-              ))}
-            </select>
-            <svg
-              className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-[var(--brand-gold)]"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
+              className={UNDERLINE_INPUT_CLASS}
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            />
           </div>
-        </div>
 
-        <div>
-          <label htmlFor="contact-message" className="block text-xs uppercase tracking-[0.2em] text-[var(--brand-gold)] mb-2">
-            {t.contact.formLineLabel_message}
-          </label>
-          <textarea
-            id="contact-message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            minLength={20}
-            maxLength={2000}
-            rows={5}
-            aria-invalid={invalidFields.has('message')}
-            aria-describedby={errorMessage ? errorId : undefined}
-            className={`${INPUT_CLASS} resize-y min-h-[140px]`}
-          />
-        </div>
+          <div>
+            <label
+              htmlFor="contact-email"
+              className={FIELD_LABEL_CLASS}
+              style={FIELD_LABEL_STYLE}
+            >
+              {t.contact.formLineLabel_email}
+            </label>
+            <input
+              id="contact-email"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              maxLength={200}
+              aria-invalid={invalidFields.has('email')}
+              aria-describedby={errorMessage ? errorId : undefined}
+              className={UNDERLINE_INPUT_CLASS}
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="contact-service"
+              className={FIELD_LABEL_CLASS}
+              style={FIELD_LABEL_STYLE}
+            >
+              {t.contact.formLineLabel_service}
+            </label>
+            <div className="relative">
+              <select
+                id="contact-service"
+                name="service"
+                value={formData.service}
+                onChange={handleChange}
+                required
+                aria-invalid={invalidFields.has('service')}
+                aria-describedby={errorMessage ? errorId : undefined}
+                className={`${UNDERLINE_INPUT_CLASS} appearance-none pr-8`}
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
+                <option value="" disabled>
+                  {t.contact.placeholder_service}
+                </option>
+                {serviceOptions.map((option) => (
+                  <option key={option} value={option} className="bg-[#111] text-white">
+                    {option}
+                  </option>
+                ))}
+              </select>
+              <svg
+                className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 text-[#D4A574]"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </div>
+          </div>
+
+          <div>
+            <label
+              htmlFor="contact-message"
+              className={FIELD_LABEL_CLASS}
+              style={FIELD_LABEL_STYLE}
+            >
+              {t.contact.formLineLabel_message}
+            </label>
+            <textarea
+              id="contact-message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              required
+              minLength={20}
+              maxLength={2000}
+              rows={5}
+              aria-invalid={invalidFields.has('message')}
+              aria-describedby={errorMessage ? errorId : undefined}
+              className={TEXTAREA_CLASS}
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            />
+          </div>
         </div>
 
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="mx-auto block mt-12 px-12 py-5 rounded-full bg-[var(--brand-gold)] text-[#0a0a0a] font-serif text-base uppercase tracking-[0.15em] shadow-[0_0_24px_-8px_rgba(212,165,116,0.3)] transition-all duration-250 ease-out hover:shadow-[0_0_28px_-6px_rgba(212,165,116,0.5)] hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 motion-reduce:hover:scale-100"
+          className="mt-10 inline-flex items-center gap-2.5 rounded-full bg-[#D4A574] px-8 py-3.5 text-xs font-medium tracking-widest text-[#0A0A0A] transition-all duration-200 ease-out hover:scale-[1.02] hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 motion-reduce:hover:scale-100"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
+          {status !== 'submitting' && <WaxSealIcon />}
           {status === 'submitting' ? t.contact.submitting : t.contact.submit}
         </button>
 
         {errorMessage && (
-          <p id={errorId} className="text-sm text-red-400/80 mt-4 text-center" role="alert">
+          <p
+            id={errorId}
+            className="mt-4 text-sm text-red-400/80"
+            role="alert"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
             {errorMessage}
           </p>
         )}

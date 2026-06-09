@@ -34,118 +34,171 @@ const SOCIALS = [
   },
 ];
 
+function LetterheadCard() {
+  const { t } = useLanguage();
+
+  return (
+    <div className="relative w-full">
+      {/* Gold aurora glow */}
+      <div
+        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        style={{
+          width: '320px',
+          height: '320px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(212,165,116,0.12) 0%, transparent 70%)',
+          filter: 'blur(60px)',
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Card */}
+      <div
+        className="relative rounded-xl text-center"
+        style={{
+          border: '1px solid rgba(212,165,116,0.25)',
+          background: 'rgba(212,165,116,0.03)',
+          padding: '36px 32px',
+        }}
+      >
+        <p
+          className="text-xl font-light tracking-[6px] text-[#D4A574]"
+          style={{ fontFamily: "'Cormorant Garamond', serif" }}
+        >
+          MELLASIA
+        </p>
+
+        <div className="mx-auto my-5 h-px w-10 bg-[#D4A574]" />
+
+        <p
+          className="text-[10px] tracking-[2.5px] text-[#555]"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
+        >
+          {t.contact.letterheadRe}
+        </p>
+
+        <p
+          className="mt-1 text-[17px] italic text-[#bbb]"
+          style={{ fontFamily: "'Cormorant Garamond', serif" }}
+        >
+          {t.contact.letterheadSubject}
+        </p>
+
+        <div
+          className="my-6 border-t"
+          style={{ borderColor: 'rgba(212,165,116,0.15)' }}
+        />
+
+        <p
+          className="text-sm italic leading-relaxed text-[#888]"
+          style={{ fontFamily: "'Cormorant Garamond', serif" }}
+        >
+          &ldquo;{t.contact.letterheadQuote}&rdquo;
+        </p>
+
+        <p
+          className="mt-6 text-[10px] tracking-[2.5px] text-[#555]"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
+        >
+          {t.contact.letterheadDatestamp}
+        </p>
+
+        <div
+          className="mx-auto mt-8 flex h-14 w-14 items-center justify-center rounded-full text-xl text-[#D4A574]"
+          style={{
+            border: '1.5px solid rgba(212,165,116,0.5)',
+            background: 'rgba(212,165,116,0.06)',
+            fontFamily: "'Cormorant Garamond', serif",
+          }}
+          aria-hidden="true"
+        >
+          M
+        </div>
+
+        <p
+          className="mt-5 text-[11px] text-[#666]"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
+        >
+          hello@mellasia.com
+        </p>
+        <p
+          className="mt-1 text-[11px] text-[#555]"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
+        >
+          {t.contact.letterheadCity}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function ContactSection() {
   const { t } = useLanguage();
 
   return (
     <section
       id="contact"
-      style={{
-        background: '#080808',
-        padding: 'clamp(80px,12vw,160px) clamp(20px,5vw,60px)',
-      }}
+      className="bg-[#0A0A0A] px-5 py-24 md:px-[60px]"
     >
-      <div style={{
-        maxWidth: '800px',
-        margin: '0 auto',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center',
-      }}>
-        {/* Label */}
-        <ScrollReveal>
-          <p style={{
-            color: '#D4A574',
-            fontSize: '11px',
-            fontWeight: 500,
-            letterSpacing: '4px',
-            textTransform: 'uppercase',
-            marginBottom: '22px',
-            fontFamily: "'DM Sans', sans-serif",
-          }}>
-            {t.contact.label}
-          </p>
-        </ScrollReveal>
+      <div className="mx-auto flex max-w-6xl flex-col gap-12 md:flex-row md:gap-12">
+        {/* Left column — form side */}
+        <ScrollReveal className="w-full md:w-[58%] md:flex-shrink-0">
+          <div className="text-left">
+            <p
+              className="mb-[22px] text-[11px] font-medium uppercase tracking-[4px] text-[#D4A574]"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              {t.contact.label}
+            </p>
 
-        {/* Heading */}
-        <ScrollReveal delay={0.1}>
-          <h2 style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontSize: 'clamp(32px,5.5vw,72px)',
-            fontWeight: 300,
-            lineHeight: 1.12,
-            color: '#ffffff',
-            marginBottom: '22px',
-          }}>
-            {t.contact.titleLine1}{' '}
-            <span style={{ color: '#D4A574', fontStyle: 'italic', display: 'block' }}>{t.contact.titleItalic}</span>
-          </h2>
-        </ScrollReveal>
+            <h2
+              className="mb-[22px] text-[clamp(32px,5.5vw,72px)] font-light leading-[1.12] text-white"
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            >
+              {t.contact.titleLine1}{' '}
+              <span className="block italic text-[#D4A574]">{t.contact.titleItalic}</span>
+            </h2>
 
-        {/* Subtitle */}
-        <ScrollReveal delay={0.2}>
-          <p style={{
-            color: 'rgba(255,255,255,0.42)',
-            fontSize: 'clamp(14px,1.6vw,17px)',
-            lineHeight: 1.75,
-            fontFamily: "'DM Sans', sans-serif",
-            fontWeight: 300,
-            maxWidth: '440px',
-          }}>
-            {t.contact.subtitle}
-          </p>
-        </ScrollReveal>
+            <p
+              className="mb-10 max-w-md text-sm text-[#777]"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
+              {t.contact.subtitle}
+            </p>
 
-        {/* Contact form */}
-        <ScrollReveal delay={0.3}>
-          <div id="kontakt-forma" className="mt-12 md:mt-16 w-full">
-            <ContactForm />
+            <div id="kontakt-forma" className="w-full">
+              <ContactForm />
+            </div>
           </div>
         </ScrollReveal>
 
-        {/* Fallback email */}
-        <ScrollReveal delay={0.35}>
-          <div className="mt-16 w-full">
-            <div className="w-20 h-px bg-[var(--brand-gold)]/30 mx-auto" />
-            <p className="text-center text-sm text-white/60 mt-6">{t.contact.fallback_text}</p>
+        {/* Right column — letterhead card */}
+        <ScrollReveal delay={0.2} className="mt-12 w-full md:mt-0 md:w-[42%] md:self-center">
+          <LetterheadCard />
+        </ScrollReveal>
+      </div>
+
+      {/* Fallback email & social links */}
+      <ScrollReveal delay={0.35}>
+        <div className="mx-auto mt-16 max-w-6xl">
+          <div className="mx-auto h-px w-20 bg-[#D4A574]/30" />
+          <p
+            className="mt-6 text-center text-sm text-white/60"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
+          >
+            {t.contact.fallback_text}
+          </p>
+          <div className="mt-4 text-center">
             <a
               href="mailto:hello@mellasia.com"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                background: '#D4A574',
-                color: '#0A0A0A',
-                fontSize: '15px',
-                fontWeight: 500,
-                letterSpacing: '0.5px',
-                padding: '16px 36px',
-                borderRadius: '100px',
-                textDecoration: 'none',
-                transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
-                marginTop: '16px',
-                fontFamily: "'DM Sans', sans-serif",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-3px)';
-                e.currentTarget.style.boxShadow = '0 16px 50px rgba(212,165,116,0.4)';
-                e.currentTarget.style.background = '#E8C9A0';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'none';
-                e.currentTarget.style.background = '#D4A574';
-              }}
+              className="inline-flex items-center gap-2 rounded-full bg-[#D4A574] px-9 py-4 text-[15px] font-medium tracking-[0.5px] text-[#0A0A0A] no-underline transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-[3px] hover:bg-[#E8C9A0] hover:shadow-[0_16px_50px_rgba(212,165,116,0.4)]"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               hello@mellasia.com ↗
             </a>
           </div>
-        </ScrollReveal>
 
-        {/* Social links */}
-        <ScrollReveal delay={0.4}>
-          <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginTop: '48px' }}>
+          <div className="mt-12 flex items-center justify-center gap-6">
             {SOCIALS.map((s) => (
               <a
                 key={s.label}
@@ -153,26 +206,14 @@ export default function ContactSection() {
                 target={s.href.startsWith('http') ? '_blank' : undefined}
                 rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 aria-label={s.label}
-                style={{
-                  color: 'rgba(255,255,255,0.3)',
-                  transition: 'color 0.25s, transform 0.25s',
-                  display: 'block',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = '#D4A574';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'rgba(255,255,255,0.3)';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
+                className="block text-white/30 transition-[color,transform] duration-[250ms] hover:-translate-y-0.5 hover:text-[#D4A574]"
               >
                 {s.icon}
               </a>
             ))}
           </div>
-        </ScrollReveal>
-      </div>
+        </div>
+      </ScrollReveal>
     </section>
   );
 }
