@@ -105,6 +105,7 @@ export type TranslationShape = {
   footer: {
     copyright: string;
     tagline: string;
+    description: string;
     navHeading: string;
     servicesHeading: string;
     service1: string;
@@ -230,6 +231,7 @@ export const translations = {
     footer: {
       copyright: '© 2026 Mellasia Studio. All rights reserved.',
       tagline: 'Crafted with care in Zagreb.',
+      description: 'A creative studio crafting cinematic digital experiences and AI-powered products.',
       navHeading: 'Navigation',
       servicesHeading: 'Services',
       service1: 'AI Social Media',
@@ -352,6 +354,7 @@ export const translations = {
     footer: {
       copyright: '© 2026 Mellasia Studio. Sva prava pridržana.',
       tagline: 'S ljubavlju iz Zagreba.',
+      description: 'Kreativni studio koji kreira kinematografska digitalna iskustva i AI-podržane produkte.',
       navHeading: 'Navigacija',
       servicesHeading: 'Usluge',
       service1: 'AI Marketing',

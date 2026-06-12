@@ -17,7 +17,7 @@ interface Particle {
   driftTimer: number;
 }
 
-const PARTICLE_COUNT = 35;
+const PARTICLE_COUNT = 55;
 const GOLD_R = 212;
 const GOLD_G = 165;
 const GOLD_B = 116;
@@ -52,11 +52,11 @@ export default function GoldParticles() {
         vy,
         baseVx: vx,
         baseVy: vy,
-        radius: 1 + Math.random(),
+        radius: 1.5 + Math.random() * 1.5,
         opacityPhase: Math.random() * Math.PI * 2,
         cycleDuration: 3 + Math.random() * 5,
-        opacityMin: 0.15,
-        opacityMax: 0.15 + Math.random() * 0.35,
+        opacityMin: 0.3,
+        opacityMax: 0.35 + Math.random() * 0.4,
         driftTimer: 120 + Math.random() * 240,
       };
     };
@@ -109,9 +109,12 @@ export default function GoldParticles() {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${GOLD_R},${GOLD_G},${GOLD_B},${opacity})`;
+        ctx.shadowBlur = p.radius * 5;
+        ctx.shadowColor = `rgba(${GOLD_R},${GOLD_G},${GOLD_B},${opacity * 0.6})`;
         ctx.fill();
       });
 
+      ctx.shadowBlur = 0;
       animRef.current = requestAnimationFrame(draw);
     };
 

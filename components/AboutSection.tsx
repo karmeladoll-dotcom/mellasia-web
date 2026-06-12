@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import ScrollReveal from './ScrollReveal';
 import { useLanguage } from '@/lib/LanguageContext';
 
@@ -79,7 +80,7 @@ export default function AboutSection() {
             </div>
           </ScrollReveal>
 
-          {/* Right: founder photo placeholder */}
+          {/* Right: founder photo */}
           <ScrollReveal delay={0.22}>
             <div
               style={{
@@ -87,23 +88,18 @@ export default function AboutSection() {
                 borderRadius: '20px',
                 aspectRatio: '3/4',
                 background: '#111111',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
                 width: '100%',
+                position: 'relative',
+                overflow: 'hidden',
               }}
             >
-              <span
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: '13px',
-                  fontWeight: 400,
-                  color: 'rgba(212,165,116,0.4)',
-                  letterSpacing: '1px',
-                }}
-              >
-                {t.about.photoPlaceholder}
-              </span>
+              <Image
+                src="/images/Mellasia Founder Picture.jpg"
+                alt="Karmela — Mellasia Studio founder"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
             </div>
           </ScrollReveal>
         </div>

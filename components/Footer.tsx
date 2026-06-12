@@ -84,7 +84,7 @@ export default function Footer() {
             fontWeight: 300,
             maxWidth: '240px',
           }}>
-            A creative studio crafting cinematic digital experiences and AI-powered products.
+            {t.footer.description}
           </p>
         </div>
 
