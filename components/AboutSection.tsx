@@ -88,7 +88,8 @@ export default function AboutSection() {
                 borderRadius: '20px',
                 aspectRatio: '3/4',
                 background: '#111111',
-                width: '100%',
+                maxWidth: '80%',
+                margin: '0 auto',
                 position: 'relative',
                 overflow: 'hidden',
               }}
@@ -97,8 +98,8 @@ export default function AboutSection() {
                 src="/images/Mellasia Founder Picture.jpg"
                 alt="Karmela — Mellasia Studio founder"
                 fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: 'cover', objectPosition: 'center top' }}
+                sizes="(max-width: 768px) 80vw, 40vw"
               />
             </div>
           </ScrollReveal>

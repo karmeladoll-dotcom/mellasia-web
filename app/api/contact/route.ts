@@ -207,7 +207,7 @@ export async function POST(request: Request) {
       from,
       to,
       replyTo: email,
-      subject: `Nova poruka preko kontakt forme — ${name}`,
+      subject: `Pismo studiju — ${name} (${service})`,
       html: buildHtmlEmail(name, email, service, message),
       text: buildTextEmail(name, email, service, message),
     });
