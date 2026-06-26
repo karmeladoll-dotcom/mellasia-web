@@ -1,29 +1,25 @@
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
-import AboutSection from '@/components/AboutSection';
-import ProductSection from '@/components/ProductSection';
-import PortfolioSection from '@/components/PortfolioSection';
-import ReelSection from '@/components/ReelSection';
-import ServicesSection from '@/components/ServicesSection';
+import FeaturedWorkSection from '@/components/FeaturedWorkSection';
+import CapabilitiesSection from '@/components/CapabilitiesSection';
+import AudienceSection from '@/components/AudienceSection';
+import StudioSection from '@/components/StudioSection';
+import LabTeaserSection from '@/components/LabTeaserSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
-import GoldParticles from '@/components/GoldParticles';
 
 export default function Home() {
   return (
-    <>
-      <GoldParticles />
-      <main>
+    <main>
       <Navigation />
       <HeroSection />
-      <AboutSection />
-      <ProductSection />
-      <PortfolioSection />
-      <ReelSection />
-      <ServicesSection />
+      <FeaturedWorkSection />
+      <CapabilitiesSection />
+      <AudienceSection />
+      <StudioSection />
+      <LabTeaserSection />
       <ContactSection />
       <Footer />
-      </main>
-    </>
+    </main>
   );
 }

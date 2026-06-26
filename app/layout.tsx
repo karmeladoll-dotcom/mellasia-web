@@ -1,17 +1,25 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/LanguageContext";
+import { DM_Sans } from "next/font/google";
+
+// Body voice — DM Sans handles paragraph copy at small sizes
+// where Panchang's geometric character becomes tiring.
+const bodyFont = DM_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  variable: "--font-body",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Mellasia Creative Agency",
+  title: "Mellasia · Cinematic digital experiences",
   description:
-    "AI-powered restaurant marketing, cinematic storytelling, and digital experiences. From Zagreb to the world.",
-  keywords: "creative agency, AI marketing, restaurant marketing, brand identity, video production, Zagreb",
+    "Mellasia designs cinematic websites and digital identities for hospitality, beauty, lifestyle and experience-led brands. Independent studio, Zagreb / Worldwide.",
   openGraph: {
-    title: "Mellasia Creative Agency",
+    title: "Mellasia · Cinematic digital experiences",
     description:
-      "AI-powered restaurant marketing, cinematic storytelling, and digital experiences. From Zagreb to the world.",
-    url: "https://mellasia.com",
+      "Mellasia designs cinematic websites and digital identities for hospitality, beauty, lifestyle and experience-led brands.",
     siteName: "Mellasia",
     type: "website",
   },
@@ -23,13 +31,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="hr" className={bodyFont.variable}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Fontshare — Gambarino (display), Telma (accent), Panchang (UI). */}
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
           rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=gambarino@400&f[]=telma@400&f[]=panchang@300,400,500,600&display=swap"
         />
       </head>
       <body>

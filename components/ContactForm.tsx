@@ -16,14 +16,14 @@ type FormData = {
 };
 
 const FIELD_LABEL_CLASS =
-  'mb-2 block text-[10px] uppercase tracking-[2px] text-[#D4A574]';
-const FIELD_LABEL_STYLE = { fontFamily: "'DM Sans', sans-serif" };
+  'mb-2 block text-[10px] font-medium uppercase tracking-[0.32em] text-[var(--bone-mute)]';
+const FIELD_LABEL_STYLE = { fontFamily: "var(--font-ui), system-ui, sans-serif" };
 
 const UNDERLINE_INPUT_CLASS =
-  'w-full border-0 border-b border-[#333] bg-transparent px-0 py-4 text-base text-white placeholder:text-[#555] transition-colors duration-200 ease-in-out focus:border-[#D4A574] focus:outline-none';
+  'w-full border-0 border-b border-[var(--rule-strong)] bg-transparent px-0 py-4 text-base text-[var(--bone-0)] placeholder:text-[var(--bone-mute)] transition-colors duration-200 ease-in-out focus:border-[var(--bone-0)] focus:outline-none';
 
 const TEXTAREA_CLASS =
-  'w-full resize-y rounded-lg border border-[#282828] bg-transparent px-6 py-5 text-base text-white placeholder:text-[#555] transition-colors duration-200 ease-in-out focus:border-[#D4A574] focus:outline-none min-h-[140px]';
+  'w-full resize-y rounded-[2px] border border-[var(--rule-strong)] bg-transparent px-6 py-5 text-base text-[var(--bone-0)] placeholder:text-[var(--bone-mute)] transition-colors duration-200 ease-in-out focus:border-[var(--bone-0)] focus:outline-none min-h-[140px]';
 
 function WaxSealIcon() {
   return (
@@ -174,16 +174,16 @@ function ServiceDropdown({
         aria-describedby={errorDescribedBy}
         onClick={() => setIsOpen((open) => !open)}
         onKeyDown={handleButtonKeyDown}
-        className={`group flex w-full items-center justify-between border-0 border-b bg-transparent py-4 text-left text-base transition-colors duration-200 ease-in-out focus:border-[#D4A574] focus:outline-none ${
-          isOpen ? 'border-[#D4A574]' : 'border-[#333] hover:border-[#D4A574]'
+        className={`group flex w-full items-center justify-between border-0 border-b bg-transparent py-4 text-left text-base transition-colors duration-200 ease-in-out focus:border-[var(--bone-0)] focus:outline-none ${
+          isOpen ? 'border-[var(--bone-0)]' : 'border-[var(--rule-strong)] hover:border-[var(--bone-0)]'
         }`}
-        style={{ fontFamily: "'DM Sans', sans-serif" }}
+        style={{ fontFamily: "var(--font-ui), system-ui, sans-serif" }}
       >
-        <span className={value ? 'text-white' : 'text-[#555]'}>
+        <span className={value ? 'text-[var(--bone-0)]' : 'text-[var(--bone-mute)]'}>
           {value || placeholder}
         </span>
         <svg
-          className={`shrink-0 text-[#555] transition-transform duration-200 ease-out ${
+          className={`shrink-0 text-[var(--bone-mute)] transition-transform duration-200 ease-out ${
             isOpen ? 'rotate-180' : ''
           }`}
           width="16"
@@ -207,7 +207,7 @@ function ServiceDropdown({
         aria-labelledby={id}
         tabIndex={-1}
         onKeyDown={handleListboxKeyDown}
-        className={`absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-lg border border-[rgba(212,165,116,0.25)] bg-[#141414] transition-all duration-200 ease-out ${
+        className={`absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-[2px] border border-[var(--rule-strong)] bg-[var(--ink-2)] transition-all duration-200 ease-out ${
           isOpen
             ? 'pointer-events-auto translate-y-0 opacity-100'
             : 'pointer-events-none -translate-y-1 opacity-0'
@@ -228,14 +228,14 @@ function ServiceDropdown({
               onClick={() => selectOption(option)}
               className={`flex cursor-pointer items-center justify-between px-4 py-3 text-[13px] transition-colors duration-150 ${
                 isSelected || isFocused
-                  ? 'bg-[rgba(212,165,116,0.1)] text-[#D4A574]'
-                  : 'text-[#ccc] hover:bg-[rgba(212,165,116,0.1)] hover:text-[#D4A574]'
+                  ? 'bg-[rgba(244,241,234,0.06)] text-[var(--bone-0)]'
+                  : 'text-[var(--bone-dim)] hover:bg-[rgba(244,241,234,0.06)] hover:text-[var(--bone-0)]'
               }`}
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
+              style={{ fontFamily: "var(--font-ui), system-ui, sans-serif" }}
             >
               <span>{option}</span>
               {isSelected && (
-                <span className="ml-3 flex h-1.5 w-1.5 shrink-0 rounded-full bg-[#D4A574]" aria-hidden="true" />
+                <span className="ml-3 flex h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--bone-0)]" aria-hidden="true" />
               )}
             </div>
           );
@@ -261,11 +261,9 @@ export default function ContactForm() {
   const [invalidFields, setInvalidFields] = useState<Set<string>>(new Set());
 
   const serviceOptions = [
-    t.contact.services.aiMarketing,
-    t.contact.services.visualIdentity,
-    t.contact.services.videoProduction,
-    t.contact.services.menuDesign,
-    t.contact.services.digitalStrategy,
+    t.contact.services.story,
+    t.contact.services.visual,
+    t.contact.services.build,
     t.contact.services.other,
   ];
 
@@ -357,19 +355,27 @@ export default function ContactForm() {
     return (
       <div className="py-16 text-left">
         <h3
-          className="mb-4 text-3xl italic text-[#D4A574]"
-          style={{ fontFamily: "'Cormorant Garamond', serif" }}
+          className="mb-4 text-3xl text-[var(--bone-0)]"
+          style={{
+            fontFamily: 'var(--font-accent)',
+            fontStyle: 'normal',
+            fontWeight: 400,
+            letterSpacing: '-0.01em',
+          }}
         >
           {t.contact.success_headline}
         </h3>
-        <p className="mb-8 text-white/60" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+        <p
+          className="mb-8 text-[var(--bone-dim)]"
+          style={{ fontFamily: "var(--font-ui), system-ui, sans-serif" }}
+        >
           {t.contact.success_subtext}
         </p>
         <button
           type="button"
           onClick={() => setStatus('idle')}
-          className="text-sm text-[#D4A574]/80 underline underline-offset-4 transition-colors hover:text-[#D4A574]"
-          style={{ fontFamily: "'DM Sans', sans-serif" }}
+          className="text-sm text-[var(--bone-dim)] underline underline-offset-4 transition-colors hover:text-[var(--bone-0)]"
+          style={{ fontFamily: "var(--font-ui), system-ui, sans-serif" }}
         >
           {t.contact.success_again}
         </button>
@@ -411,7 +417,7 @@ export default function ContactForm() {
               aria-invalid={invalidFields.has('name')}
               aria-describedby={errorMessage ? errorId : undefined}
               className={UNDERLINE_INPUT_CLASS}
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
+              style={{ fontFamily: "var(--font-ui), system-ui, sans-serif" }}
             />
           </div>
 
@@ -434,7 +440,7 @@ export default function ContactForm() {
               aria-invalid={invalidFields.has('email')}
               aria-describedby={errorMessage ? errorId : undefined}
               className={UNDERLINE_INPUT_CLASS}
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
+              style={{ fontFamily: "var(--font-ui), system-ui, sans-serif" }}
             />
           </div>
 
@@ -477,7 +483,7 @@ export default function ContactForm() {
               aria-invalid={invalidFields.has('message')}
               aria-describedby={errorMessage ? errorId : undefined}
               className={TEXTAREA_CLASS}
-              style={{ fontFamily: "'DM Sans', sans-serif" }}
+              style={{ fontFamily: "var(--font-ui), system-ui, sans-serif" }}
             />
           </div>
         </div>
@@ -485,8 +491,8 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="mt-10 inline-flex items-center gap-2.5 rounded-full bg-[#D4A574] px-8 py-3.5 text-xs font-medium tracking-widest text-[#0A0A0A] transition-all duration-200 ease-out hover:scale-[1.02] hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 motion-reduce:hover:scale-100"
-          style={{ fontFamily: "'DM Sans', sans-serif" }}
+          className="mt-10 inline-flex items-center gap-2.5 rounded-[2px] bg-[var(--bone-0)] px-8 py-3.5 text-xs font-medium tracking-[0.18em] text-[var(--ink-0)] transition-all duration-200 ease-out hover:bg-white hover:-translate-y-[1px] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 motion-reduce:hover:translate-y-0"
+          style={{ fontFamily: "var(--font-ui), system-ui, sans-serif" }}
         >
           {status !== 'submitting' && <WaxSealIcon />}
           {status === 'submitting' ? t.contact.submitting : t.contact.submit}
@@ -497,7 +503,7 @@ export default function ContactForm() {
             id={errorId}
             className="mt-4 text-sm text-red-400/80"
             role="alert"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
+            style={{ fontFamily: "var(--font-ui), system-ui, sans-serif" }}
           >
             {errorMessage}
           </p>

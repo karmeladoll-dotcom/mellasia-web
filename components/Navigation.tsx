@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useLanguage } from '@/lib/LanguageContext';
 import type { Language } from '@/lib/translations';
+import MellasiaMark from './MellasiaMark';
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
@@ -10,11 +11,11 @@ export default function Navigation() {
   const { language, setLanguage, t } = useLanguage();
 
   const NAV_LINKS = [
-    { label: t.nav.product, href: '#product' },
-    { label: t.nav.about, href: '#about' },
-    { label: t.nav.portfolio, href: '#portfolio' },
-    { label: t.nav.reel, href: '#reel' },
-    { label: t.nav.services, href: '#services' },
+    { label: t.nav.work, href: '#work' },
+    { label: t.nav.capabilities, href: '#capabilities' },
+    { label: t.nav.forWhom, href: '#for-whom' },
+    { label: t.nav.studio, href: '#studio' },
+    { label: t.nav.lab, href: '#lab' },
     { label: t.nav.contact, href: '#contact' },
   ];
 
@@ -27,7 +28,10 @@ export default function Navigation() {
   const handleNavClick = (href: string) => {
     setMenuOpen(false);
     const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (!el) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const top = el.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top, behavior: reduced ? 'auto' : 'smooth' });
   };
 
   const toggleLang = () => setLanguage(language === 'hr' ? 'en' : ('hr' as Language));
@@ -40,64 +44,56 @@ export default function Navigation() {
         left: 0,
         right: 0,
         zIndex: 100,
-        padding: scrolled ? '14px clamp(20px,5vw,60px)' : '22px clamp(20px,5vw,60px)',
-        background: scrolled ? 'rgba(10,10,10,0.92)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(212,165,116,0.12)' : '1px solid transparent',
+        padding: scrolled
+          ? '14px clamp(20px, 5vw, 60px)'
+          : '22px clamp(20px, 5vw, 60px)',
+        background: scrolled ? 'rgba(10,10,10,0.86)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(14px)' : 'none',
+        WebkitBackdropFilter: scrolled ? 'blur(14px)' : 'none',
+        borderBottom: scrolled ? '1px solid var(--rule)' : '1px solid transparent',
         transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
       }}
     >
-      {/* Logo */}
       <a
         href="#hero"
-        onClick={(e) => { e.preventDefault(); handleNavClick('#hero'); }}
-        style={{
-          fontFamily: "'Cormorant Garamond', serif",
-          fontSize: 'clamp(20px,2.5vw,26px)',
-          fontWeight: 400,
-          color: '#D4A574',
-          textTransform: 'uppercase',
-          letterSpacing: '3px',
-          textDecoration: 'none',
+        onClick={(e) => {
+          e.preventDefault();
+          handleNavClick('#hero');
         }}
+        style={{ textDecoration: 'none' }}
+        aria-label="Mellasia — home"
       >
-        Mellasia
+        <MellasiaMark />
       </a>
 
-      {/* Desktop links */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '36px',
-        }}
-        className="desktop-nav"
-      >
+      <div className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
         {NAV_LINKS.map((link) => (
           <a
             key={link.href}
             href={link.href}
-            onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick(link.href);
+            }}
             style={{
-              color: 'rgba(255,255,255,0.65)',
-              fontSize: '14px',
+              color: 'var(--bone-dim)',
+              fontFamily: "var(--font-ui), system-ui, sans-serif",
+              fontSize: '13px',
               fontWeight: 400,
-              letterSpacing: '0.5px',
+              letterSpacing: '0.04em',
               textDecoration: 'none',
               transition: 'color 0.25s',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#D4A574')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.65)')}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--bone-0)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--bone-dim)')}
           >
             {link.label}
           </a>
         ))}
 
-        {/* Language toggle */}
         <button
           onClick={toggleLang}
           aria-label="Toggle language"
@@ -106,63 +102,66 @@ export default function Navigation() {
             alignItems: 'center',
             gap: '2px',
             background: 'transparent',
-            border: '1px solid rgba(212,165,116,0.3)',
-            borderRadius: '100px',
+            border: '1px solid var(--rule-strong)',
+            borderRadius: '2px',
             padding: '5px 12px',
             cursor: 'pointer',
             fontSize: '11px',
             fontWeight: 500,
-            letterSpacing: '1px',
-            fontFamily: "'DM Sans', sans-serif",
+            letterSpacing: '0.12em',
+            fontFamily: "var(--font-ui), system-ui, sans-serif",
             transition: 'all 0.25s',
-            color: 'rgba(255,255,255,0.55)',
+            color: 'var(--bone-dim)',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = 'rgba(212,165,116,0.6)';
-            e.currentTarget.style.color = '#D4A574';
+            e.currentTarget.style.borderColor = 'var(--bone-0)';
+            e.currentTarget.style.color = 'var(--bone-0)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = 'rgba(212,165,116,0.3)';
-            e.currentTarget.style.color = 'rgba(255,255,255,0.55)';
+            e.currentTarget.style.borderColor = 'var(--rule-strong)';
+            e.currentTarget.style.color = 'var(--bone-dim)';
           }}
         >
-          <span style={{ color: language === 'hr' ? '#D4A574' : 'rgba(255,255,255,0.4)' }}>HR</span>
-          <span style={{ color: 'rgba(255,255,255,0.2)', margin: '0 3px' }}>|</span>
-          <span style={{ color: language === 'en' ? '#D4A574' : 'rgba(255,255,255,0.4)' }}>EN</span>
+          <span style={{ color: language === 'hr' ? 'var(--bone-0)' : 'var(--bone-mute)' }}>HR</span>
+          <span style={{ color: 'var(--bone-mute)', margin: '0 3px' }}>|</span>
+          <span style={{ color: language === 'en' ? 'var(--bone-0)' : 'var(--bone-mute)' }}>EN</span>
         </button>
 
-        {/* CTA */}
         <a
           href="#contact"
-          onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
+          onClick={(e) => {
+            e.preventDefault();
+            handleNavClick('#contact');
+          }}
           style={{
-            color: '#D4A574',
+            color: 'var(--bone-0)',
+            fontFamily: "var(--font-ui), system-ui, sans-serif",
             fontSize: '13px',
             fontWeight: 500,
-            letterSpacing: '0.5px',
+            letterSpacing: '0.04em',
             textDecoration: 'none',
-            padding: '8px 22px',
-            border: '1px solid rgba(212,165,116,0.45)',
-            borderRadius: '100px',
+            padding: '8px 20px',
+            border: '1px solid var(--rule-strong)',
+            borderRadius: '2px',
             transition: 'all 0.25s',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'rgba(212,165,116,0.1)';
-            e.currentTarget.style.borderColor = '#D4A574';
+            e.currentTarget.style.borderColor = 'var(--bone-0)';
+            e.currentTarget.style.background = 'rgba(244,241,234,0.04)';
           }}
           onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'var(--rule-strong)';
             e.currentTarget.style.background = 'transparent';
-            e.currentTarget.style.borderColor = 'rgba(212,165,116,0.45)';
           }}
         >
           {t.nav.cta}
         </a>
       </div>
 
-      {/* Hamburger */}
       <button
         aria-label="Toggle menu"
         onClick={() => setMenuOpen(!menuOpen)}
+        className="hamburger-btn"
         style={{
           display: 'none',
           flexDirection: 'column',
@@ -172,66 +171,78 @@ export default function Navigation() {
           cursor: 'pointer',
           padding: '4px',
         }}
-        className="hamburger-btn"
       >
-        <span style={{
-          width: '24px', height: '1.5px',
-          background: menuOpen ? '#D4A574' : 'rgba(255,255,255,0.8)',
-          display: 'block',
-          transition: 'all 0.3s',
-          transform: menuOpen ? 'rotate(45deg) translate(4.5px, 4.5px)' : 'none',
-        }} />
-        <span style={{
-          width: '24px', height: '1.5px',
-          background: menuOpen ? '#D4A574' : 'rgba(255,255,255,0.8)',
-          display: 'block',
-          transition: 'all 0.3s',
-          opacity: menuOpen ? 0 : 1,
-        }} />
-        <span style={{
-          width: '24px', height: '1.5px',
-          background: menuOpen ? '#D4A574' : 'rgba(255,255,255,0.8)',
-          display: 'block',
-          transition: 'all 0.3s',
-          transform: menuOpen ? 'rotate(-45deg) translate(4.5px, -4.5px)' : 'none',
-        }} />
+        <span
+          style={{
+            width: '22px',
+            height: '1.2px',
+            background: menuOpen ? 'var(--bone-0)' : 'var(--bone-dim)',
+            display: 'block',
+            transition: 'all 0.3s',
+            transform: menuOpen ? 'rotate(45deg) translate(4.5px, 4.5px)' : 'none',
+          }}
+        />
+        <span
+          style={{
+            width: '22px',
+            height: '1.2px',
+            background: menuOpen ? 'var(--bone-0)' : 'var(--bone-dim)',
+            display: 'block',
+            transition: 'all 0.3s',
+            opacity: menuOpen ? 0 : 1,
+          }}
+        />
+        <span
+          style={{
+            width: '22px',
+            height: '1.2px',
+            background: menuOpen ? 'var(--bone-0)' : 'var(--bone-dim)',
+            display: 'block',
+            transition: 'all 0.3s',
+            transform: menuOpen ? 'rotate(-45deg) translate(4.5px, -4.5px)' : 'none',
+          }}
+        />
       </button>
 
-      {/* Mobile menu */}
       {menuOpen && (
-        <div style={{
-          position: 'absolute',
-          top: '100%',
-          left: 0,
-          right: 0,
-          background: 'rgba(10,10,10,0.97)',
-          backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(212,165,116,0.12)',
-          padding: '20px clamp(20px,5vw,60px) 28px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '20px',
-          animation: 'fadeIn 0.25s ease',
-        }}>
+        <div
+          style={{
+            position: 'absolute',
+            top: '100%',
+            left: 0,
+            right: 0,
+            background: 'rgba(10,10,10,0.97)',
+            backdropFilter: 'blur(14px)',
+            borderBottom: '1px solid var(--rule)',
+            padding: '20px clamp(20px,5vw,60px) 28px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px',
+            animation: 'fadeIn 0.25s ease',
+          }}
+        >
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick(link.href);
+              }}
               style={{
-                color: 'rgba(255,255,255,0.8)',
-                fontSize: '18px',
-                fontWeight: 400,
-                fontFamily: "'Cormorant Garamond', serif",
+                color: 'var(--bone-1)',
+                fontFamily: 'var(--font-ui), system-ui, sans-serif',
+                fontSize: '20px',
+                fontWeight: 500,
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase',
                 textDecoration: 'none',
-                letterSpacing: '1px',
               }}
             >
               {link.label}
             </a>
           ))}
 
-          {/* Mobile language toggle */}
           <button
             onClick={toggleLang}
             style={{
@@ -239,34 +250,38 @@ export default function Navigation() {
               alignItems: 'center',
               gap: '2px',
               background: 'transparent',
-              border: '1px solid rgba(212,165,116,0.3)',
-              borderRadius: '100px',
+              border: '1px solid var(--rule-strong)',
+              borderRadius: '2px',
               padding: '7px 16px',
               cursor: 'pointer',
               fontSize: '12px',
               fontWeight: 500,
-              letterSpacing: '1px',
-              fontFamily: "'DM Sans', sans-serif",
+              letterSpacing: '0.12em',
+              fontFamily: "var(--font-ui), system-ui, sans-serif",
               width: 'fit-content',
-              color: 'rgba(255,255,255,0.55)',
+              color: 'var(--bone-dim)',
             }}
           >
-            <span style={{ color: language === 'hr' ? '#D4A574' : 'rgba(255,255,255,0.4)' }}>HR</span>
-            <span style={{ color: 'rgba(255,255,255,0.2)', margin: '0 4px' }}>|</span>
-            <span style={{ color: language === 'en' ? '#D4A574' : 'rgba(255,255,255,0.4)' }}>EN</span>
+            <span style={{ color: language === 'hr' ? 'var(--bone-0)' : 'var(--bone-mute)' }}>HR</span>
+            <span style={{ color: 'var(--bone-mute)', margin: '0 4px' }}>|</span>
+            <span style={{ color: language === 'en' ? 'var(--bone-0)' : 'var(--bone-mute)' }}>EN</span>
           </button>
 
           <a
             href="#contact"
-            onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('#contact');
+            }}
             style={{
-              color: '#D4A574',
-              fontSize: '14px',
+              color: 'var(--bone-0)',
+              fontFamily: "var(--font-ui), system-ui, sans-serif",
+              fontSize: '13px',
               fontWeight: 500,
               textDecoration: 'none',
               padding: '10px 22px',
-              border: '1px solid rgba(212,165,116,0.45)',
-              borderRadius: '100px',
+              border: '1px solid var(--rule-strong)',
+              borderRadius: '2px',
               width: 'fit-content',
               marginTop: '4px',
             }}
@@ -277,7 +292,7 @@ export default function Navigation() {
       )}
 
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
           .desktop-nav { display: none !important; }
           .hamburger-btn { display: flex !important; }
         }

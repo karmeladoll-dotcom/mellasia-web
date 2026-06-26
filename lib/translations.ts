@@ -2,74 +2,75 @@ export type Language = 'en' | 'hr';
 
 export type TranslationShape = {
   nav: {
-    about: string;
-    product: string;
-    portfolio: string;
-    reel: string;
-    services: string;
+    work: string;
+    capabilities: string;
+    forWhom: string;
+    studio: string;
+    lab: string;
     contact: string;
     cta: string;
   };
-  about: {
-    label: string;
-    title: string;
-    titleItalic: string;
-    paragraph1: string;
-    paragraph2: string;
-    photoPlaceholder: string;
-  };
   hero: {
-    badge: string;
+    meta: string;
     titleLine1: string;
     titleLine2: string;
     subtitle: string;
-    cta1: string;
-    cta2: string;
+    ctaPrimary: string;
+    ctaGhost: string;
     scroll: string;
+    frameLabel: string;
   };
-  product: {
-    label: string;
+  work: {
+    eyebrow: string;
     title: string;
+    titleItalic: string;
+    statusLabel: string;
+    category: string;
+    name: string;
+    tagline: string;
     description: string;
-    feature1Title: string;
-    feature1Desc: string;
-    feature2Title: string;
-    feature2Desc: string;
-    feature3Title: string;
-    feature3Desc: string;
-    feature4Title: string;
-    feature4Desc: string;
-    stat1: string;
-    stat2: string;
-    stat3: string;
+    viewLive: string;
+    fallbackNote: string;
   };
-  portfolio: {
-    label: string;
+  capabilities: {
+    eyebrow: string;
     title: string;
     titleItalic: string;
+    pillar1Name: string;
+    pillar1Purpose: string;
+    pillar1Bullets: string[];
+    pillar2Name: string;
+    pillar2Purpose: string;
+    pillar2Bullets: string[];
+    pillar3Name: string;
+    pillar3Purpose: string;
+    pillar3Bullets: string[];
   };
-  reel: {
-    label: string;
+  forWhom: {
+    eyebrow: string;
     title: string;
     titleItalic: string;
+    body: string;
+    tags: string[];
   };
-  services: {
-    label: string;
+  studio: {
+    eyebrow: string;
     title: string;
     titleItalic: string;
-    service1Name: string;
-    service1Desc: string;
-    service2Name: string;
-    service2Desc: string;
-    service3Name: string;
-    service3Desc: string;
-    service4Name: string;
-    service4Desc: string;
-    service5Name: string;
-    service5Desc: string;
+    body: string;
+    principles: string[];
+  };
+  lab: {
+    eyebrow: string;
+    title: string;
+    titleItalic: string;
+    body: string;
+    slotLabel: string;
+    slotStatus: string;
+    moreSoon: string;
   };
   contact: {
-    label: string;
+    eyebrow: string;
     titleLine1: string;
     titleItalic: string;
     subtitle: string;
@@ -79,20 +80,16 @@ export type TranslationShape = {
     formLineLabel_message: string;
     placeholder_service: string;
     services: {
-      aiMarketing: string;
-      visualIdentity: string;
-      videoProduction: string;
-      menuDesign: string;
-      digitalStrategy: string;
+      story: string;
+      visual: string;
+      build: string;
       other: string;
     };
     submit: string;
     submitting: string;
-    letterheadRe: string;
-    letterheadSubject: string;
-    letterheadQuote: string;
-    letterheadDatestamp: string;
-    letterheadCity: string;
+    panelEmail: string;
+    panelLocation: string;
+    panelAvailability: string;
     success_headline: string;
     success_subtext: string;
     success_again: string;
@@ -103,267 +100,313 @@ export type TranslationShape = {
     error_send: string;
   };
   footer: {
+    description: string;
+    studioHeading: string;
+    connectHeading: string;
+    linkWork: string;
+    linkStudio: string;
+    linkLab: string;
+    linkContact: string;
     copyright: string;
     tagline: string;
-    description: string;
-    navHeading: string;
-    servicesHeading: string;
-    service1: string;
-    service2: string;
-    service3: string;
-    service4: string;
-    service5: string;
+    authorLine: string;
   };
 };
 
-export const translations = {
-  en: {
-    nav: {
-      about: 'About',
-      product: 'Product',
-      portfolio: 'Portfolio',
-      reel: 'Reel',
-      services: 'Services',
-      contact: 'Contact',
-      cta: "Let's talk",
-    },
-    about: {
-      label: '00 — About',
-      title: 'The studio behind',
-      titleItalic: 'the screen.',
-      paragraph1:
-        'Mellasia is a one-woman creative studio based in Zagreb, founded in 2026. We blend AI technology with human creativity to help restaurants tell their story online. From social media content to brand identity, we build digital experiences that feel personal, not automated.',
-      paragraph2:
-        'Behind Mellasia is Karmela, a self-taught developer and marketer who built BalkanBites from scratch as a solo founder. No team, no funding, just late nights and a stubborn belief that small restaurants deserve big-brand marketing.',
-      photoPlaceholder: 'Founder photo',
-    },
-    hero: {
-      badge: 'Creative Agency · Est. 2026',
-      titleLine1: 'Crafting brands',
-      titleLine2: 'that linger.',
-      subtitle:
-        'AI-powered restaurant marketing, cinematic storytelling, and digital experiences. From Zagreb to the world.',
-      cta1: 'Explore our work',
-      cta2: 'Start a project',
-      scroll: 'Scroll',
-    },
-    product: {
-      label: '01 - Product',
-      title: 'Meet BalkanBites, your AI marketing team.',
-      description:
-        'Upload a dish photo. AI writes the caption and generates a post for Instagram in under a minute. No copywriter, no photographer, no monthly agency bill.',
-      feature1Title: 'Caption',
-      feature1Desc: 'Upload a photo, AI writes the perfect caption',
-      feature2Title: 'Remove BG',
-      feature2Desc: 'Remove background from any food photo instantly',
-      feature3Title: 'AI Image',
-      feature3Desc: 'Generate or enhance food photography with AI',
-      feature4Title: 'Smart Post',
-      feature4Desc: 'Complete post: AI creates both the image and caption, ready for Instagram',
-      stat1: 'Platforms',
-      stat2: 'Generation time',
-      stat3: 'Starting price',
-    },
-    portfolio: {
-      label: '02 - Portfolio',
-      title: 'Selected',
-      titleItalic: 'work.',
-    },
-    reel: {
-      label: '03 - Reel',
-      title: 'Stories,',
-      titleItalic: 'in motion.',
-    },
-    services: {
-      label: '04 - Services',
-      title: 'What we',
-      titleItalic: 'do best.',
-      service1Name: 'AI Social Media Marketing',
-      service1Desc:
-        'Automated Instagram, Facebook & TikTok content creation for restaurants. AI-generated captions, images, and posts that feel handcrafted.',
-      service2Name: 'Brand Identity',
-      service2Desc:
-        "Logo systems, visual language, and brand voice. Building the soul of your restaurant's digital presence.",
-      service3Name: 'Video Production',
-      service3Desc: 'Cinematic short-form content, launch reels, and brand films. From concept to final cut.',
-      service4Name: 'Menu & Print Design',
-      service4Desc:
-        "Beautiful menus, flyers, and promotional materials that match your restaurant's atmosphere.",
-      service5Name: 'Digital Strategy',
-      service5Desc:
-        'Positioning, content calendars, and growth strategies tailored to the hospitality industry.',
-    },
-    contact: {
-      label: '05 — LETTER TO THE STUDIO',
-      titleLine1: "Let's make something",
-      titleItalic: 'unforgettable.',
-      subtitle: 'Write us a letter. We reply within one working day.',
-      formLineLabel_name: 'NAME',
-      formLineLabel_email: 'EMAIL',
-      formLineLabel_service: 'SERVICE',
-      formLineLabel_message: 'MESSAGE',
-      placeholder_service: 'Choose a service',
-      services: {
-        aiMarketing: 'AI marketing on social media',
-        visualIdentity: 'Visual identity',
-        videoProduction: 'Video production',
-        menuDesign: 'Menu design',
-        digitalStrategy: 'Digital strategy',
-        other: 'Other',
-      },
-      submit: 'SEAL & SEND',
-      submitting: 'Sending...',
-      letterheadRe: 'RE:',
-      letterheadSubject: 'Your project',
-      letterheadQuote: 'Every great project begins with a single letter.',
-      letterheadDatestamp: 'ZAGREB · MMXXVI',
-      letterheadCity: 'Zagreb, Croatia',
-      success_headline: 'Message sent.',
-      success_subtext: 'We respond within one business day.',
-      success_again: 'Send another message',
-      fallback_text: 'Or write us directly at',
-      error_validation: 'All fields are required and properly formatted.',
-      error_email: 'Email is not properly formatted.',
-      error_message_length: 'Message must be at least 20 characters.',
-      error_send:
-        'Message not sent. Try again or write us directly at hello@mellasia.com.',
-    },
-    footer: {
-      copyright: '© 2026 Mellasia Studio. All rights reserved.',
-      tagline: 'Crafted with care in Zagreb.',
-      description: 'A creative studio crafting cinematic digital experiences and AI-powered products.',
-      navHeading: 'Navigation',
-      servicesHeading: 'Services',
-      service1: 'AI Social Media',
-      service2: 'Brand Identity',
-      service3: 'Video Production',
-      service4: 'Menu & Print Design',
-      service5: 'Digital Strategy',
-    },
-  },
-  hr: {
-    nav: {
-      about: 'O nama',
-      product: 'Proizvod',
-      portfolio: 'Portfolio',
-      reel: 'Video',
-      services: 'Usluge',
-      contact: 'Kontakt',
-      cta: 'Javite se',
-    },
-    about: {
-      label: '00 — O nama',
-      title: 'Studio iza',
-      titleItalic: 'ekrana.',
-      paragraph1:
-        'Mellasia je kreativni studio iz Zagreba, osnovan 2026. Spajamo AI tehnologiju s ljudskom kreativnošću kako bismo pomogli restoranima ispričati svoju priču online. Od sadržaja za društvene mreže do vizualnog identiteta, gradimo digitalna iskustva koja djeluju osobno, ne automatizirano.',
-      paragraph2:
-        'Iza Mellasie stoji Karmela, samouka developerica i marketingašica koja je sama izgradila BalkanBites od nule. Bez tima, bez financiranja, samo kasne noći i tvrdoglavo uvjerenje da mali restorani zaslužuju marketing kao veliki brendovi.',
-      photoPlaceholder: 'Fotografija osnivačice',
-    },
-    hero: {
-      badge: 'Kreativna agencija · Osn. 2026.',
-      titleLine1: 'Brendovi koji',
-      titleLine2: 'ostavljaju trag.',
-      subtitle:
-        'AI marketing za restorane, filmsko pripovijedanje i digitalna iskustva. Iz Zagreba u svijet.',
-      cta1: 'Pogledaj radove',
-      cta2: 'Pokreni projekt',
-      scroll: 'LISTAJ',
-    },
-    product: {
-      label: '01 - Proizvod',
-      title: 'Upoznaj BalkanBites, tvoj AI marketing tim.',
-      description:
-        'Učitaj fotku jela. AI napiše natpis i pripremi objavu za Instagram za manje od minute. Bez copywritera, bez fotografa, bez mjesečnog računa agencije.',
-      feature1Title: 'Natpis',
-      feature1Desc: 'Učitaj fotku, AI napiše savršeni natpis',
-      feature2Title: 'Ukloni pozadinu',
-      feature2Desc: 'Ukloni pozadinu s bilo koje fotke jela u sekundi',
-      feature3Title: 'AI slika',
-      feature3Desc: 'Generiraj ili unaprijedi fotografije hrane pomoću AI-ja',
-      feature4Title: 'Smart Post',
-      feature4Desc: 'Kompletna objava: AI kreira sliku i natpis, spremi za Instagram',
-      stat1: 'Platforme',
-      stat2: 'Vrijeme generiranja',
-      stat3: 'Početna cijena',
-    },
-    portfolio: {
-      label: '02 - Portfolio',
-      title: 'Odabrani',
-      titleItalic: 'radovi.',
-    },
-    reel: {
-      label: '03 - Video',
-      title: 'Priče',
-      titleItalic: 'u pokretu.',
-    },
-    services: {
-      label: '04 - Usluge',
-      title: 'Ono u čemu',
-      titleItalic: 'smo najbolji.',
-      service1Name: 'AI Marketing na društvenim mrežama',
-      service1Desc:
-        'Automatizirani sadržaj za Instagram, Facebook i TikTok za restorane. AI natpisi, slike i objave koji izgledaju ručno napravljeno.',
-      service2Name: 'Vizualni identitet',
-      service2Desc:
-        'Logo sustavi, vizualni jezik i glas branda. Gradnja duše digitalnog identiteta vašeg restorana.',
-      service3Name: 'Video produkcija',
-      service3Desc: 'Kinematografski kratki sadržaj, launch reelovi i brand filmovi. Od koncepta do finalnog reza.',
-      service4Name: 'Dizajn jelovnika',
-      service4Desc: 'Lijepi meniji, flajeri i promocijski materijali koji odgovaraju atmosferi vašeg restorana.',
-      service5Name: 'Digitalna strategija',
-      service5Desc:
-        'Pozicioniranje, content kalendari i strategije rasta prilagođene ugostiteljskoj industriji.',
-    },
-    contact: {
-      label: '05 — PISMO STUDIJU',
-      titleLine1: 'Napravimo nešto',
-      titleItalic: 'nezaboravno.',
-      subtitle: 'Napišite nam pismo. Odgovaramo unutar jednog radnog dana.',
-      formLineLabel_name: 'IME',
-      formLineLabel_email: 'EMAIL',
-      formLineLabel_service: 'USLUGA',
-      formLineLabel_message: 'PORUKA',
-      placeholder_service: 'Odaberi uslugu',
-      services: {
-        aiMarketing: 'AI marketing na društvenim mrežama',
-        visualIdentity: 'Vizualni identitet',
-        videoProduction: 'Video produkcija',
-        menuDesign: 'Dizajn jelovnika',
-        digitalStrategy: 'Digitalna strategija',
-        other: 'Drugo',
-      },
-      submit: 'ZAPEČATI I POŠALJI',
-      submitting: 'Šalje se...',
-      letterheadRe: 'RE:',
-      letterheadSubject: 'Vaš projekt',
-      letterheadQuote: 'Svaki veliki projekt započinje jednim pismom.',
-      letterheadDatestamp: 'ZAGREB · MMXXVI',
-      letterheadCity: 'Zagreb, Hrvatska',
-      success_headline: 'Poruka poslana.',
-      success_subtext: 'Javljamo se unutar jednog radnog dana.',
-      success_again: 'Pošalji još jednu poruku',
-      fallback_text: 'Ili nam piši direktno na',
-      error_validation: 'Sva polja su obavezna i ispravnog formata.',
-      error_email: 'Email nije ispravnog formata.',
-      error_message_length: 'Poruka mora imati najmanje 20 znakova.',
-      error_send:
-        'Poruka nije poslana. Pokušaj ponovno ili nam piši direktno na hello@mellasia.com.',
-    },
-    footer: {
-      copyright: '© 2026 Mellasia Studio. Sva prava pridržana.',
-      tagline: 'S ljubavlju iz Zagreba.',
-      description: 'Kreativni studio koji kreira kinematografska digitalna iskustva i AI-podržane produkte.',
-      navHeading: 'Navigacija',
-      servicesHeading: 'Usluge',
-      service1: 'AI Marketing',
-      service2: 'Vizualni identitet',
-      service3: 'Video produkcija',
-      service4: 'Dizajn jelovnika',
-      service5: 'Digitalna strategija',
-    },
-  },
-} satisfies Record<Language, TranslationShape>;
-
 export type Translations = TranslationShape;
+
+const en: TranslationShape = {
+  nav: {
+    work: 'Work',
+    capabilities: 'Capabilities',
+    forWhom: 'For',
+    studio: 'Studio',
+    lab: 'Lab',
+    contact: 'Contact',
+    cta: 'Start a project',
+  },
+  hero: {
+    meta: 'MELLASIA · STUDIO · ZAGREB / WORLDWIDE',
+    titleLine1: 'Websites that feel',
+    titleLine2: 'like a world.',
+    subtitle:
+      'Mellasia designs cinematic digital experiences for brands built to be felt.',
+    ctaPrimary: 'View featured work',
+    ctaGhost: 'Start a project',
+    scroll: 'Scroll',
+    frameLabel: '01 / OPENING FRAME · MELLASIA 2026',
+  },
+  work: {
+    eyebrow: '01 — FEATURED WORK',
+    title: 'A first look —',
+    titleItalic: 'Forno Nero.',
+    statusLabel: 'Featured project',
+    category: 'Hospitality / Digital Experience',
+    name: 'Forno Nero',
+    tagline: 'A digital experience built like a night out.',
+    description:
+      'Fire, rhythm, appetite. Forno Nero is the studio’s first public frame — a cinematic site where atmosphere leads the menu.',
+    viewLive: 'View live project',
+    fallbackNote: 'Final visuals in progress.',
+  },
+  capabilities: {
+    eyebrow: '02 — WHAT MELLASIA BUILDS',
+    title: 'Three disciplines,',
+    titleItalic: 'one direction.',
+    pillar1Name: 'Story & Structure',
+    pillar1Purpose:
+      'What the website is trying to say, and how it leads someone there.',
+    pillar1Bullets: [
+      'Narrative direction',
+      'Hierarchy',
+      'User journey',
+      'Information architecture',
+    ],
+    pillar2Name: 'Visual Direction',
+    pillar2Purpose: 'How it looks, feels, and frames itself.',
+    pillar2Bullets: [
+      'Typography',
+      'Composition',
+      'Image direction',
+      'Digital identity',
+    ],
+    pillar3Name: 'Build & Motion',
+    pillar3Purpose: 'How it moves, responds, and holds together.',
+    pillar3Bullets: [
+      'Responsive frontend',
+      'Interaction design',
+      'Purposeful motion',
+      'Implementation detail',
+    ],
+  },
+  forWhom: {
+    eyebrow: '03 — BUILT FOR',
+    title: 'For brands built',
+    titleItalic: 'to be felt.',
+    body:
+      'Mellasia partners with hospitality, beauty, lifestyle, fashion, lounge and experience-led brands — places and people whose work earns its presence.',
+    tags: [
+      'Hospitality',
+      'Beauty',
+      'Lifestyle',
+      'Fashion',
+      'Lounge',
+      'Experience',
+    ],
+  },
+  studio: {
+    eyebrow: '04 — STUDIO',
+    title: 'An independent studio led by creative direction —',
+    titleItalic: 'not templates.',
+    body:
+      'Mellasia is an independent digital studio. Every project begins with one question: what should someone feel before they decide?',
+    principles: [
+      'No borrowed brand voices.',
+      'No motion without meaning.',
+      'No generic digital places.',
+    ],
+  },
+  lab: {
+    eyebrow: '05 — CONCEPT LAB',
+    title: 'Future worlds,',
+    titleItalic: 'tested before they become real.',
+    body:
+      'The Lab is where Mellasia tests ideas no one has asked for yet. Cinematic concepts and interactive studies live here while they take shape.',
+    slotLabel: 'Experiment',
+    slotStatus: 'In development',
+    moreSoon: 'More soon.',
+  },
+  contact: {
+    eyebrow: '06 — START A PROJECT',
+    titleLine1: 'Tell us what',
+    titleItalic: 'should be felt.',
+    subtitle: 'Write us. We reply within one working day.',
+    formLineLabel_name: 'NAME',
+    formLineLabel_email: 'EMAIL',
+    formLineLabel_service: 'DISCIPLINE',
+    formLineLabel_message: 'MESSAGE',
+    placeholder_service: 'Choose a discipline',
+    services: {
+      story: 'Story & Structure',
+      visual: 'Visual Direction',
+      build: 'Build & Motion',
+      other: 'Other',
+    },
+    submit: 'Send',
+    submitting: 'Sending…',
+    panelEmail: 'hello@mellasia.com',
+    panelLocation: 'Zagreb · Worldwide',
+    panelAvailability: 'By appointment',
+    success_headline: 'Message received.',
+    success_subtext: 'We respond within one business day.',
+    success_again: 'Send another message',
+    fallback_text: 'Or write us directly at',
+    error_validation: 'All fields are required and properly formatted.',
+    error_email: 'Email is not properly formatted.',
+    error_message_length: 'Message must be at least 20 characters.',
+    error_send:
+      'Message not sent. Try again or write us directly at hello@mellasia.com.',
+  },
+  footer: {
+    description:
+      'An independent digital studio. Zagreb, worldwide.',
+    studioHeading: 'Studio',
+    connectHeading: 'Connect',
+    linkWork: 'Featured Work',
+    linkStudio: 'Studio',
+    linkLab: 'Lab',
+    linkContact: 'Contact',
+    copyright: '© 2026 Mellasia',
+    tagline: 'Made for what should be felt — in Zagreb.',
+    authorLine: 'Authored by Karmela Sen',
+  },
+};
+
+const hr: TranslationShape = {
+  nav: {
+    work: 'Rad',
+    capabilities: 'Discipline',
+    forWhom: 'Za koga',
+    studio: 'Studio',
+    lab: 'Lab',
+    contact: 'Kontakt',
+    cta: 'Pokreni projekt',
+  },
+  hero: {
+    meta: 'MELLASIA · STUDIO · ZAGREB / GLOBALNO',
+    titleLine1: 'Web stranice koje',
+    titleLine2: 'se osjećaju kao svijet.',
+    subtitle:
+      'Mellasia oblikuje filmska digitalna iskustva za brendove koji su stvoreni da ostave dojam.',
+    ctaPrimary: 'Pogledaj izdvojeni rad',
+    ctaGhost: 'Pokreni projekt',
+    scroll: 'Listaj',
+    frameLabel: '01 / POČETNI KADAR · MELLASIA 2026',
+  },
+  work: {
+    eyebrow: '01 — IZDVOJENI RAD',
+    title: 'Prvi pogled —',
+    titleItalic: 'Forno Nero.',
+    statusLabel: 'Izdvojeni projekt',
+    category: 'Ugostiteljstvo / Digitalno iskustvo',
+    name: 'Forno Nero',
+    tagline: 'Digitalno iskustvo osmišljeno kao izlazak.',
+    description:
+      'Vatra, ritam, apetit. Forno Nero je prvi javni kadar studija — filmska stranica gdje atmosfera vodi prije jelovnika.',
+    viewLive: 'Pogledaj projekt uživo',
+    fallbackNote: 'Završni vizuali u izradi.',
+  },
+  capabilities: {
+    eyebrow: '02 — ŠTO MELLASIA GRADI',
+    title: 'Tri discipline,',
+    titleItalic: 'jedan smjer.',
+    pillar1Name: 'Priča i struktura',
+    pillar1Purpose:
+      'Što stranica želi reći i kako vodi posjetitelja do toga.',
+    pillar1Bullets: [
+      'Narativni smjer',
+      'Hijerarhija',
+      'Korisničko putovanje',
+      'Informacijska arhitektura',
+    ],
+    pillar2Name: 'Vizualni smjer',
+    pillar2Purpose: 'Kako izgleda, kako se osjeća, kako se uokviruje.',
+    pillar2Bullets: [
+      'Tipografija',
+      'Kompozicija',
+      'Smjer slika',
+      'Digitalni identitet',
+    ],
+    pillar3Name: 'Izvedba i pokret',
+    pillar3Purpose: 'Kako se kreće, kako odgovara, kako drži cjelinu.',
+    pillar3Bullets: [
+      'Responzivni frontend',
+      'Interakcijski dizajn',
+      'Pokret sa svrhom',
+      'Detalj izvedbe',
+    ],
+  },
+  forWhom: {
+    eyebrow: '03 — ZA KOGA',
+    title: 'Za brendove stvorene',
+    titleItalic: 'da se osjete.',
+    body:
+      'Mellasia surađuje s brendovima iz ugostiteljstva, beauty industrije, lifestylea, mode i prostora vođenih iskustvom — s mjestima i ljudima čiji rad zaslužuje svoju prisutnost.',
+    tags: [
+      'Ugostiteljstvo',
+      'Beauty',
+      'Lifestyle',
+      'Moda',
+      'Lounge',
+      'Iskustvo',
+    ],
+  },
+  studio: {
+    eyebrow: '04 — STUDIO',
+    title: 'Nezavisni studio vođen kreativnim smjerom —',
+    titleItalic: 'ne predlošcima.',
+    body:
+      'Mellasia je nezavisni digitalni studio. Svaki projekt počinje jednim pitanjem: što bi netko trebao osjetiti prije nego što odluči?',
+    principles: [
+      'Bez posuđenih glasova brendova.',
+      'Bez pokreta bez značenja.',
+      'Bez generičkih digitalnih prostora.',
+    ],
+  },
+  lab: {
+    eyebrow: '05 — CONCEPT LAB',
+    title: 'Budući svjetovi,',
+    titleItalic: 'isprobani prije nego što postanu stvarni.',
+    body:
+      'Lab je prostor u kojem Mellasia istražuje ideje koje nitko još nije naručio. Filmski koncepti i interaktivne studije ovdje žive dok ne dobiju oblik.',
+    slotLabel: 'Eksperiment',
+    slotStatus: 'U razvoju',
+    moreSoon: 'Uskoro više.',
+  },
+  contact: {
+    eyebrow: '06 — POKRENI PROJEKT',
+    titleLine1: 'Reci nam što',
+    titleItalic: 'treba osjetiti.',
+    subtitle: 'Pišite nam. Odgovaramo unutar jednog radnog dana.',
+    formLineLabel_name: 'IME',
+    formLineLabel_email: 'EMAIL',
+    formLineLabel_service: 'DISCIPLINA',
+    formLineLabel_message: 'PORUKA',
+    placeholder_service: 'Odaberite disciplinu',
+    services: {
+      story: 'Priča i struktura',
+      visual: 'Vizualni smjer',
+      build: 'Izvedba i pokret',
+      other: 'Drugo',
+    },
+    submit: 'Pošalji',
+    submitting: 'Šaljem…',
+    panelEmail: 'hello@mellasia.com',
+    panelLocation: 'Zagreb · Globalno',
+    panelAvailability: 'Po dogovoru',
+    success_headline: 'Poruka primljena.',
+    success_subtext: 'Odgovaramo unutar jednog radnog dana.',
+    success_again: 'Pošalji novu poruku',
+    fallback_text: 'Ili nam pišite izravno na',
+    error_validation: 'Sva polja su obavezna i ispravnog formata.',
+    error_email: 'Email nije ispravnog formata.',
+    error_message_length: 'Poruka mora imati najmanje 20 znakova.',
+    error_send:
+      'Poruka nije poslana. Pokušajte ponovno ili nam pišite izravno na hello@mellasia.com.',
+  },
+  footer: {
+    description:
+      'Nezavisni digitalni studio. Zagreb, globalno.',
+    studioHeading: 'Studio',
+    connectHeading: 'Veza',
+    linkWork: 'Izdvojeni rad',
+    linkStudio: 'Studio',
+    linkLab: 'Lab',
+    linkContact: 'Kontakt',
+    copyright: '© 2026 Mellasia',
+    tagline: 'Stvoreno za ono što se treba osjetiti — u Zagrebu.',
+    authorLine: 'Autorica: Karmela Sen',
+  },
+};
+
+export const translations: Record<Language, TranslationShape> = { en, hr };

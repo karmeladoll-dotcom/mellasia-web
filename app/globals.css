@@ -1,106 +1,95 @@
 @import "tailwindcss";
 
 :root {
-  --brand-gold: #D4A574;
-  --gold: #D4A574;
-  --gold-light: #E8C9A0;
-  --gold-dim: rgba(212, 165, 116, 0.3);
-  --gold-border: rgba(212, 165, 116, 0.15);
-  --dark: #0A0A0A;
-  --dark-card: #111111;
-  --dark-section: #080808;
+  /* ─── Mellasia type system (Fontshare + Google) ───────────────
+     --font-display = Gambarino  — hero, project titles, footer wordmark
+     --font-accent  = Telma      — rare italic accent (e.g. "world.")
+     --font-ui      = Panchang   — nav, eyebrows, metadata, CTA labels, form labels
+     --font-body    = DM Sans    — paragraph body copy (loaded via next/font)
+  */
+  --font-display: 'Gambarino', Georgia, serif;
+  --font-accent: 'Telma', Georgia, serif;
+  --font-ui: 'Panchang', system-ui, sans-serif;
+
+  --ink-0: #0A0A0A;
+  --ink-1: #0E0E0E;
+  --ink-2: #141414;
+  --ink-3: #1B1B1B;
+
+  /* Warm under-bases — used only inside featured / atmospheric frames. */
+  --ink-warm-0: #0B0907;
+  --ink-warm-1: #100B08;
+
+  --bone-0: #F4F1EA;
+  --bone-1: #D7D2C5;
+  --bone-dim: rgba(244, 241, 234, 0.55);
+  --bone-mute: rgba(244, 241, 234, 0.28);
+  --bone-faint: rgba(244, 241, 234, 0.12);
+
+  --rule: rgba(244, 241, 234, 0.10);
+  --rule-strong: rgba(244, 241, 234, 0.22);
+
+  --ember: #B26A3C;
+  --ember-soft: rgba(178, 106, 60, 0.25);
+  --ember-glow: rgba(178, 106, 60, 0.42);
+  --brass: #7E6A4A;
 }
 
 html {
   scroll-behavior: smooth;
-  background: var(--dark);
+  background: var(--ink-0);
 }
 
 body {
-  background: var(--dark);
-  color: #ffffff;
-  font-family: 'DM Sans', sans-serif;
+  background: var(--ink-0);
+  color: var(--bone-0);
+  font-family: var(--font-body), 'DM Sans', system-ui, sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: #D4A574;
-  color: #0A0A0A;
+  background: var(--bone-0);
+  color: var(--ink-0);
 }
 
-::-webkit-scrollbar {
-  width: 6px;
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--ink-0); }
+::-webkit-scrollbar-thumb { background: var(--bone-mute); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--bone-dim); }
+
+/* ─── Keyframes ───────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-::-webkit-scrollbar-track {
-  background: #0A0A0A;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(212, 165, 116, 0.3);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(212, 165, 116, 0.5);
-}
-
-/* Keyframes */
-@keyframes fadeInUp {
+@keyframes apertureReveal {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    filter: blur(18px) brightness(0.45);
+    transform: scale(1.04);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    filter: blur(0) brightness(1);
+    transform: scale(1);
   }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes emberDrift {
+  0%, 100% { opacity: 0.7; transform: translateY(0); }
+  50%      { opacity: 1;   transform: translateY(-1.5%); }
 }
 
-@keyframes scrollLine {
-  0% {
-    transform: scaleY(0);
-    transform-origin: top;
-    opacity: 1;
-  }
-  50% {
-    transform: scaleY(1);
-    transform-origin: top;
-    opacity: 1;
-  }
-  51% {
-    transform: scaleY(1);
-    transform-origin: bottom;
-    opacity: 1;
-  }
-  100% {
-    transform: scaleY(0);
-    transform-origin: bottom;
-    opacity: 0;
-  }
-}
-
-@keyframes pulse-orb {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.08); }
-}
-
-@keyframes blink-cursor {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* Scroll reveal base */
+/* ─── Scroll-reveal base ─────────────────────────────────── */
 .reveal {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.visible {
@@ -108,30 +97,88 @@ body {
   transform: translateY(0);
 }
 
-/* Staggered delays */
-.reveal-d1 { transition-delay: 0.1s; }
-.reveal-d2 { transition-delay: 0.2s; }
-.reveal-d3 { transition-delay: 0.3s; }
-.reveal-d4 { transition-delay: 0.4s; }
-.reveal-d5 { transition-delay: 0.5s; }
+.reveal-d1 { transition-delay: 0.08s; }
+.reveal-d2 { transition-delay: 0.16s; }
+.reveal-d3 { transition-delay: 0.24s; }
+.reveal-d4 { transition-delay: 0.32s; }
+.reveal-d5 { transition-delay: 0.40s; }
 
-/* Cormorant Garamond helper classes */
-.font-cormorant {
-  font-family: 'Cormorant Garamond', serif;
+/* ─── Type helpers ───────────────────────────────────────── */
+/* Display = Gambarino. Hero, project titles, key statements, footer wordmark. */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
 }
 
-/* Gold color utility */
-.text-gold {
-  color: var(--gold);
+/* Accent = Telma. Rare, special, italic only. Never dominant. */
+.font-accent {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.015em;
 }
 
-.border-gold-dim {
-  border-color: var(--gold-border);
+/* UI = Panchang. Nav, eyebrows, metadata, CTAs, form labels. */
+.font-ui {
+  font-family: var(--font-ui);
+  font-weight: 400;
 }
 
-/* Smooth transition for accordion */
+/* Body = DM Sans. Paragraph copy, long-form text. */
+.font-body {
+  font-family: var(--font-body), 'DM Sans', system-ui, sans-serif;
+}
+
+/* Back-compat alias — older sections still reference this class. */
+.font-serif-display {
+  font-family: var(--font-display);
+}
+
+/* ─── Film grain (CSS-only via inline SVG noise) ──────────
+   Apply via a wrapper class. The grain sits on a ::after pseudo
+   so it never blocks interaction. Two intensities: subtle / strong. */
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.96  0 0 0 0 0.94  0 0 0 0 0.90  0 0 0 0.45 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 320px 320px;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  z-index: 4;
+}
+.grain-strong::after {
+  opacity: 0.11;
+}
+
+/* Editorial hairline used in lieu of the previous scroll-line animation. */
+.hairline-v {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--bone-dim), transparent);
+}
+
+/* Accordion (kept for future reuse) */
 .accordion-content {
   overflow: hidden;
-  transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.35s ease;
+  transition:
+    max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.35s ease;
+}
+
+/* ─── Reduced motion contract ────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

@@ -3,17 +3,15 @@ import { Resend } from 'resend';
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const VALID_SERVICES = [
-  'AI marketing na društvenim mrežama',
-  'Vizualni identitet',
-  'Video produkcija',
-  'Dizajn jelovnika',
-  'Digitalna strategija',
+  // HR (must match contact.services in lib/translations.ts)
+  'Priča i struktura',
+  'Vizualni smjer',
+  'Izvedba i pokret',
   'Drugo',
-  'AI marketing on social media',
-  'Visual identity',
-  'Video production',
-  'Menu design',
-  'Digital strategy',
+  // EN
+  'Story & Structure',
+  'Visual Direction',
+  'Build & Motion',
   'Other',
 ] as const;
 
