@@ -1,6 +1,7 @@
 'use client';
 
 import ScrollReveal from './ScrollReveal';
+import SpotlightStatement from './SpotlightStatement';
 import { useLanguage } from '@/lib/LanguageContext';
 
 export default function StudioSection() {
@@ -85,7 +86,11 @@ export default function StudioSection() {
           </p>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.24}>
+        <ScrollReveal delay={0.2}>
+          <SpotlightStatement />
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.32}>
           <div
             style={{
               marginTop: 'clamp(16px, 3vw, 32px)',

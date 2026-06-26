@@ -109,7 +109,13 @@ export default function HeroSection() {
         }}
       >
         {/* ─── Left: typographic poster ──────────────────────────── */}
-        <div style={{ position: 'relative', zIndex: 2 }}>
+        <div className="hero-text-column" style={{ position: 'relative', zIndex: 2 }}>
+          {/* Cinematic overhead projector — lens + cone of light. */}
+          <div className="hero-spotlight" aria-hidden="true">
+            <span className="hero-spotlight-lens" />
+            <span className="hero-spotlight-cone" />
+          </div>
+
           <span
             ref={setRef(0)}
             style={{
@@ -126,15 +132,14 @@ export default function HeroSection() {
             {t.hero.meta}
           </span>
 
-          {/* H1 — Gambarino display, Telma italic accent on the final noun. */}
+          {/* H1 — single static layer. Gambarino display + one Telma noun.
+              No bright overlay, no mask reveal. Layout is stable. */}
           <h1
             className="hero-title"
             style={{
               margin: '0 0 36px 0',
-              color: 'var(--bone-0)',
             }}
           >
-            {/* Display line — Gambarino, mixed case, poster scale. */}
             <span
               ref={setRef(1)}
               className="hero-display"
@@ -151,7 +156,6 @@ export default function HeroSection() {
               {t.hero.titleLine1}
             </span>
 
-            {/* Accent line — Gambarino runs into one Telma italic word. */}
             <span
               ref={setRef(2)}
               className="hero-accent-row"
@@ -182,14 +186,15 @@ export default function HeroSection() {
                   fontSize: 'clamp(48px, 9.6vw, 152px)',
                   lineHeight: 0.96,
                   letterSpacing: '-0.02em',
-                  color: 'var(--bone-1)',
                   display: 'inline-block',
+                  color: 'var(--bone-1)',
                 }}
               >
                 {accentLead && (
                   <span style={{ marginRight: '0.18em' }}>{accentLead}</span>
                 )}
                 <em
+                  className="hero-accent-noun"
                   style={{
                     fontFamily: 'var(--font-accent)',
                     fontStyle: 'normal',
@@ -429,6 +434,125 @@ export default function HeroSection() {
       </div>
 
       <style>{`
+        /* ─── Cinematic overhead projector — primary hero signature ─── */
+        /* Wrapper sits inside the left text column and overlays the title.   */
+        .hero-spotlight {
+          position: absolute;
+          top: clamp(-110px, -8vh, -70px);
+          left: 0;
+          right: 0;
+          height: clamp(420px, 70vh, 660px);
+          pointer-events: none;
+          z-index: 1;
+          overflow: visible;
+        }
+
+        /* Lens — small ivory/brass source at top centre of the cone. */
+        .hero-spotlight-lens {
+          position: absolute;
+          top: 0;
+          left: clamp(26%, 30%, 34%);
+          width: 14px;
+          height: 14px;
+          border-radius: 50%;
+          background: radial-gradient(
+            circle at 50% 50%,
+            rgba(255, 250, 238, 1) 0%,
+            rgba(244, 241, 234, 0.65) 35%,
+            rgba(178, 106, 60, 0.4) 65%,
+            transparent 100%
+          );
+          box-shadow:
+            0 0 22px rgba(244, 241, 234, 0.55),
+            0 0 56px rgba(178, 106, 60, 0.32);
+          opacity: 0;
+          transform: scale(0.6);
+          animation: heroLensIgnite 1300ms cubic-bezier(0.22, 1, 0.36, 1) 150ms forwards;
+        }
+
+        /* Cone — soft atmospheric vertical shaft opening downward. */
+        .hero-spotlight-cone {
+          position: absolute;
+          top: 4px;
+          left: calc(clamp(26%, 30%, 34%) + 7px);
+          width: clamp(280px, 38vw, 460px);
+          height: clamp(380px, 60vh, 580px);
+          margin-left: calc(clamp(280px, 38vw, 460px) / -2);
+          background: radial-gradient(
+            ellipse 42% 100% at 50% 0%,
+            rgba(244, 241, 234, 0.20) 0%,
+            rgba(244, 241, 234, 0.11) 18%,
+            rgba(178, 106, 60, 0.06) 42%,
+            rgba(126, 106, 74, 0.03) 62%,
+            transparent 86%
+          );
+          filter: blur(14px);
+          opacity: 0;
+          transform: scaleX(0.06) scaleY(0.55);
+          transform-origin: 50% 0%;
+          mix-blend-mode: screen;
+          animation: heroConeOpen 1900ms cubic-bezier(0.22, 1, 0.36, 1) 380ms forwards;
+        }
+
+        @keyframes heroLensIgnite {
+          0%   { opacity: 0;    transform: scale(0.6); }
+          35%  { opacity: 1;    transform: scale(1.15); }
+          50%  { opacity: 0.72; transform: scale(1.05); }
+          70%  { opacity: 1;    transform: scale(1.02); }
+          100% { opacity: 0.9;  transform: scale(1); }
+        }
+
+        /* Cone opens and settles to a calm atmospheric presence.
+           Stays subtle — never reads as a flashlight beam. */
+        @keyframes heroConeOpen {
+          0%   { opacity: 0;    transform: scaleX(0.06) scaleY(0.55); }
+          24%  { opacity: 0.40; }
+          60%  { opacity: 0.55; transform: scaleX(1.02) scaleY(1.01); }
+          100% { opacity: 0.45; transform: scaleX(1)    scaleY(1); }
+        }
+
+        /* Telma "world." — restrained ivory/brass bloom behind the noun.
+           Static after the bloom fades in. No flicker, no per-word animation. */
+        .hero-accent-noun {
+          position: relative;
+          display: inline-block;
+        }
+        .hero-accent-noun::after {
+          content: '';
+          position: absolute;
+          left: -18%;
+          right: -18%;
+          top: -14%;
+          bottom: -18%;
+          background: radial-gradient(
+            ellipse 60% 65% at 50% 55%,
+            rgba(178, 106, 60, 0.18) 0%,
+            rgba(126, 106, 74, 0.10) 38%,
+            transparent 72%
+          );
+          filter: blur(18px);
+          opacity: 0;
+          z-index: -1;
+          pointer-events: none;
+          animation: heroNounBloom 1400ms cubic-bezier(0.22, 1, 0.36, 1) 1500ms forwards;
+        }
+        @keyframes heroNounBloom {
+          0%   { opacity: 0; }
+          100% { opacity: 0.85; }
+        }
+
+        /* Reduced-motion contract — final calm state, no animation. */
+        @media (prefers-reduced-motion: reduce) {
+          .hero-spotlight-lens,
+          .hero-spotlight-cone,
+          .hero-accent-noun::after {
+            animation: none !important;
+          }
+          .hero-spotlight-lens { opacity: 0.9; transform: scale(1); }
+          .hero-spotlight-cone { opacity: 0.45; transform: scaleX(1) scaleY(1); }
+          .hero-accent-noun::after { opacity: 0.85; }
+        }
+
         .hero-cta-primary:hover {
           transform: translateY(-1px);
           background: #ffffff;
@@ -457,6 +581,23 @@ export default function HeroSection() {
           .hero-scroll-cue { display: none !important; }
           .hero-accent-rule {
             width: 28px !important;
+          }
+          /* Keep the projector cone scaled to the phone viewport. */
+          .hero-spotlight {
+            top: -64px;
+            height: 360px;
+          }
+          .hero-spotlight-lens {
+            left: 24%;
+            width: 11px;
+            height: 11px;
+          }
+          .hero-spotlight-cone {
+            left: calc(24% + 6px);
+            width: 78vw;
+            height: 320px;
+            margin-left: -39vw;
+            filter: blur(12px);
           }
         }
       `}</style>
