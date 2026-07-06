@@ -8,14 +8,21 @@
  * sticky-stage scene, driven entirely by native scroll progress
  * (motion useScroll + useTransform, all mappings linear + reversible).
  *
- * Choreography (progress 0..1 across the 240vh container):
- *   0.00–0.12  hero at rest, Forno hidden
- *   0.10–0.30  Forno frame fades in while still low in the stage
- *   0.12–0.38  hero content (title, meta, rules, aperture) fades out, -28px lift
- *   0.15–0.75  Forno rises 78vh→0 and scales 0.84→1 (origin bottom-center)
- *   0.15–0.55  Forno top clip resolves 14%→0
- *   0.55–0.85  residual hero atmosphere tapers to 0.35 (continuity, not blackout)
- *   0.75–1.00  dwell — Forno dominant, stage settled
+ * Choreography (progress 0..1 across the 340vh container):
+ *   0.00–0.07  hero at rest, Forno hidden
+ *   0.06–0.18  Forno frame fades in while still low in the stage
+ *   0.07–0.23  hero content (title, meta, rules, aperture) fades out, -28px lift
+ *   0.09–0.45  Forno rises 78vh→0; outer arrival scale 0.84→1 (origin bottom)
+ *   0.09–0.33  Forno top clip resolves 14%→0
+ *   0.45–0.58  editorial settle — contained frame (~79vw effective), no movement
+ *   0.58–0.82  inner shell expands 0.86→1.065 (center origin) → ~98vw effective
+ *   0.58–0.82  residual hero atmosphere tapers to 0.35 as the expansion takes over
+ *   0.82–1.00  hold — large cinematic state
+ *
+ * Nested transform structure: the OUTER wrapper owns the Phase 1 arrival
+ * (translateY / opacity / clip / bottom-origin scale); the INNER shell owns
+ * the Phase 2 expansion (centered scale only). This avoids a transform-origin
+ * compromise between the rise and the expansion.
  *
  * To remove: delete the app/motion-lab/ folder.
  */
@@ -32,9 +39,14 @@ import {
 } from 'motion/react';
 
 const FORNO_VIDEO_SRC = '/forno/forno-video-first.mp4';
-// Final editorial width — dominant but never full-bleed (stage padding
-// keeps it off the viewport edges on top of this cap).
-const FORNO_FRAME_WIDTH = 'min(92vw, 1360px)';
+// Viewport-relative frame basis — deliberately NOT px-capped in this
+// experiment so the expanded state stays ~98vw on wide desktops too.
+// Effective visual widths: basis × outer arrival scale × inner shell scale.
+//   settle:   92vw × 1.0 × 0.86  ≈ 79vw (contained editorial frame)
+//   expanded: 92vw × 1.0 × 1.065 ≈ 98vw (near edge-to-edge cinematic)
+const FORNO_FRAME_BASIS = '92vw';
+// Static reduced-motion representation = the settled editorial state.
+const FORNO_FRAME_STATIC = '79vw';
 
 export default function MotionLabPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -47,25 +59,30 @@ export default function MotionLabPage() {
     offset: ['start start', 'end end'],
   });
 
-  // ─── Forno frame ─────────────────────────────────────────────
-  // Idiomatic framer style props (y / scale / opacity as MotionValues)
-  // — a raw `transform` template string desyncs after re-renders
-  // (resize snapshots the style and drops the subscription).
-  const fornoOpacity = useTransform(scrollYProgress, [0.10, 0.30], [0, 1]);
-  const fornoY       = useTransform(scrollYProgress, [0.15, 0.75], ['78vh', '0vh']);
-  const fornoScale   = useTransform(scrollYProgress, [0.15, 0.75], [0.84, 1]);
-  const fornoClipPct = useTransform(scrollYProgress, [0.15, 0.55], [14, 0]);
+  // ─── Forno frame — outer wrapper (Phase 1 arrival) ───────────
+  // Idiomatic framer style props (y / scale as MotionValues) — a raw
+  // `transform` template string desyncs after re-renders (resize
+  // snapshots the style and drops the subscription).
+  const fornoOpacity = useTransform(scrollYProgress, [0.06, 0.18], [0, 1]);
+  const fornoY       = useTransform(scrollYProgress, [0.09, 0.45], ['78vh', '0vh']);
+  const fornoScale   = useTransform(scrollYProgress, [0.09, 0.45], [0.84, 1]);
+  const fornoClipPct = useTransform(scrollYProgress, [0.09, 0.33], [14, 0]);
   const fornoClipPath: MotionValue<string> = useMotionTemplate`inset(${fornoClipPct}% 0 0 0)`;
 
+  // ─── Forno inner shell (Phase 2 expansion, centered) ─────────
+  // Holds 0.86 through arrival + settle (clamped), then expands to
+  // 1.065 across 0.58–0.82 → contained ~79vw becomes ~98vw effective.
+  const shellScale = useTransform(scrollYProgress, [0.58, 0.82], [0.86, 1.065]);
+
   // ─── Hero content (title, meta, rules, aperture — one group) ─
-  // Fully gone by 0.38, before Forno reaches its dominant position.
-  const heroOpacity = useTransform(scrollYProgress, [0.12, 0.38], [1, 0]);
-  const heroY       = useTransform(scrollYProgress, [0.12, 0.38], [0, -28]);
+  // Fully gone by 0.23, before Forno reaches its settled position.
+  const heroOpacity = useTransform(scrollYProgress, [0.07, 0.23], [1, 0]);
+  const heroY       = useTransform(scrollYProgress, [0.07, 0.23], [0, -28]);
 
   // ─── Residual hero atmosphere ────────────────────────────────
-  // The warm stage light persists after the type recedes, tapering only
-  // once Forno is dominant. Continuity of the same cinematic space.
-  const ambientOpacity = useTransform(scrollYProgress, [0.55, 0.85], [1, 0.35]);
+  // The warm stage light persists behind the contained frame, tapering
+  // only as the expansion takes over. Continuity of the same space.
+  const ambientOpacity = useTransform(scrollYProgress, [0.58, 0.82], [1, 0.35]);
 
   // ─── Imperative opacity writes ───────────────────────────────
   // framer v12 renders `opacity` MotionValues through WAAPI, which
@@ -97,9 +114,9 @@ export default function MotionLabPage() {
     const video = videoRef.current;
     if (!video) return;
     return scrollYProgress.on('change', (v) => {
-      if (v >= 0.10 && video.paused) {
+      if (v >= 0.06 && video.paused) {
         video.play().catch(() => {});
-      } else if (v < 0.10 && !video.paused) {
+      } else if (v < 0.06 && !video.paused) {
         video.pause();
       }
     });
@@ -129,7 +146,7 @@ export default function MotionLabPage() {
             className="lab-forno-frame grain grain-strong"
             style={{
               position: 'relative',
-              width: FORNO_FRAME_WIDTH,
+              width: FORNO_FRAME_STATIC,
               aspectRatio: '21 / 9',
             }}
           >
@@ -149,7 +166,7 @@ export default function MotionLabPage() {
       {/* ─── Scroll container ─────────────────────────────────
           Tall outer + sticky inner stage = native browser scroll,
           no jacking, no lock, no hidden scrollbar. */}
-      <div ref={containerRef} style={{ height: '240vh', position: 'relative' }}>
+      <div ref={containerRef} style={{ height: '340vh', position: 'relative' }}>
         <div
           style={{
             position: 'sticky',
@@ -206,22 +223,38 @@ export default function MotionLabPage() {
               padding: 'clamp(24px,4vw,64px)',
             }}
           >
+            {/* OUTER wrapper — Phase 1 arrival only (rise, clip, opacity,
+                bottom-origin scale). Layout box stays 92vw × 21:9. */}
             <motion.div
               ref={fornoLayerRef}
-              className="lab-forno-frame grain grain-strong"
+              className="lab-forno-frame"
               style={{
                 y: fornoY,
                 scale: fornoScale,
                 opacity: 0,
                 clipPath: fornoClipPath,
                 position: 'relative',
-                width: FORNO_FRAME_WIDTH,
+                width: FORNO_FRAME_BASIS,
                 aspectRatio: '21 / 9',
                 transformOrigin: '50% 100%',
                 willChange: 'transform, clip-path',
               }}
             >
-              <FornoFrameContent videoRef={videoRef} />
+              {/* INNER shell — Phase 2 expansion only. Centered scale,
+                  0.86 (contained) → 1.065 (~98vw effective). No layout
+                  animation, no distortion, aspect preserved. */}
+              <motion.div
+                className="grain grain-strong"
+                style={{
+                  scale: shellScale,
+                  position: 'absolute',
+                  inset: 0,
+                  transformOrigin: '50% 50%',
+                  willChange: 'transform',
+                }}
+              >
+                <FornoFrameContent videoRef={videoRef} />
+              </motion.div>
             </motion.div>
           </div>
 
