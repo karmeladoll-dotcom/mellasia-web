@@ -27,7 +27,7 @@
  * To remove: delete the app/motion-lab/ folder.
  */
 
-import { useRef, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import {
   motion,
   useScroll,
@@ -38,7 +38,8 @@ import {
   type MotionValue,
 } from 'motion/react';
 
-const FORNO_VIDEO_SRC = '/forno/forno-video-first.mp4';
+const FORNO_STILL_SRC = '/forno/forno-still.jpg';
+const FORNO_STILL_MOBILE_SRC = '/forno/forno-still-mobile.jpg';
 // Viewport-relative frame basis — deliberately NOT px-capped in this
 // experiment so the expanded state stays ~98vw on wide desktops too.
 // Effective visual widths: basis × outer arrival scale × inner shell scale.
@@ -50,10 +51,9 @@ const FORNO_FRAME_STATIC = '79vw';
 
 export default function MotionLabPage() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const reduced = useReducedMotion();
 
-  // 240vh container, 100vh sticky stage → 140vh of pinned scroll maps to 0..1.
+  // 340vh container, 100vh sticky stage → 240vh of pinned scroll maps to 0..1.
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
@@ -73,6 +73,14 @@ export default function MotionLabPage() {
   // Holds 0.86 through arrival + settle (clamped), then expands to
   // 1.065 across 0.58–0.82 → contained ~79vw becomes ~98vw effective.
   const shellScale = useTransform(scrollYProgress, [0.58, 0.82], [0.86, 1.065]);
+  const stillScale = useTransform(scrollYProgress, [0.06, 0.45, 0.82], [1.08, 1.025, 1]);
+  const stillY = useTransform(scrollYProgress, [0.09, 0.45, 0.82], ['3%', '0%', '-1%']);
+  const stillBrightness = useTransform(scrollYProgress, [0.06, 0.24, 0.45, 0.82], [0.7, 0.9, 1, 1.04]);
+  const stillSaturation = useTransform(scrollYProgress, [0.06, 0.45, 0.82], [0.82, 0.96, 1]);
+  const stillContrast = useTransform(scrollYProgress, [0.06, 0.45, 0.82], [1.08, 1.03, 1]);
+  const stillBlur = useTransform(scrollYProgress, [0.06, 0.2, 0.45], [7, 2, 0]);
+  const stillFilter: MotionValue<string> =
+    useMotionTemplate`brightness(${stillBrightness}) saturate(${stillSaturation}) contrast(${stillContrast}) blur(${stillBlur}px)`;
 
   // ─── Hero content (title, meta, rules, aperture — one group) ─
   // Fully gone by 0.23, before Forno reaches its settled position.
@@ -108,23 +116,9 @@ export default function MotionLabPage() {
     if (fornoLayerRef.current) fornoLayerRef.current.style.opacity = String(v);
   });
 
-  // ─── Scroll-gated video playback (skipped under reduced motion) ─
-  useEffect(() => {
-    if (reduced) return;
-    const video = videoRef.current;
-    if (!video) return;
-    return scrollYProgress.on('change', (v) => {
-      if (v >= 0.06 && video.paused) {
-        video.play().catch(() => {});
-      } else if (v < 0.06 && !video.paused) {
-        video.pause();
-      }
-    });
-  }, [scrollYProgress, reduced]);
-
   // ─── Reduced motion: no sticky choreography at all ───────────
   // Hero and Forno render as two normal in-flow blocks, static,
-  // final-state. Video stays paused on its first frame.
+  // final-state. The Forno still renders as a stable editorial frame.
   if (reduced) {
     return (
       <main style={{ background: 'var(--ink-0)', color: 'var(--bone-0)', minHeight: '100vh' }}>
@@ -150,7 +144,7 @@ export default function MotionLabPage() {
               aspectRatio: '21 / 9',
             }}
           >
-            <FornoFrameContent videoRef={videoRef} />
+            <FornoFrameContent />
           </div>
         </section>
         <LabFooter />
@@ -253,7 +247,11 @@ export default function MotionLabPage() {
                   willChange: 'transform',
                 }}
               >
-                <FornoFrameContent videoRef={videoRef} />
+                <FornoFrameContent
+                  stillScale={stillScale}
+                  stillY={stillY}
+                  stillFilter={stillFilter}
+                />
               </motion.div>
             </motion.div>
           </div>
@@ -476,12 +474,18 @@ function HeroContent() {
   );
 }
 
-/* ─── Forno frame interior — atmosphere, video, scrim, titles ────── */
+/* ─── Forno frame interior — atmosphere, still, scrim, titles ────── */
 function FornoFrameContent({
-  videoRef,
+  stillScale,
+  stillY,
+  stillFilter,
 }: {
-  videoRef: React.RefObject<HTMLVideoElement | null>;
+  stillScale?: MotionValue<number>;
+  stillY?: MotionValue<string>;
+  stillFilter?: MotionValue<string>;
 }) {
+  const [stillReady, setStillReady] = useState(false);
+
   return (
     <div
       style={{
@@ -493,7 +497,7 @@ function FornoFrameContent({
           'inset 0 1px 0 rgba(244,241,234,0.05), 0 100px 140px -70px rgba(0,0,0,0.95)',
       }}
     >
-      {/* CSS atmosphere — visible until the video's first frame paints */}
+      {/* CSS atmosphere stays visible until the still image has painted. */}
       <div
         aria-hidden
         style={{
@@ -518,7 +522,7 @@ function FornoFrameContent({
         }}
       />
 
-      {/* Media slot — the real Forno footage */}
+      {/* Media slot — Forno still (Motion Lab static-image test) */}
       <div
         className="forno-media-slot"
         aria-hidden="true"
@@ -529,22 +533,47 @@ function FornoFrameContent({
           pointerEvents: 'none',
         }}
       >
-        <video
-          ref={videoRef}
-          src={FORNO_VIDEO_SRC}
-          muted
-          loop
-          playsInline
-          preload="auto"
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        />
+        <motion.picture
+          style={{
+            display: 'block',
+            width: '100%',
+            height: '100%',
+            y: stillY,
+            scale: stillScale,
+            filter: stillFilter,
+            opacity: stillReady ? 1 : 0,
+            transition: 'opacity 420ms ease',
+            willChange: stillScale ? 'transform, filter, opacity' : 'opacity',
+          }}
+        >
+          <source media="(max-width: 900px)" srcSet={FORNO_STILL_MOBILE_SRC} />
+          <img
+            src={FORNO_STILL_SRC}
+            alt=""
+            decoding="async"
+            fetchPriority="high"
+            onLoad={() => setStillReady(true)}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        </motion.picture>
         {/* Editorial bottom scrim — constant, keeps the title legible
-            over bright footage. Not animated. */}
+            over the still. Not animated. */}
         <div
           style={{
             position: 'absolute',
             inset: 0,
             background: 'linear-gradient(180deg, transparent 45%, rgba(5,3,2,0.72) 100%)',
+          }}
+        />
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background:
+              'radial-gradient(90% 120% at 20% 100%, rgba(178,106,60,0.18) 0%, transparent 52%), linear-gradient(90deg, rgba(5,3,2,0.34) 0%, transparent 34%, rgba(5,3,2,0.2) 100%)',
+            mixBlendMode: 'screen',
+            opacity: 0.62,
           }}
         />
       </div>
@@ -554,7 +583,7 @@ function FornoFrameContent({
         style={{
           position: 'absolute',
           top: 'clamp(20px,2.5vw,32px)',
-          left: 'clamp(24px,3.5vw,40px)',
+          left: 'clamp(24px,3.5vw,96px)',
           color: 'var(--bone-dim)',
           fontFamily: 'var(--font-ui), system-ui, sans-serif',
           fontSize: 10,
@@ -584,8 +613,8 @@ function FornoFrameContent({
       <div
         style={{
           position: 'absolute',
-          left: 'clamp(24px,3.5vw,40px)',
-          right: 'clamp(24px,3.5vw,40px)',
+          left: 'clamp(24px,3.5vw,96px)',
+          right: 'clamp(24px,3.5vw,96px)',
           bottom: 'clamp(28px,4vw,44px)',
           zIndex: 5,
           display: 'flex',
@@ -625,7 +654,7 @@ function FornoFrameContent({
         style={{
           position: 'absolute',
           bottom: 'clamp(20px,2.5vw,32px)',
-          right: 'clamp(24px,3.5vw,40px)',
+          right: 'clamp(24px,3.5vw,96px)',
           color: 'var(--bone-mute)',
           fontFamily: 'var(--font-ui), system-ui, sans-serif',
           fontSize: 10,
@@ -725,7 +754,7 @@ function LabFooter() {
         }}
       >
         Scroll back up to replay the choreography in reverse. Sticky stage
-        releases here — native scroll continues normally past this point.
+        releases here. Native scroll continues normally past this point.
       </p>
     </footer>
   );
