@@ -375,7 +375,162 @@
 
 @media (max-width: 720px) {
   .lightStory {
-    display: none;
+    height: 100svh;
+  }
+
+  .lightStage {
+    position: relative;
+    height: 100svh;
+  }
+}
+
+@media (max-width: 720px) and (prefers-reduced-motion: no-preference) {
+  .titleProjectorField {
+    -webkit-mask-image: radial-gradient(
+      ellipse 72% 32% at 42% 49%,
+      rgba(0, 0, 0, 0.34) 0%,
+      rgba(0, 0, 0, 0.48) 43%,
+      rgba(0, 0, 0, 0.8) 72%,
+      #000 100%
+    );
+    mask-image: radial-gradient(
+      ellipse 72% 32% at 42% 49%,
+      rgba(0, 0, 0, 0.34) 0%,
+      rgba(0, 0, 0, 0.48) 43%,
+      rgba(0, 0, 0, 0.8) 72%,
+      #000 100%
+    );
+    animation: title-projector-presence 4.8s 0.18s
+      cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .titleProjectorField::before {
+    background: radial-gradient(
+      ellipse 70% 38% at 108% 4%,
+      rgba(255, 252, 241, 0.9) 0%,
+      rgba(243, 208, 147, 0.58) 24%,
+      rgba(174, 118, 55, 0.24) 50%,
+      rgba(98, 61, 28, 0.07) 69%,
+      transparent 84%
+    );
+    filter: blur(18px);
+  }
+
+  .titleProjectorField::after {
+    inset: -4% -16% -4% -8%;
+    width: 124%;
+    height: 108%;
+    background: conic-gradient(
+      at 106% 1%,
+      transparent 0deg 232deg,
+      rgba(114, 73, 34, 0.05) 238deg,
+      rgba(196, 140, 72, 0.24) 245deg,
+      rgba(249, 219, 163, 0.52) 251deg,
+      rgba(255, 247, 224, 0.7) 255deg,
+      rgba(232, 186, 113, 0.38) 261deg,
+      rgba(156, 99, 43, 0.12) 268deg,
+      transparent 277deg 360deg
+    );
+    filter: blur(27px);
+    transform-origin: 106% 1%;
+    animation: title-projector-beam 4.8s 0.18s
+      cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .titleProjectorField .lightVolume {
+    inset: -3% -14% -3% -8%;
+    width: 122%;
+    height: 106%;
+    background: conic-gradient(
+      at 106% 1%,
+      transparent 0deg 240deg,
+      rgba(209, 155, 78, 0.12) 245deg,
+      rgba(255, 229, 177, 0.43) 250deg,
+      rgba(255, 253, 242, 0.68) 255deg,
+      rgba(242, 201, 131, 0.38) 260deg,
+      rgba(158, 96, 39, 0.09) 266deg,
+      transparent 272deg 360deg
+    );
+    filter: blur(13px);
+    transform-origin: 106% 1%;
+    animation: title-projector-core 4.8s 0.24s
+      cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .titleProjectorField .lightVolume::before {
+    background:
+      radial-gradient(
+        ellipse 60% 18% at 28% 58%,
+        rgba(210, 151, 75, 0.17) 0%,
+        transparent 76%
+      ),
+      radial-gradient(
+        ellipse 58% 18% at 55% 39%,
+        rgba(229, 183, 113, 0.26) 0%,
+        transparent 77%
+      ),
+      radial-gradient(
+        ellipse 52% 17% at 82% 19%,
+        rgba(255, 225, 172, 0.24) 0%,
+        transparent 78%
+      );
+    filter: blur(22px);
+  }
+
+  .titleProjectorField .lightVolume::after {
+    top: -7%;
+    right: -12%;
+    width: 58%;
+    height: 28%;
+    filter: blur(16px);
+  }
+
+  .study:has([data-hero-light="title-projector"])
+    :global(#hero-light-study-title) > span:first-child {
+    color: transparent;
+    background-image: linear-gradient(
+      112deg,
+      #f1ede4 0 29%,
+      #ddc093 36%,
+      #f0dab4 43%,
+      #fff0ce 49%,
+      #fffffb 55%,
+      #f9e8c7 62%,
+      #dcc093 70%,
+      #f1ede4 79% 100%
+    );
+    background-position: 116% 50%;
+    background-size: 225% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0 transparent;
+    animation: title-projector-lead 3.65s 0.52s
+      cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .study:has([data-hero-light="title-projector"])
+    :global(#hero-light-study-title) > span:last-child {
+    color: transparent;
+    background-image: linear-gradient(
+      112deg,
+      #c9c5bc 0 29%,
+      #d0b487 36%,
+      #e6cea6 43%,
+      #f5d7a8 49%,
+      #fff6e3 55%,
+      #ebc88f 62%,
+      #cfa36a 70%,
+      #c9c5bc 79% 100%
+    );
+    background-position: 116% 50%;
+    background-size: 225% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0 transparent;
+    animation: title-projector-noun 3.65s 0.64s
+      cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 }
 
@@ -397,5 +552,9 @@
 
   .titleProjectorField {
     opacity: 0;
+  }
+
+  .lightStory {
+    display: none;
   }
 }

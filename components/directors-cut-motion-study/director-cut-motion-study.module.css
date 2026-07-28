@@ -414,7 +414,9 @@
   }
 
   .mobileImageSettle img {
+    object-fit: contain;
     object-position: center center;
+    transform: scale(1.08);
   }
 
   .boundaryTrack {
