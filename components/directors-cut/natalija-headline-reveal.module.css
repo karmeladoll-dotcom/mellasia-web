@@ -1,0 +1,12 @@
+.word {
+  display: inline-block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

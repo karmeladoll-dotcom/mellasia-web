@@ -1,0 +1,965 @@
+.page {
+  --dc-ink: #0a0a09;
+  --dc-ink-soft: #141210;
+  --dc-bone: #f1ede4;
+  --dc-smoke: #c9c5bc;
+  --dc-smoke-deep: #b9b4aa;
+  --dc-brass: #8d744e;
+  --dc-rule-dark: rgba(16, 15, 13, 0.24);
+  --dc-rule-light: rgba(241, 237, 228, 0.2);
+  min-width: 0;
+  overflow: clip;
+  background: var(--dc-ink);
+  color: var(--dc-bone);
+}
+
+.page :global(*) {
+  box-sizing: border-box;
+}
+
+.page :global(a),
+.page :global(button) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.page :global(a:focus-visible),
+.page :global(button:focus-visible) {
+  outline: 2px solid var(--dc-brass);
+  outline-offset: 5px;
+}
+
+.navigation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  width: 100%;
+  min-height: 72px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 18px clamp(20px, 3.8vw, 64px);
+  color: var(--dc-bone);
+}
+
+.wordmark,
+.colophonMark {
+  color: inherit;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 20px;
+  letter-spacing: 0.24em;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.navigation nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2.5vw, 42px);
+}
+
+.navigation nav a,
+.primaryLink,
+.labTrigger,
+.labReveal a {
+  color: inherit;
+  font-family: var(--font-ui), system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.navigation nav a {
+  padding: 10px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 180ms ease;
+}
+
+.navigation nav a:hover {
+  border-color: currentColor;
+}
+
+.prologue {
+  position: relative;
+  display: grid;
+  min-height: 100svh;
+  grid-template-columns: minmax(0, 8fr) minmax(220px, 4fr);
+  align-items: end;
+  gap: clamp(40px, 7vw, 120px);
+  padding: 112px clamp(20px, 3.8vw, 64px) clamp(56px, 7vw, 108px);
+  background: var(--dc-ink);
+}
+
+.prologue::before {
+  position: absolute;
+  top: 0;
+  right: 19%;
+  width: 1px;
+  height: 42%;
+  background: linear-gradient(to bottom, transparent, rgba(241, 237, 228, 0.18));
+  content: "";
+}
+
+.prologueCopy {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  align-self: center;
+  max-width: 1120px;
+  padding-top: 2vh;
+  animation: opening-exposure 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.labLabel {
+  margin: 0;
+  font-family: var(--font-ui), system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.projectName {
+  margin: 0;
+  color: rgba(241, 237, 228, 0.62);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(19px, 1.8vw, 28px);
+  line-height: 1;
+}
+
+.prologue h1 {
+  max-width: none;
+  margin: clamp(24px, 4vh, 44px) 0 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(60px, 6.5vw, 124px);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 0.88;
+}
+
+.prologue h1 span {
+  display: block;
+}
+
+.heroLead,
+.heroNoun {
+  white-space: nowrap;
+}
+
+.heroNoun {
+  margin-left: clamp(28px, 7vw, 120px);
+  color: var(--dc-smoke);
+}
+
+.prologueIntro {
+  max-width: 40ch;
+  margin: clamp(28px, 4vh, 44px) 0 0 clamp(28px, 7vw, 120px);
+  color: rgba(241, 237, 228, 0.7);
+  font-size: clamp(16px, 1.2vw, 19px);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.primaryLink {
+  display: inline-block;
+  margin: 28px 0 0 clamp(28px, 7vw, 120px);
+  padding: 14px 0 11px;
+  border-bottom: 1px solid var(--dc-brass);
+}
+
+.prologueStatement {
+  position: relative;
+  z-index: 1;
+  max-width: 22ch;
+  margin: 0;
+  padding-bottom: 8px;
+  color: rgba(241, 237, 228, 0.66);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(22px, 2.3vw, 38px);
+  line-height: 1.08;
+}
+
+.exposurePlane {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0 8%, var(--dc-brass) 29%, rgba(241, 237, 228, 0.34) 78%, transparent 100%);
+  transform-origin: left;
+  animation: opening-line 1100ms 250ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.forno {
+  position: relative;
+  padding: clamp(112px, 12vw, 184px) 0 0;
+  background: var(--dc-ink-soft);
+}
+
+.fornoHeader {
+  display: grid;
+  grid-template-columns: minmax(150px, 2fr) minmax(0, 8fr) 2fr;
+  gap: 24px;
+  align-items: end;
+  padding: 0 clamp(20px, 3.8vw, 64px) clamp(44px, 6vw, 88px);
+}
+
+.fornoHeader h2 {
+  grid-column: 2;
+  max-width: 10ch;
+  margin: 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(56px, 7.8vw, 126px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 0.88;
+}
+
+.fornoWorld {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1408 / 612;
+  overflow: hidden;
+  background: #0c0a08;
+}
+
+.fornoWorld picture,
+.fornoWorld img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fornoWorld img {
+  object-fit: cover;
+  object-position: center 54%;
+}
+
+.fornoClose {
+  display: grid;
+  min-height: clamp(280px, 34vw, 500px);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 24px;
+  align-items: center;
+  padding: clamp(72px, 10vw, 150px) clamp(20px, 3.8vw, 64px);
+  background: var(--dc-smoke);
+  color: var(--dc-ink);
+}
+
+.workingNote {
+  grid-column: 2 / span 6;
+  max-width: 18ch;
+  margin: 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(36px, 4.8vw, 72px);
+  letter-spacing: -0.015em;
+  line-height: 0.98;
+}
+
+.fornoBody {
+  grid-column: 9 / span 3;
+  max-width: 34ch;
+  margin: 0;
+  color: rgba(10, 10, 9, 0.7);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.identity {
+  position: relative;
+  padding: clamp(112px, 14vw, 220px) clamp(20px, 3.8vw, 64px) clamp(120px, 15vw, 230px);
+  background: var(--dc-smoke);
+  color: var(--dc-ink);
+}
+
+.identity::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent 0 5%, var(--dc-rule-dark) 16% 83%, transparent 96%);
+  content: "";
+}
+
+.identityIntro {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  max-width: 1420px;
+  margin: 0 auto;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.identityIntro > p:first-child {
+  grid-column: 1 / span 2;
+  color: rgba(10, 10, 9, 0.62);
+}
+
+.identityIntro h2 {
+  grid-column: 3 / span 7;
+  max-width: 11ch;
+  margin: 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(54px, 7.3vw, 116px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 0.9;
+}
+
+.identityIntro > p:last-child {
+  grid-column: 10 / span 3;
+  align-self: end;
+  max-width: 34ch;
+  margin: 0;
+  color: rgba(10, 10, 9, 0.68);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.identityComposition {
+  position: relative;
+  display: grid;
+  max-width: 1420px;
+  margin: clamp(88px, 12vw, 176px) auto 0;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: auto auto;
+  gap: 40px 24px;
+  align-items: center;
+}
+
+.natalijaWorld {
+  position: relative;
+  z-index: 1;
+  grid-column: 5 / span 4;
+  grid-row: 1 / span 2;
+  aspect-ratio: 842 / 1264;
+  overflow: hidden;
+  background: #17130f;
+}
+
+.natalijaWorld img {
+  object-fit: cover;
+}
+
+.methodNote {
+  grid-column: 1 / span 3;
+  grid-row: 1;
+  align-self: end;
+  padding-top: 22px;
+  border-top: 1px solid var(--dc-rule-dark);
+}
+
+.methodStatement {
+  max-width: 31ch;
+  margin: 18px 0 0;
+  color: rgba(10, 10, 9, 0.76);
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.65;
+}
+
+.motionPrinciple {
+  grid-column: 9 / span 4;
+  grid-row: 2;
+  align-self: end;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(30px, 3.4vw, 52px);
+  line-height: 1.02;
+}
+
+.motionPrinciple p {
+  margin: 0;
+}
+
+.motionPrinciple p:last-child {
+  margin-left: clamp(18px, 3vw, 54px);
+  color: rgba(10, 10, 9, 0.52);
+}
+
+.lab {
+  position: relative;
+  min-height: 110svh;
+  padding: clamp(116px, 15vw, 230px) clamp(20px, 3.8vw, 64px);
+  background: var(--dc-ink-soft);
+  color: var(--dc-bone);
+}
+
+.lab::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 34%;
+  background: linear-gradient(to bottom, var(--dc-smoke-deep), rgba(141, 116, 78, 0.5), transparent);
+  content: "";
+}
+
+.labCopy {
+  display: grid;
+  max-width: 1420px;
+  margin: 0 auto;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.labLabel {
+  grid-column: 1 / span 2;
+  color: rgba(241, 237, 228, 0.5);
+}
+
+.labCopy h2 {
+  grid-column: 3 / span 7;
+  max-width: 10ch;
+  margin: 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(58px, 8vw, 126px);
+  font-weight: 400;
+  letter-spacing: -0.028em;
+  line-height: 0.86;
+}
+
+.labCopy > p:last-child {
+  grid-column: 10 / span 3;
+  align-self: end;
+  max-width: 32ch;
+  margin: 0;
+  color: rgba(241, 237, 228, 0.64);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.labGate {
+  position: relative;
+  min-height: clamp(330px, 34vw, 480px);
+  max-width: 1420px;
+  margin: clamp(96px, 15vw, 220px) auto 0;
+  padding: clamp(70px, 9vw, 130px) 0;
+  border-top: 1px solid var(--dc-rule-light);
+}
+
+.labTrigger {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  display: grid;
+  width: min(340px, 72vw);
+  min-height: 86px;
+  place-items: center;
+  gap: 12px;
+  padding: 18px 28px;
+  border: 0;
+  background: var(--dc-ink-soft);
+  color: var(--dc-bone);
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
+
+.labTriggerLine {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--dc-brass);
+  transform: scaleX(0.24);
+  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.labTrigger:hover .labTriggerLine,
+.labTrigger:focus-visible .labTriggerLine,
+.labGate[data-open="true"] .labTriggerLine {
+  transform: scaleX(1);
+}
+
+.labReveal {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  width: min(720px, 92vw);
+  display: flex;
+  max-width: 720px;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+  clip-path: inset(0 48% 0 48%);
+  transform: translate(-50%, -46%);
+  transition: opacity 500ms ease, transform 700ms cubic-bezier(0.16, 1, 0.3, 1), clip-path 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.labReveal p {
+  margin: 0;
+  color: rgba(241, 237, 228, 0.74);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(27px, 3.3vw, 48px);
+  line-height: 1.08;
+}
+
+.labReveal a {
+  margin-top: 32px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--dc-brass);
+}
+
+.labGate[data-open="true"] .labReveal {
+  opacity: 1;
+  pointer-events: auto;
+  clip-path: inset(0 0 0 0);
+  transform: translate(-50%, -50%);
+}
+
+.invitation {
+  display: grid;
+  min-height: 78svh;
+  grid-template-columns: minmax(0, 8fr) minmax(260px, 4fr);
+  gap: 48px;
+  align-items: end;
+  padding: clamp(110px, 14vw, 210px) clamp(20px, 3.8vw, 64px) clamp(72px, 8vw, 120px);
+  border-top: 1px solid var(--dc-rule-light);
+  background: var(--dc-ink);
+}
+
+.invitationCopy h2 {
+  max-width: 9ch;
+  margin: 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(62px, 9vw, 148px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 0.86;
+}
+
+.invitationCopy p {
+  max-width: 42ch;
+  margin: 32px 0 0;
+  color: rgba(241, 237, 228, 0.62);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.emailLink {
+  display: inline-block;
+  align-self: end;
+  justify-self: stretch;
+  padding: 22px 0;
+  border-top: 1px solid var(--dc-brass);
+  border-bottom: 1px solid var(--dc-brass);
+  color: var(--dc-bone);
+  font-family: var(--font-ui), system-ui, sans-serif;
+  font-size: clamp(13px, 1.25vw, 17px);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: padding-left 240ms cubic-bezier(0.16, 1, 0.3, 1), background 240ms ease, color 240ms ease;
+}
+
+.emailLink:hover,
+.emailLink:focus-visible {
+  padding-left: 18px;
+  background: var(--dc-bone);
+  color: var(--dc-ink);
+}
+
+.colophon {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: clamp(32px, 7vw, 120px);
+  align-items: end;
+  padding: 36px clamp(20px, 3.8vw, 64px) 42px;
+  border-top: 1px solid var(--dc-rule-light);
+  background: var(--dc-ink);
+  color: rgba(241, 237, 228, 0.58);
+}
+
+.colophon p {
+  margin: 0;
+  font-family: var(--font-ui), system-ui, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.13em;
+  line-height: 1.7;
+  text-transform: uppercase;
+}
+
+.colophonMark {
+  color: var(--dc-bone);
+}
+
+@keyframes opening-exposure {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes opening-line {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@media (min-width: 1600px) {
+  .prologue,
+  .fornoHeader,
+  .fornoClose,
+  .identity,
+  .lab,
+  .invitation,
+  .navigation,
+  .colophon {
+    padding-left: max(64px, calc((100vw - 1800px) / 2));
+    padding-right: max(64px, calc((100vw - 1800px) / 2));
+  }
+
+  .fornoWorld {
+    max-width: 1920px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 980px) {
+  .prologue {
+    grid-template-columns: 1fr;
+    align-content: end;
+  }
+
+  .prologueCopy {
+    align-self: end;
+  }
+
+  .prologueStatement {
+    max-width: 28ch;
+  }
+
+  .fornoHeader,
+  .identityIntro,
+  .labCopy {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  .fornoHeader h2 {
+    grid-column: 3 / span 6;
+  }
+
+  .identityIntro > p:first-child,
+  .labLabel {
+    grid-column: 1 / span 2;
+  }
+
+  .identityIntro h2,
+  .labCopy h2 {
+    grid-column: 3 / span 6;
+  }
+
+  .identityIntro > p:last-child,
+  .labCopy > p:last-child {
+    grid-column: 3 / span 4;
+    margin-top: 24px;
+  }
+
+  .identityComposition {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  .natalijaWorld {
+    grid-column: 3 / span 4;
+  }
+
+  .methodNote {
+    grid-column: 1 / span 2;
+  }
+
+  .motionPrinciple {
+    grid-column: 7 / span 2;
+    font-size: clamp(26px, 3.5vw, 38px);
+  }
+
+  .invitation {
+    grid-template-columns: 1fr;
+  }
+
+  .emailLink {
+    width: min(100%, 480px);
+  }
+}
+
+@media (max-width: 720px) {
+  .navigation {
+    min-height: 64px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .wordmark {
+    font-size: 16px;
+    letter-spacing: 0.18em;
+  }
+
+  .navigation nav {
+    gap: 18px;
+  }
+
+  .navigation nav a {
+    font-size: 9px;
+  }
+
+  .navigation nav a:nth-child(2) {
+    display: none;
+  }
+
+  .prologue {
+    min-height: 100svh;
+    gap: 40px;
+    padding-top: 94px;
+    padding-bottom: 44px;
+  }
+
+  .prologue::before {
+    right: 20px;
+    height: 29%;
+  }
+
+  .prologueCopy {
+    padding-top: 0;
+  }
+
+  .prologue h1 {
+    max-width: none;
+    margin-top: 22px;
+    font-size: clamp(52px, 14vw, 68px);
+    line-height: 0.87;
+  }
+
+  .heroNoun,
+  .prologueIntro,
+  .primaryLink {
+    margin-left: 0;
+  }
+
+  .heroLead {
+    max-width: 8ch;
+    white-space: normal;
+  }
+
+  .prologueIntro {
+    max-width: 32ch;
+    margin-top: 26px;
+    font-size: 15px;
+  }
+
+  .primaryLink {
+    margin-top: 24px;
+  }
+
+  .prologueStatement {
+    max-width: 22ch;
+    font-size: 24px;
+  }
+
+  .forno {
+    padding-top: 96px;
+  }
+
+  .fornoHeader,
+  .identityIntro,
+  .labCopy {
+    display: block;
+  }
+
+  .fornoHeader .projectName,
+  .identityIntro > p:first-child,
+  .labLabel {
+    margin-bottom: 22px;
+  }
+
+  .fornoHeader h2,
+  .labCopy h2 {
+    font-size: clamp(50px, 15vw, 76px);
+  }
+
+  .identityIntro h2 {
+    font-size: clamp(43px, 12vw, 56px);
+  }
+
+  .fornoWorld {
+    aspect-ratio: 3 / 4;
+  }
+
+  .fornoWorld img {
+    object-position: center center;
+  }
+
+  .fornoClose {
+    display: block;
+    min-height: 0;
+    padding-top: 88px;
+    padding-bottom: 96px;
+  }
+
+  .workingNote {
+    max-width: 14ch;
+    font-size: clamp(38px, 11vw, 56px);
+  }
+
+  .fornoBody {
+    max-width: 31ch;
+    margin-top: 36px;
+    font-size: 15px;
+  }
+
+  .identity {
+    padding-top: 110px;
+    padding-bottom: 120px;
+  }
+
+  .identity::before {
+    left: 20px;
+  }
+
+  .identityIntro {
+    padding-left: 22px;
+  }
+
+  .identityIntro > p:last-child,
+  .labCopy > p:last-child {
+    max-width: 31ch;
+    margin-top: 28px;
+    font-size: 15px;
+  }
+
+  .identityComposition {
+    display: flex;
+    margin-top: 74px;
+    flex-direction: column;
+    gap: 52px;
+    align-items: stretch;
+  }
+
+  .natalijaWorld {
+    width: calc(100% - 22px);
+    margin-left: 22px;
+  }
+
+  .methodNote,
+  .motionPrinciple {
+    width: calc(100% - 22px);
+    margin-left: 22px;
+  }
+
+  .methodNote {
+    padding-top: 18px;
+  }
+
+  .motionPrinciple {
+    max-width: 12ch;
+    font-size: 38px;
+  }
+
+  .lab {
+    min-height: 100svh;
+    padding-top: 124px;
+    padding-bottom: 100px;
+  }
+
+  .lab::before {
+    left: 20px;
+    height: 104px;
+  }
+
+  .labCopy {
+    padding-left: 22px;
+  }
+
+  .labGate {
+    margin-top: 116px;
+    padding-top: 86px;
+    padding-bottom: 54px;
+  }
+
+  .labTrigger {
+    width: min(290px, 78vw);
+  }
+
+  .labReveal p {
+    font-size: 30px;
+  }
+
+  .invitation {
+    min-height: 86svh;
+    padding-top: 118px;
+    padding-bottom: 72px;
+  }
+
+  .invitationCopy h2 {
+    font-size: clamp(58px, 17vw, 84px);
+  }
+
+  .invitationCopy p {
+    max-width: 32ch;
+    margin-top: 26px;
+    font-size: 15px;
+  }
+
+  .emailLink {
+    font-size: 13px;
+  }
+
+  .colophon {
+    grid-template-columns: 1fr auto;
+    gap: 28px;
+  }
+
+  .colophon > p:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 440px) {
+  .navigation nav a:first-child {
+    display: none;
+  }
+
+  .prologue h1 {
+    font-size: clamp(48px, 13.5vw, 60px);
+  }
+
+  .colophon {
+    grid-template-columns: 1fr;
+  }
+
+  .colophon > p:last-child {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prologueCopy,
+  .exposurePlane {
+    animation: none;
+  }
+
+  .fornoWorld,
+  .natalijaWorld {
+    opacity: 1 !important;
+    clip-path: inset(0) !important;
+    transform: none !important;
+  }
+
+  .navigation nav a,
+  .labTriggerLine,
+  .labReveal,
+  .emailLink {
+    transition: none;
+  }
+}

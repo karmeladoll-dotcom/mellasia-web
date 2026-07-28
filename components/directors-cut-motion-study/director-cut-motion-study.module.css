@@ -1,0 +1,496 @@
+.page {
+  --study-ink: #0a0a09;
+  --study-ink-soft: #141210;
+  --study-bone: #f1ede4;
+  --study-smoke: #c9c5bc;
+  --study-brass: #8d744e;
+  min-width: 0;
+  overflow: clip;
+  background: var(--study-ink);
+  color: var(--study-bone);
+}
+
+.page :global(*) {
+  box-sizing: border-box;
+}
+
+.page :global(a) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.page :global(a:focus-visible) {
+  outline: 2px solid var(--study-brass);
+  outline-offset: 5px;
+}
+
+.story {
+  position: relative;
+  height: 150svh;
+  background: var(--study-ink);
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.fornoAnchor {
+  position: absolute;
+  top: 50svh;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.prologue,
+.forno {
+  position: absolute;
+  inset: 0;
+}
+
+.prologue {
+  z-index: 1;
+  background: var(--study-ink);
+}
+
+.prologue::before {
+  position: absolute;
+  top: 0;
+  right: 19%;
+  width: 1px;
+  height: 42%;
+  background: linear-gradient(to bottom, transparent, rgba(241, 237, 228, 0.18));
+  content: "";
+}
+
+.openingComposition {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-height: 100%;
+  grid-template-columns: minmax(0, 8fr) minmax(220px, 4fr);
+  align-items: end;
+  gap: clamp(40px, 7vw, 120px);
+  padding: 112px clamp(20px, 3.8vw, 64px) clamp(56px, 7vw, 108px);
+  animation: opening-exposure 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.prologueCopy {
+  min-width: 0;
+  max-width: 1120px;
+  align-self: center;
+  padding-top: 2vh;
+}
+
+.prologue h1 {
+  max-width: none;
+  margin: clamp(24px, 4vh, 44px) 0 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(60px, 6.5vw, 124px);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 0.88;
+}
+
+.prologue h1 span {
+  display: block;
+}
+
+.heroLead,
+.heroNoun {
+  white-space: nowrap;
+}
+
+.heroNoun {
+  margin-left: clamp(28px, 7vw, 120px);
+  color: var(--study-smoke);
+}
+
+.prologueIntro {
+  max-width: 40ch;
+  margin: clamp(28px, 4vh, 44px) 0 0 clamp(28px, 7vw, 120px);
+  color: rgba(241, 237, 228, 0.7);
+  font-size: clamp(16px, 1.2vw, 19px);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.primaryLink {
+  display: inline-block;
+  margin: 28px 0 0 clamp(28px, 7vw, 120px);
+  padding: 14px 0 11px;
+  border-bottom: 1px solid var(--study-brass);
+  color: inherit;
+  font-family: var(--font-ui), system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.prologueStatement {
+  max-width: 22ch;
+  margin: 0;
+  padding-bottom: 8px;
+  color: rgba(241, 237, 228, 0.66);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(22px, 2.3vw, 38px);
+  line-height: 1.08;
+}
+
+.forno {
+  z-index: 2;
+  display: grid;
+  min-height: 100%;
+  grid-template-rows: minmax(270px, 38dvh) minmax(0, 1fr);
+  background: var(--study-ink-soft);
+}
+
+.fornoHeader {
+  display: grid;
+  grid-template-columns: minmax(150px, 2fr) minmax(0, 8fr) 2fr;
+  gap: 24px;
+  align-items: end;
+  padding: clamp(76px, 10vh, 112px) clamp(20px, 3.8vw, 64px) clamp(36px, 4.5vh, 58px);
+}
+
+.projectName {
+  margin: 0;
+  color: rgba(241, 237, 228, 0.62);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(19px, 1.8vw, 28px);
+  line-height: 1;
+}
+
+.fornoHeader h2 {
+  grid-column: 2;
+  max-width: 10ch;
+  margin: 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(52px, 7.2vw, 118px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 0.88;
+}
+
+.fornoWorld {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  background: #0c0a08;
+}
+
+.imagePlane {
+  position: absolute;
+  top: -14px;
+  right: 0;
+  bottom: -14px;
+  left: 0;
+}
+
+.mobileImageSettle,
+.mobileImageSettle picture,
+.mobileImageSettle img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mobileImageSettle img {
+  object-fit: cover;
+  object-position: center 54%;
+}
+
+@media (min-width: 721px) {
+  .fornoComposed {
+    grid-template-rows: minmax(334px, calc(38dvh + 64px)) minmax(0, 1fr);
+  }
+
+  .mobileImageSettle img.fornoStillRaised {
+    object-position: center 66%;
+    transform: translateY(-10px);
+  }
+
+  .fornoWorldSoftened::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    height: clamp(36px, 4vw, 56px);
+    background: linear-gradient(
+      to bottom,
+      var(--study-ink-soft) 0%,
+      rgba(20, 18, 16, 0.82) 22%,
+      rgba(20, 18, 16, 0.34) 58%,
+      transparent 100%
+    );
+    content: "";
+    pointer-events: none;
+  }
+}
+
+.boundaryTrack {
+  position: absolute;
+  top: calc(100% - 1px);
+  right: 0;
+  left: 0;
+  z-index: 3;
+  height: 1px;
+  pointer-events: none;
+}
+
+.exposureLine {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0 8%,
+    var(--study-brass) 29%,
+    rgba(241, 237, 228, 0.34) 78%,
+    transparent 100%
+  );
+  transform-origin: left;
+  animation: opening-line 1050ms 100ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes opening-exposure {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes opening-line {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes mobile-image-settle {
+  from { transform: translateY(12px); }
+  to { transform: translateY(0); }
+}
+
+@media (min-width: 1600px) {
+  .openingComposition,
+  .fornoHeader {
+    padding-left: max(64px, calc((100vw - 1800px) / 2));
+    padding-right: max(64px, calc((100vw - 1800px) / 2));
+  }
+}
+
+@media (max-width: 980px) {
+  .openingComposition {
+    grid-template-columns: 1fr;
+    align-content: end;
+  }
+
+  .prologueCopy {
+    align-self: end;
+  }
+
+  .prologueStatement {
+    max-width: 28ch;
+  }
+
+  .fornoHeader {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  .fornoHeader h2 {
+    grid-column: 3 / span 6;
+  }
+}
+
+@media (max-width: 720px) {
+  .story {
+    height: auto;
+  }
+
+  .stage {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .fornoAnchor {
+    top: 100svh;
+  }
+
+  .prologue,
+  .forno {
+    position: relative;
+    inset: auto;
+    transform: none !important;
+  }
+
+  .prologue {
+    min-height: 100svh;
+  }
+
+  .prologue::before {
+    right: 20px;
+    height: 29%;
+  }
+
+  .openingComposition {
+    min-height: 100svh;
+    gap: 40px;
+    padding: 94px 20px 44px;
+  }
+
+  .prologueCopy {
+    padding-top: 0;
+  }
+
+  .prologue h1 {
+    margin-top: 22px;
+    font-size: clamp(52px, 14vw, 68px);
+    line-height: 0.87;
+  }
+
+  .heroLead {
+    max-width: 8ch;
+    white-space: normal;
+  }
+
+  .heroNoun,
+  .prologueIntro,
+  .primaryLink {
+    margin-left: 0;
+  }
+
+  .prologueIntro {
+    max-width: 32ch;
+    margin-top: 26px;
+    font-size: 15px;
+  }
+
+  .primaryLink {
+    margin-top: 24px;
+  }
+
+  .prologueStatement {
+    max-width: 22ch;
+    font-size: 24px;
+  }
+
+  .forno {
+    display: block;
+    min-height: 0;
+    padding-top: 96px;
+  }
+
+  .fornoHeader {
+    display: block;
+    padding: 0 20px 46px;
+  }
+
+  .projectName {
+    margin-bottom: 22px;
+  }
+
+  .fornoHeader h2 {
+    font-size: clamp(50px, 15vw, 76px);
+  }
+
+  .fornoWorld {
+    aspect-ratio: 3 / 4;
+  }
+
+  .imagePlane {
+    transform: none !important;
+  }
+
+  .mobileImageSettle img {
+    object-position: center center;
+  }
+
+  .boundaryTrack {
+    top: calc(100svh - 1px);
+    transform: none !important;
+  }
+}
+
+@media (max-width: 440px) {
+  .prologue h1 {
+    font-size: clamp(48px, 13.5vw, 60px);
+  }
+}
+
+@media (max-width: 720px) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .fornoWorld {
+      view-timeline-name: --forno-world;
+      view-timeline-axis: block;
+    }
+
+    .mobileImageSettle {
+      animation: mobile-image-settle linear both;
+      animation-timeline: --forno-world;
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story {
+    height: auto;
+  }
+
+  .stage {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .fornoAnchor {
+    top: 100svh;
+  }
+
+  .prologue,
+  .forno {
+    position: relative;
+    inset: auto;
+    transform: none !important;
+  }
+
+  .prologue {
+    min-height: 100svh;
+  }
+
+  .openingComposition,
+  .exposureLine,
+  .imagePlane,
+  .mobileImageSettle {
+    animation: none;
+    opacity: 1;
+    transform: none !important;
+  }
+
+  .forno {
+    display: block;
+    min-height: 0;
+    padding-top: clamp(96px, 12vw, 184px);
+  }
+
+  .fornoWorld {
+    aspect-ratio: 1408 / 612;
+  }
+
+  .boundaryTrack {
+    top: calc(100svh - 1px);
+    transform: none !important;
+  }
+}

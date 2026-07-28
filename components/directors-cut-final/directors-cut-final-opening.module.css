@@ -1,0 +1,401 @@
+.study {
+  position: relative;
+  min-width: 0;
+  overflow: clip;
+  background: #0a0a09;
+}
+
+.lightStory {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  height: 150svh;
+  overflow: clip;
+  pointer-events: none;
+}
+
+.lightStage {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.lightField {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.lightField::before,
+.lightField::after,
+.lightVolume {
+  position: absolute;
+  display: block;
+  content: "";
+}
+
+.titleProjectorField {
+  opacity: 0;
+  -webkit-mask-image: radial-gradient(
+    ellipse 40% 27% at 28% 44%,
+    rgba(0, 0, 0, 0.38) 0%,
+    rgba(0, 0, 0, 0.44) 40%,
+    rgba(0, 0, 0, 0.74) 69%,
+    #000 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 40% 27% at 28% 44%,
+    rgba(0, 0, 0, 0.38) 0%,
+    rgba(0, 0, 0, 0.44) 40%,
+    rgba(0, 0, 0, 0.74) 69%,
+    #000 100%
+  );
+  isolation: isolate;
+  transform: none;
+}
+
+.titleProjectorField::before {
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(
+    ellipse 36% 30% at 100% 3%,
+    rgba(255, 252, 241, 0.96) 0%,
+    rgba(243, 208, 147, 0.64) 25%,
+    rgba(174, 118, 55, 0.28) 52%,
+    rgba(98, 61, 28, 0.08) 70%,
+    transparent 84%
+  );
+  filter: blur(22px);
+  transform: none;
+}
+
+.titleProjectorField::after {
+  inset: -2%;
+  z-index: 1;
+  width: 104%;
+  height: 104%;
+  border-radius: 0;
+  background: conic-gradient(
+    at 98% 2%,
+    transparent 0deg 234deg,
+    rgba(114, 73, 34, 0.045) 239deg,
+    rgba(196, 140, 72, 0.22) 245deg,
+    rgba(249, 219, 163, 0.52) 251deg,
+    rgba(255, 247, 224, 0.72) 255deg,
+    rgba(232, 186, 113, 0.4) 261deg,
+    rgba(156, 99, 43, 0.13) 268deg,
+    transparent 276deg 360deg
+  );
+  clip-path: none;
+  filter: blur(36px);
+  transform: none;
+  transform-origin: 98% 2%;
+}
+
+.titleProjectorField .lightVolume {
+  inset: -1%;
+  z-index: 3;
+  width: 102%;
+  height: 102%;
+  border-radius: 0;
+  background: conic-gradient(
+    at 98% 2%,
+    transparent 0deg 242deg,
+    rgba(209, 155, 78, 0.13) 246deg,
+    rgba(255, 229, 177, 0.5) 251deg,
+    rgba(255, 253, 242, 0.82) 255deg,
+    rgba(242, 201, 131, 0.45) 260deg,
+    rgba(158, 96, 39, 0.1) 265deg,
+    transparent 270deg 360deg
+  );
+  filter: blur(14px);
+  transform: none;
+  transform-origin: 98% 2%;
+}
+
+.titleProjectorField .lightVolume::before,
+.titleProjectorField .lightVolume::after {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  content: "";
+}
+
+.titleProjectorField .lightVolume::before {
+  inset: 0;
+  border-radius: 0;
+  background:
+    radial-gradient(
+      ellipse 31% 22% at 34% 49%,
+      rgba(210, 151, 75, 0.2) 0%,
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 30% 21% at 48% 39%,
+      rgba(229, 183, 113, 0.3) 0%,
+      transparent 76%
+    ),
+    radial-gradient(
+      ellipse 28% 19% at 63% 28%,
+      rgba(255, 225, 172, 0.28) 0%,
+      transparent 77%
+    ),
+    radial-gradient(
+      ellipse 24% 17% at 78% 17%,
+      rgba(198, 139, 65, 0.22) 0%,
+      transparent 78%
+    );
+  filter: blur(26px);
+}
+
+.titleProjectorField .lightVolume::after {
+  top: -10%;
+  right: -8%;
+  width: 34%;
+  height: 34%;
+  background: radial-gradient(
+    ellipse at 72% 34%,
+    rgba(255, 254, 246, 0.84) 0%,
+    rgba(249, 221, 167, 0.48) 30%,
+    rgba(191, 131, 59, 0.18) 58%,
+    transparent 82%
+  );
+  filter: blur(18px);
+}
+
+@media (min-width: 721px) and (prefers-reduced-motion: no-preference) {
+  .titleProjectorField {
+    animation: title-projector-presence 5.2s 0.12s
+      cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .titleProjectorField::after {
+    animation: title-projector-beam 5.2s 0.12s
+      cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .titleProjectorField .lightVolume {
+    animation: title-projector-core 5.2s 0.18s
+      cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .study:has([data-hero-light="title-projector"])
+    :global(#hero-light-study-title) > span:first-child {
+    color: transparent;
+    background-image: linear-gradient(
+      111deg,
+      #f1ede4 0 31%,
+      #e2c79c 37%,
+      #f2dfbc 43%,
+      #fff2d4 48%,
+      #fffffb 54%,
+      #fff7e5 60%,
+      #e6cca3 68%,
+      #f1ede4 77% 100%
+    );
+    background-position: 116% 50%;
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0 transparent;
+    animation: title-projector-lead 3.8s 0.55s
+      cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .study:has([data-hero-light="title-projector"])
+    :global(#hero-light-study-title) > span:last-child {
+    color: transparent;
+    background-image: linear-gradient(
+      111deg,
+      #c9c5bc 0 31%,
+      #d4b98d 37%,
+      #ead4ad 43%,
+      #f8ddb0 48%,
+      #fff8e8 54%,
+      #f0cf98 60%,
+      #d6ad75 68%,
+      #c9c5bc 77% 100%
+    );
+    background-position: 116% 50%;
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0 transparent;
+    animation: title-projector-noun 3.8s 0.7s
+      cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@keyframes title-projector-presence {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  9% {
+    opacity: 0.22;
+  }
+  32% {
+    opacity: 1;
+  }
+  63% {
+    opacity: 0.92;
+  }
+  84% {
+    opacity: 0.28;
+  }
+}
+
+@keyframes title-projector-beam {
+  0% {
+    opacity: 0;
+    transform: translate3d(2vw, -1.2vh, 0) scale(0.985);
+  }
+  12% {
+    opacity: 0.24;
+  }
+  34% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  66% {
+    opacity: 0.88;
+    transform: translate3d(-0.35vw, 0.2vh, 0) scale(1.004);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-0.65vw, 0.35vh, 0) scale(1.006);
+  }
+}
+
+@keyframes title-projector-core {
+  0% {
+    opacity: 0;
+    transform: translate3d(1.6vw, -0.9vh, 0) scale(0.985);
+  }
+  16% {
+    opacity: 0.2;
+  }
+  38% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  64% {
+    opacity: 0.86;
+    transform: translate3d(-0.3vw, 0.16vh, 0) scale(1.003);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-0.55vw, 0.3vh, 0) scale(1.005);
+  }
+}
+
+@keyframes title-projector-lead {
+  0%,
+  11% {
+    background-position: 116% 50%;
+    text-shadow: none;
+  }
+  48% {
+    background-position: 50% 50%;
+    -webkit-text-stroke: 0.55px rgba(39, 25, 12, 0.62);
+    text-shadow:
+      0 1px 0 rgba(35, 23, 12, 0.9),
+      0 0 2px rgba(23, 15, 8, 0.82),
+      0 0 7px rgba(56, 35, 16, 0.48),
+      0 0 18px rgba(255, 226, 173, 0.22);
+  }
+  64% {
+    background-position: 42% 50%;
+    -webkit-text-stroke: 0.4px rgba(42, 27, 13, 0.5);
+    text-shadow:
+      0 1px 0 rgba(36, 23, 12, 0.78),
+      0 0 2px rgba(24, 16, 9, 0.68),
+      0 0 6px rgba(60, 37, 17, 0.36),
+      0 0 15px rgba(248, 213, 155, 0.18);
+  }
+  88% {
+    background-position: -10% 50%;
+    text-shadow: 0 0 8px rgba(201, 139, 61, 0.08);
+  }
+  100% {
+    color: #f1ede4;
+    background-image: none;
+    background-position: -10% 50%;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    -webkit-text-fill-color: #f1ede4;
+    -webkit-text-stroke: 0 transparent;
+    text-shadow: none;
+  }
+}
+
+@keyframes title-projector-noun {
+  0%,
+  11% {
+    background-position: 116% 50%;
+    text-shadow: none;
+  }
+  48% {
+    background-position: 50% 50%;
+    -webkit-text-stroke: 0.55px rgba(40, 25, 11, 0.64);
+    text-shadow:
+      0 1px 0 rgba(34, 22, 11, 0.9),
+      0 0 2px rgba(22, 14, 7, 0.84),
+      0 0 7px rgba(55, 33, 14, 0.5),
+      0 0 17px rgba(248, 210, 148, 0.21);
+  }
+  64% {
+    background-position: 42% 50%;
+    -webkit-text-stroke: 0.4px rgba(43, 27, 12, 0.52);
+    text-shadow:
+      0 1px 0 rgba(35, 22, 11, 0.78),
+      0 0 2px rgba(23, 15, 8, 0.7),
+      0 0 6px rgba(58, 34, 15, 0.38),
+      0 0 14px rgba(235, 193, 127, 0.17);
+  }
+  88% {
+    background-position: -10% 50%;
+    text-shadow: 0 0 8px rgba(181, 116, 45, 0.07);
+  }
+  100% {
+    color: #c9c5bc;
+    background-image: none;
+    background-position: -10% 50%;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    -webkit-text-fill-color: #c9c5bc;
+    -webkit-text-stroke: 0 transparent;
+    text-shadow: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .lightStory {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightStory {
+    height: 100svh;
+  }
+
+  .lightStage {
+    position: relative;
+    height: 100svh;
+  }
+
+  .lightField {
+    animation: none;
+    opacity: 0.9;
+    transform: none;
+  }
+
+  .titleProjectorField {
+    opacity: 0;
+  }
+}
