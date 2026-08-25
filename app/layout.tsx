@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   creator: "Karmela Sen",
   publisher: "Mellasia",
   category: "Web design studio",
+  verification: {
+    google: "nvDXUbsvDnN3SQog-DJnQhc63axebr-tMLoP_5dgZ-M",
+  },
   robots: {
     index: true,
     follow: true,
