@@ -140,6 +140,9 @@ export default function DirectorsCutFinalExperience() {
         <div>
           <p>Authored by Karmela Sen</p>
           <p>Zagreb</p>
+          <Link className={styles.serviceLink} href="/izrada-web-stranica-zagreb">
+            Izrada web stranica Zagreb
+          </Link>
         </div>
         <p>&copy; 2026 Mellasia</p>
       </footer>

@@ -589,6 +589,24 @@
   text-transform: uppercase;
 }
 
+.serviceLink {
+  display: inline-block;
+  margin-top: 8px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(241, 237, 228, 0.28);
+  color: rgba(241, 237, 228, 0.72);
+  font-family: var(--font-ui), system-ui, sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  line-height: 1.7;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.serviceLink:hover {
+  border-color: currentColor;
+}
+
 .colophonMark {
   color: var(--dc-bone);
 }
