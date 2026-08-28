@@ -86,14 +86,26 @@
   border-radius: 0;
   background: transparent;
   color: var(--dc-bone);
-  cursor: default;
+  cursor: pointer;
   font-family: var(--font-ui), system-ui, sans-serif;
   font-size: 10px;
   font-weight: 500;
   letter-spacing: 0.16em;
   line-height: 1;
-  opacity: 0.58;
+  opacity: 0.82;
+  text-decoration: none;
   text-transform: uppercase;
+  transition: border-color 220ms ease, opacity 220ms ease, transform 160ms ease;
+}
+
+.futureLink:hover,
+.futureLink:focus-visible {
+  border-color: var(--dc-bone);
+  opacity: 1;
+}
+
+.futureLink:active {
+  transform: translateY(1px);
 }
 
 details[open] .visualAperture {

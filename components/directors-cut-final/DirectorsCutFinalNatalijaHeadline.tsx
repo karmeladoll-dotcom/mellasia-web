@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useRef } from "react";
+import { motion, useAnimationControls, useReducedMotion } from "motion/react";
 
 import headlineStyles from "@/components/directors-cut/natalija-headline-reveal.module.css";
 
@@ -14,15 +15,42 @@ type DirectorsCutFinalNatalijaHeadlineProps = {
 export default function DirectorsCutFinalNatalijaHeadline({
   id,
 }: DirectorsCutFinalNatalijaHeadlineProps) {
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const controls = useAnimationControls();
   const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    const heading = headingRef.current;
+    if (reducedMotion || !heading || typeof IntersectionObserver === "undefined") {
+      controls.set("clear");
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          controls.set("soft");
+          return;
+        }
+
+        if (entry.intersectionRatio >= 0.82) {
+          controls.start("clear");
+        }
+      },
+      { threshold: [0, 0.82], rootMargin: "0px 0px -8% 0px" },
+    );
+
+    observer.observe(heading);
+    return () => observer.disconnect();
+  }, [controls, reducedMotion]);
 
   return (
     <motion.h2
+      ref={headingRef}
       id={id}
       aria-label={headline}
       initial={reducedMotion ? false : "soft"}
-      whileInView={reducedMotion ? undefined : "clear"}
-      viewport={{ once: true, amount: 0.82, margin: "0px 0px -8% 0px" }}
+      animate={reducedMotion ? "clear" : controls}
     >
       {words.map((word, index) => (
         <span key={word}>

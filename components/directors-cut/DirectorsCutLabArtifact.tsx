@@ -28,15 +28,15 @@ export default function DirectorsCutLabArtifact() {
           <span>Access granted.</span>
           <span>Memory opens later.</span>
         </p>
-        <button
+        <a
           className={styles.futureLink}
-          type="button"
-          disabled
-          data-future-href="/lab"
-          aria-label="Enter the Lab. Preview only. Future destination: /lab"
+          href="https://afterglow07.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open AFTERGLOW / 07 in a new tab"
         >
-          Enter the Lab
-        </button>
+          Enter Afterglow
+        </a>
       </div>
     </>
   );
